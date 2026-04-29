@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get in touch with Mustansar Mahmood — Content Marketing Manager and SEO Writer available for hire and freelance work.">
+<title>Contact — Mustansar Mahmood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #FAF8F4; --bg2: #F0EDE6; --bg3: #E8E4DB; --text: #1A1814; --muted: #7A776E; --accent: #C8622A; --accent-bg: #F5E8DF; --border: rgba(26,24,20,0.1); --nav-h: 68px; --serif: 'DM Serif Display', serif; --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease; }
+  [data-theme="dark"] { --bg: #141210; --bg2: #1E1C18; --bg3: #262420; --text: #F0EDE6; --muted: #8A8478; --accent: #E07840; --accent-bg: #2A1E16; --border: rgba(240,237,230,0.1); }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: var(--bg); border-bottom: 1px solid var(--border); transition: background var(--transition); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color var(--transition); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .btn-talk { background: var(--accent); color: #fff; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
+
+  /* PAGE */
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; padding: calc(var(--nav-h) + 5rem) 5% 6rem; align-items: start; }
+
+  /* LEFT */
+  .page-tag { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.5rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem; }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .contact-intro { color: var(--muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 2.5rem; }
+  .contact-methods { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .contact-method { display: flex; align-items: center; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; text-decoration: none; color: var(--text); transition: all var(--transition); }
+  .contact-method:hover { border-color: var(--accent); background: var(--accent-bg); }
+  .method-icon { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .method-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .method-val { font-size: 0.95rem; font-weight: 500; color: var(--text); }
+  .social-row { display: flex; gap: 0.75rem; }
+  .social-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1.25rem; text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 500; transition: all var(--transition); display: flex; align-items: center; gap: 0.5rem; }
+  .social-card:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+  /* RIGHT — FORM */
+  .contact-form-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+  .form-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.75rem 1rem; font-size: 0.95rem; font-family: var(--sans); color: var(--text);
+    transition: border-color var(--transition); outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit {
+    width: 100%; background: var(--accent); color: #fff; border: none;
+    padding: 0.9rem 1.75rem; border-radius: 50px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; font-family: var(--sans); transition: opacity var(--transition); margin-top: 0.5rem;
+  }
+  .form-submit:hover { opacity: 0.85; }
+  .form-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem; text-align: center; }
+  .success-msg { display: none; background: #EAF3DE; border: 1px solid #C0DD97; border-radius: 8px; padding: 1rem; color: #3B6D11; font-size: 0.9rem; text-align: center; margin-top: 1rem; }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+  @media (max-width: 900px) { .contact-wrap { grid-template-columns: 1fr; gap: 3rem; } }
+  @media (max-width: 600px) {
+    .nav-links, .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    .form-row { grid-template-columns: 1fr; }
+    .social-row { flex-wrap: wrap; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; }
+  }
+
+  /* SCROLL PROGRESS BAR */
+  #scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 101;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 6px rgba(200,98,42,0.5);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html">Guides</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="guides.html">Guides</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="contact-wrap">
+  <div>
+    <span class="page-tag">Get In Touch</span>
+    <h1 class="page-title">Let's build something<br><em>worth reading.</em></h1>
+    <p class="contact-intro">Whether you're hiring, outsourcing content, need someone to lead a team, or just want to chat — I'm easy to reach. No long intake forms. No waiting a week for a reply. I respond within 24 hours, usually much faster.</p>
+
+    <div class="contact-methods">
+      <a href="https://wa.me/923000853448" target="_blank" class="contact-method">
+        <div class="method-icon">💬</div>
+        <div>
+          <div class="method-label">WhatsApp</div>
+          <div class="method-val">+92 300 0853448</div>
+        </div>
+      </a>
+      <a href="mailto:itsmustansarmahmood@gmail.com" class="contact-method">
+        <div class="method-icon">✉️</div>
+        <div>
+          <div class="method-label">Email</div>
+          <div class="method-val">itsmustansarmahmood@gmail.com</div>
+        </div>
+      </a>
+    </div>
+
+    <p style="font-size:0.8rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Find me on</p>
+    <div class="social-row">
+      <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-card">
+        <span>in</span> LinkedIn
+      </a>
+      <a href="#" class="social-card">
+        <span>𝕏</span> Twitter/X
+      </a>
+      <a href="#" class="social-card">
+        <span>▶</span> YouTube
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-form-wrap">
+    <h2 class="form-title">Send me a message</h2>
+    <div id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-input" placeholder="John" id="fname">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last name</label>
+          <input type="text" class="form-input" placeholder="Smith" id="lname">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-input" placeholder="john@company.com" id="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">I'm reaching out about...</label>
+        <select class="form-select" id="reason">
+          <option value="">Choose one</option>
+          <option>Hiring (full-time / part-time role)</option>
+          <option>Freelance content writing project</option>
+          <option>Content strategy consultation</option>
+          <option>Team leadership / management</option>
+          <option>Editing & proofreading</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your message</label>
+        <textarea class="form-textarea" placeholder="Tell me a bit about what you need — the more detail, the better." id="message"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send Message →</button>
+      <p class="form-note">⚡ I typically reply within 24 hours</p>
+      <div class="success-msg" id="successMsg">✅ Message sent! I'll get back to you soon. For faster replies, WhatsApp is best.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Mustansar Mahmood</div>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html">Guides</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Mustansar Mahmood. Lahore, Pakistan.</p>
+</footer>
+
+<script>
+  function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+  function submitForm() {
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    if (!email || !message) { alert('Please fill in your email and message.'); return; }
+    // Opens default email client with pre-filled content
+    const fname = document.getElementById('fname').value;
+    const lname = document.getElementById('lname').value;
+    const reason = document.getElementById('reason').value;
+    const subject = encodeURIComponent(`Portfolio Enquiry: ${reason || 'General'}`);
+    const body = encodeURIComponent(`Name: ${fname} ${lname}\nEmail: ${email}\nReason: ${reason}\n\n${message}`);
+    window.location.href = `mailto:itsmustansarmahmood@gmail.com?subject=${subject}&body=${body}`;
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free guides on SEO, content writing, team management, and content strategy by Mustansar Mahmood.">
+<title>Guides — Mustansar Mahmood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #FAF8F4; --bg2: #F0EDE6; --bg3: #E8E4DB; --text: #1A1814; --muted: #7A776E; --accent: #C8622A; --accent-bg: #F5E8DF; --border: rgba(26,24,20,0.1); --nav-h: 68px; --serif: 'DM Serif Display', serif; --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease; }
+  [data-theme="dark"] { --bg: #141210; --bg2: #1E1C18; --bg3: #262420; --text: #F0EDE6; --muted: #8A8478; --accent: #E07840; --accent-bg: #2A1E16; --border: rgba(240,237,230,0.1); }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: var(--bg); border-bottom: 1px solid var(--border); transition: background var(--transition); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color var(--transition); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .btn-talk { background: var(--accent); color: #fff; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
+
+  .page-hero { padding: calc(var(--nav-h) + 5rem) 5% 3.5rem; }
+  .page-tag { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1.1; max-width: 680px; }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-sub { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin-top: 1rem; line-height: 1.8; }
+
+  /* GUIDES GRID */
+  .guides-wrap { padding: 1rem 5% 6rem; }
+  .coming-soon-note { background: var(--accent-bg); border: 1px dashed var(--accent); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--accent); margin-bottom: 2.5rem; }
+  .guides-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .guide-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all var(--transition); }
+  .guide-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .guide-card a { text-decoration: none; color: inherit; display: block; }
+  .guide-thumb { height: 160px; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+  .guide-thumb .g-icon { font-size: 2.5rem; opacity: 0.5; }
+  .guide-body { padding: 1.25rem; }
+  .guide-cat { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; display: block; }
+  .guide-title { font-family: var(--serif); font-size: 1.05rem; margin-bottom: 0.5rem; line-height: 1.45; color: var(--text); }
+  .guide-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+  .guide-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .read-time { font-size: 0.75rem; color: var(--muted); }
+  .read-link { font-size: 0.8rem; font-weight: 600; color: var(--accent); }
+  .guide-badge { display: inline-block; background: var(--bg3); color: var(--muted); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .guide-badge.soon { background: var(--accent-bg); color: var(--accent); }
+
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  .social-links { display: flex; gap: 0.75rem; }
+  .social-link { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) { .guides-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) {
+    .nav-links, .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    .guides-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; }
+  }
+
+  /* SCROLL PROGRESS BAR */
+  #scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 101;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 6px rgba(200,98,42,0.5);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html" class="active">Guides</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="guides.html">Guides</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="page-hero">
+  <span class="page-tag">Guides</span>
+  <h1 class="page-title">Things I've figured out<br>and <em>written down.</em></h1>
+  <p class="page-sub">Practical guides on SEO, content writing, team management, and using AI without losing quality. Free, no email required.</p>
+</div>
+
+<div class="guides-wrap">
+  <div class="coming-soon-note">✏️ <strong>For you to update:</strong> Replace these placeholder guide cards with your own published articles or guides. Add the real URL to each card link, swap in screenshots for the thumbnails, and update the title and description. New guides can be added by duplicating any card block.</div>
+  <div class="guides-grid">
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">🔍</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">SEO</span>
+        <h3 class="guide-title">How to Build Topical Authority Without Publishing 500 Articles</h3>
+        <p class="guide-desc">Most brands think more content = more authority. Here's the smarter approach — cluster strategy, pillar structure, and search intent alignment done right.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 8 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">✍️</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">Content Writing</span>
+        <h3 class="guide-title">The SEO Brief Template I Use for Every Article (And Why It Works)</h3>
+        <p class="guide-desc">A well-made content brief saves hours of revision. This is the exact template I use when briefing writers — with explanations for every field.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 6 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">👥</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">Team Management</span>
+        <h3 class="guide-title">How I Managed 15 Writers Without Things Falling Apart</h3>
+        <p class="guide-desc">Hiring is easy. Keeping output consistent across a 15-person team is not. Here's the SOP system, QA process, and communication structure that actually worked.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 10 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">🤖</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">AI Writing</span>
+        <h3 class="guide-title">How to Use Claude for Content Without It Sounding Like AI</h3>
+        <p class="guide-desc">The problem isn't using AI — it's using it wrong. This guide covers my exact workflow for AI-assisted writing that passes detection and reads like a human wrote it.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 7 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">📧</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">Copywriting</span>
+        <h3 class="guide-title">Email Sequences That Sell: What I Learned from a $40k Campaign</h3>
+        <p class="guide-desc">Not all email copy converts. Breaking down the structure, timing, and hooks that turned a single Klaviyo campaign into $40,000 in sales for one client.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 9 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card fade-in">
+      <div class="guide-thumb"><span class="g-icon">📊</span></div>
+      <div class="guide-body">
+        <span class="guide-cat">Strategy</span>
+        <h3 class="guide-title">Keyword Research in 2026: What Still Works and What's a Waste of Time</h3>
+        <p class="guide-desc">Search has changed. Volume alone doesn't cut it anymore. Here's how I approach keyword research now — with intent mapping, semantic clustering, and competitor gap analysis.</p>
+        <div class="guide-foot">
+          <span class="read-time">⏱ 11 min read</span>
+          <span class="guide-badge soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Mustansar Mahmood</div>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html">Guides</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link">in</a>
+    <a href="https://wa.me/923000853448" target="_blank" class="social-link">W</a>
+    <a href="mailto:itsmustansarmahmood@gmail.com" class="social-link">@</a>
+  </div>
+  <p class="footer-copy">© 2026 Mustansar Mahmood.</p>
+</footer>
+<script>
+  function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*100);fo.unobserve(en.target);}});},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+</script>
+</body>
+</html>
