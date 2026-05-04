@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -14,17 +13,17 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  const prompt = `You are an SEO content strategist. Analyze this search query across three layers, then perform a SERP content brief.
+  const prompt = `You are an SEO strategist. Analyze this query and respond ONLY in valid JSON with no markdown or code fences.
 
 Query: "${query.trim()}"
 
-Respond ONLY in this exact JSON format with no extra text, no markdown, no code fences:
+Return this exact JSON structure:
 {
-  "layer1": "Search Intent: (1-2 bullet points — what is the user literally asking for? What format/type of content do they expect?)",
-  "layer2": "Immediate Intent: (1-2 bullet points — what outcome does the user want from consuming this content?)",
-  "layer3": "Hidden Intent: (1-2 bullet points — what is the deeper desire, emotion, or end goal driving this search?)",
-  "contentAngle": "Recommended angle that serves all 3 layers simultaneously — be specific, sharp, and name the angle clearly with an example headline.",
-  "serpAnalysis": "MUST-COVER TOPICS [HIGH PRIORITY = appears in 3+ top results]:\\n• (list 4-6 must-cover subtopics or questions)\\n\\nPEOPLE ALSO ASK:\\n• (list 4-5 PAA questions relevant to this query)\\n\\nCONTENT GAPS (angles the top pages are missing):\\n• (list 2-3 specific gaps your article could own)\\n\\nSUGGESTED H2 OUTLINE:\\nH2: (heading)\\nH2: (heading)\\nH2: (heading)\\nH2: (heading)\\nH2: (heading)"
+  "layer1": "Search Intent: 2 bullet points on what the user literally wants and what content format they expect",
+  "layer2": "Immediate Intent: 2 bullet points on what outcome the user wants from reading this content",
+  "layer3": "Hidden Intent: 2 bullet points on the deeper emotion or end goal driving this search",
+  "contentAngle": "One sharp content angle serving all 3 layers with an example headline",
+  "serpAnalysis": "MUST-COVER TOPICS:\\n• topic 1\\n• topic 2\\n• topic 3\\n• topic 4\\n\\nPEOPLE ALSO ASK:\\n• question 1\\n• question 2\\n• question 3\\n\\nCONTENT GAPS:\\n• gap 1\\n• gap 2\\n\\nSUGGESTED H2 OUTLINE:\\nH2: heading\\nH2: heading\\nH2: heading\\nH2: heading\\nH2: heading"
 }`;
 
   try {
@@ -36,8 +35,8 @@ Respond ONLY in this exact JSON format with no extra text, no markdown, no code 
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1500,
+            temperature: 0.5,
+            maxOutputTokens: 800,
           }
         })
       }
@@ -45,21 +44,20 @@ Respond ONLY in this exact JSON format with no extra text, no markdown, no code 
 
     if (!geminiRes.ok) {
       const errData = await geminiRes.json().catch(() => ({}));
-      console.error('Gemini API error:', errData);
-      return res.status(502).json({ error: 'AI service error. Please try again.' });
+      console.error('Gemini API error:', JSON.stringify(errData));
+      return res.status(502).json({ error: `Gemini error ${geminiRes.status}: ${errData?.error?.message || 'Unknown'}` });
     }
 
     const geminiData = await geminiRes.json();
     const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    // Strip any markdown code fences if present
     const cleaned = rawText.replace(/```json|```/g, '').trim();
 
     let parsed;
     try {
       parsed = JSON.parse(cleaned);
     } catch (e) {
-      console.error('JSON parse failed:', cleaned);
+      console.error('JSON parse failed. Raw:', cleaned);
       return res.status(502).json({ error: 'Failed to parse AI response. Please try again.' });
     }
 
@@ -72,7 +70,7 @@ Respond ONLY in this exact JSON format with no extra text, no markdown, no code 
     });
 
   } catch (err) {
-    console.error('Handler error:', err);
+    console.error('Handler error:', err.message);
     return res.status(500).json({ error: 'Something went wrong. Please try again.' });
   }
 }
