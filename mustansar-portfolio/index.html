@@ -154,7 +154,7 @@
   .hero-inner {
     position: relative; z-index:2;
     width:100%; max-width:1400px; margin:0 auto;
-    padding: calc(var(--nav-h) + 3.5rem) 5% 4rem;
+    padding: calc(10px + 3.5rem) 5% 4rem;
     display: grid; grid-template-columns: 1.15fr 1fr;
     align-items: center; gap: 2rem;
     box-sizing: border-box;
@@ -184,7 +184,7 @@
     margin-bottom:1.75rem; line-height:1.8;
     animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both;
   }
-  .typewriter-wrap { min-height:2rem; margin-bottom:0.5rem; animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+  .typewriter-wrap {height: 100%; min-height:41px; margin-bottom:0.5rem; animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
   .typewriter {
     font-family:var(--serif); font-size:1.25rem; color:var(--accent);
     font-style:italic; border-right:2px solid var(--accent);
@@ -368,6 +368,9 @@
   }
   .social-link:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.15)}
 
+  @media (max-width: 1200px) {
+	.hero-inner {padding : 15px 5% 4rem;}
+  }
   /* RESPONSIVE */
   @media(max-width:900px){
     .hero-inner{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 2.5rem);padding-bottom:3rem}
@@ -401,6 +404,9 @@
     .hero-card { will-change: transform; }
     /* disable heavy CSS transitions on mobile */
     .service-card, .portfolio-card { transform: none !important; will-change: auto; }
+  }
+  @media (max-width: 576px) {
+	.hero-inner {padding : 0 5% 4rem;} 
   }
   .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.22,1,0.36,1)}
   .fade-in.visible{opacity:1;transform:none}
