@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Reddit Growth Strategy — Brand Visibility & Citation Building Playbook by Mustansar Mahmood.">
+<title>Reddit Growth Strategy — Mustansar Mahmood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f4ebdd; --bg-rgb: 244,235,221;
+    --bg2: #ede0cc; --bg2-rgb: 237,224,204; --bg3: #e5d3b8;
+    --text: #1a1612; --muted: #6b5e4e;
+    --accent: #c1272d; --accent-rgb: 193,39,45; --accent-bg: #f7dede;
+    --secondary: #8dca93; --secondary-rgb: 141,202,147;
+    --border: rgba(26,22,18,0.12);
+    --nav-h: 68px; --serif: 'DM Serif Display', serif;
+    --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #18130e; --bg-rgb: 24,19,14;
+    --bg2: #231c15; --bg2-rgb: 35,28,21; --bg3: #2e2419;
+    --text: #f4ebdd; --muted: #9a8878;
+    --accent: #e03035; --accent-rgb: 224,48,53; --accent-bg: #2e1112;
+    --secondary: #6db874; --secondary-rgb: 109,184,116;
+    --border: rgba(244,235,221,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.75; transition: background var(--transition), color var(--transition); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(var(--bg-rgb),.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s ease; transform-origin: left; }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-talk { background: var(--secondary); color: #fff; padding: .5rem 1.25rem; border-radius: 50px; font-size: .875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),.35); }
+  .btn-talk:hover { transform: translateY(-2px); }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+  #scroll-progress { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; background: var(--accent); z-index: 101; transition: width .1s linear; border-radius: 0 2px 2px 0; box-shadow: 0 0 6px rgba(var(--accent-rgb),.5); }
+  .page-wrap { max-width: 820px; margin: 0 auto; padding: calc(var(--nav-h) + 4rem) 5% 6rem; }
+  .breadcrumb { display: flex; align-items: center; gap: .5rem; font-size: .78rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .breadcrumb a { color: var(--muted); text-decoration: none; transition: color var(--transition); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb span { opacity: .4; }
+  .guide-cat-tag { display: inline-flex; align-items: center; gap: .4rem; background: var(--accent-bg); color: var(--accent); padding: .32rem .85rem; border-radius: 50px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 1.1rem; }
+  .guide-main-title { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1; letter-spacing: -.03em; margin-bottom: 1rem; }
+  .guide-main-title em { font-style: italic; color: var(--accent); }
+  .guide-subtitle { font-size: 1.05rem; color: var(--muted); line-height: 1.8; max-width: 640px; margin-bottom: 1.75rem; }
+  .guide-meta { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; padding: 1rem 1.25rem; background: var(--bg2); border-radius: var(--radius); border: 1px solid var(--border); }
+  .meta-item { display: flex; align-items: center; gap: .4rem; font-size: .82rem; color: var(--muted); }
+  .meta-item strong { color: var(--text); font-weight: 600; }
+  .meta-divider { width: 1px; height: 16px; background: var(--border); }
+  .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 2.5rem 0; }
+  .toc-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 1rem; }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+  .toc-list li { display: flex; align-items: baseline; gap: .6rem; }
+  .toc-num { font-family: var(--serif); font-size: .85rem; color: var(--accent); min-width: 1.4rem; }
+  .toc-list a { font-size: .9rem; color: var(--text); text-decoration: none; font-weight: 500; transition: color var(--transition); }
+  .toc-list a:hover { color: var(--accent); }
+  .guide-divider { height: 1px; background: var(--border); margin: 3rem 0; }
+  .guide-section { margin-bottom: 3.5rem; }
+  .section-num { font-family: var(--serif); font-size: .8rem; color: var(--accent); font-style: italic; display: block; margin-bottom: .35rem; }
+  .section-heading { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: -.02em; margin-bottom: 1rem; line-height: 1.2; }
+  .section-body p { font-size: .97rem; color: var(--text); line-height: 1.85; margin-bottom: 1rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .sub-heading { font-family: var(--serif); font-size: 1.1rem; margin: 1.75rem 0 .75rem; color: var(--text); }
+  .guide-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: .75rem 0 1rem; }
+  .guide-list li { display: flex; align-items: flex-start; gap: .65rem; font-size: .95rem; line-height: 1.7; color: var(--text); }
+  .guide-list li::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: .6rem; }
+  .field-note { display: flex; gap: .85rem; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1rem 1.15rem; margin: 1.25rem 0; }
+  .field-note-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .05rem; }
+  .field-note-body { flex: 1; }
+  .field-note-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .3rem; display: block; }
+  .field-note-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; margin: 0; }
+  .field-note-body p em { font-style: italic; color: var(--text); }
+  .operator-block { background: var(--text); color: var(--bg); border-radius: var(--radius); padding: 1.1rem 1.3rem; margin: 1.25rem 0; }
+  .operator-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; opacity: .5; margin-bottom: .4rem; font-family: var(--sans); }
+  .operator-code { font-size: .92rem; line-height: 1.6; font-family: monospace; }
+  .operator-example { font-size: .82rem; opacity: .65; margin-top: .3rem; font-family: monospace; }
+  .guide-table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: var(--radius); border: 1px solid var(--border); }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .guide-table th { background: var(--bg3); color: var(--text); font-weight: 600; padding: .7rem 1rem; text-align: left; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid var(--border); }
+  .guide-table td { padding: .7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; line-height: 1.6; }
+  .guide-table tr:last-child td { border-bottom: none; }
+  .guide-table tr:nth-child(even) td { background: rgba(var(--bg2-rgb),.4); }
+  .guide-table td strong { color: var(--accent); font-weight: 600; }
+  .phase-list { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; }
+  .phase-item { display: grid; grid-template-columns: 110px 1fr; gap: 1rem; align-items: start; background: var(--bg2); border-radius: var(--radius); padding: 1rem 1.15rem; border: 1px solid var(--border); transition: border-color var(--transition); }
+  .phase-item:hover { border-color: var(--accent); }
+  .phase-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); display: block; margin-bottom: .2rem; }
+  .phase-time { font-family: var(--serif); font-size: .95rem; color: var(--text); display: block; }
+  .phase-content h4 { font-family: var(--serif); font-size: 1rem; margin-bottom: .3rem; }
+  .phase-content p { font-size: .85rem; color: var(--muted); line-height: 1.65; margin: 0; }
+  .back-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .85rem; text-decoration: none; transition: color var(--transition); margin-top: 2rem; }
+  .back-link:hover { color: var(--accent); }
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { color: var(--muted); font-size: .8rem; }
+  .social-links { display: flex; gap: .5rem; }
+  .social-link { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: .85rem; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1); }
+  .fade-in.visible { opacity: 1; transform: none; }
+  @media(max-width:600px) {
+    .nav-links, .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    .phase-item { grid-template-columns: 1fr; }
+    .meta-divider { display: none; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html" class="active">Guides</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a>
+  <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+  <a href="guides.html">Guides</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb fade-in">
+    <a href="index.html">Home</a><span>›</span>
+    <span>Guides</span><span>›</span>
+    <span>Reddit Growth Strategy</span>
+  </div>
+
+  <div class="fade-in">
+    <div class="guide-cat-tag">📱 Social Media Strategy</div>
+    <h1 class="guide-main-title">Reddit Growth Strategy:<br><em>Brand Visibility &amp; Citation Building</em></h1>
+    <p class="guide-subtitle">A step-by-step playbook for building genuine Reddit presence — from account warm-up to brand citations — without getting flagged, shadow-banned, or ignored.</p>
+    <div class="guide-meta">
+      <div class="meta-item">✍️ <strong>Mustansar Mahmood</strong></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">⏱ <strong>12 min read</strong></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">📋 <strong>6 sections</strong></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">🔒 <strong>Strategy guide</strong></div>
+    </div>
+  </div>
+
+  <div class="toc fade-in">
+    <div class="toc-title">Contents</div>
+    <ol class="toc-list">
+      <li><span class="toc-num">01</span><a href="#s1">Account Setup &amp; Warm-Up</a></li>
+      <li><span class="toc-num">02</span><a href="#s2">Posting Strategy</a></li>
+      <li><span class="toc-num">03</span><a href="#s3">Finding Threads to Engage In</a></li>
+      <li><span class="toc-num">04</span><a href="#s4">Result Measurement</a></li>
+      <li><span class="toc-num">05</span><a href="#s5">Tools &amp; Resources</a></li>
+      <li><span class="toc-num">06</span><a href="#s6">Phased Rollout Timeline</a></li>
+    </ol>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S1 -->
+  <div class="guide-section fade-in" id="s1">
+    <span class="section-num">Section 01</span>
+    <h2 class="section-heading">Account Setup &amp; Warm-Up</h2>
+    <div class="section-body">
+      <p>The goal of the Reddit account is to build credibility over time, not to promote the brand immediately. New accounts that jump straight into promotion are flagged, shadow-banned, or ignored by the community.</p>
+      <h3 class="sub-heading">Initial Phase: Authority Building</h3>
+      <ul class="guide-list">
+        <li>Create a new Reddit account with a neutral, non-branded username.</li>
+        <li>For the first 2–4 weeks, focus exclusively on genuine community participation.</li>
+        <li>Upvote and comment on posts in relevant subreddits.</li>
+        <li>Answer questions in your niche as a knowledgeable community member.</li>
+        <li>Build karma organically by contributing helpful, non-promotional content.</li>
+        <li>Target subreddits related to your industry, audience pain points, and adjacent topics.</li>
+        <li>Avoid posting links, brand names, or promotional language during this phase.</li>
+      </ul>
+      <div class="field-note">
+        <div class="field-note-icon">💡</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Username Choice</span>
+          <p><em>Account names that actually make sense are significantly less prone to bans. Choose a username that feels contextually human — something a real niche enthusiast would pick. Avoid strings of numbers or obvious brand signals.</em></p>
+        </div>
+      </div>
+      <div class="field-note">
+        <div class="field-note-icon">🕐</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Account Age Matters More Than Karma</span>
+          <p><em>Any account older than 6 months carries far more weight on Reddit than a new one — even with higher karma. The older the account, the more Reddit's algorithm and users trust it. If you can acquire or age an account intentionally, do it.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S2 -->
+  <div class="guide-section fade-in" id="s2">
+    <span class="section-num">Section 02</span>
+    <h2 class="section-heading">Posting Strategy</h2>
+    <div class="section-body">
+      <p>All posts and comments should feel like they are written by a real user — a customer, a satisfied client, or a knowledgeable community member. Overt promotion will be downvoted and damage account credibility.</p>
+      <h3 class="sub-heading">Tone — Informational &amp; Natural</h3>
+      <ul class="guide-list">
+        <li>Write as a genuine community member sharing knowledge or experience.</li>
+        <li>Avoid salesy language, superlatives, or calls-to-action.</li>
+      </ul>
+      <div class="field-note">
+        <div class="field-note-icon">⚡</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Negative Marketing Is Still Marketing</span>
+          <p><em>Pointing out a competitor's weakness, or acknowledging a real limitation of your own product, can actually build trust faster than pure praise. Be mindful: only discuss negatives that don't damage your own brand's reputation. Authenticity converts.</em></p>
+        </div>
+      </div>
+      <h3 class="sub-heading">Brand Mentions</h3>
+      <ul class="guide-list">
+        <li>Mention the brand only naturally, the way a customer would reference it in conversation.</li>
+        <li>"I used [Brand] last year for this and it worked well" — not "[Brand] is the best solution for…"</li>
+      </ul>
+      <h3 class="sub-heading">Format: Simulate Authentic Reviews</h3>
+      <ul class="guide-list">
+        <li>Post as if sharing a real customer experience, feedback, or comparison.</li>
+        <li>"Has anyone else tried X? My experience was…"</li>
+      </ul>
+      <div class="field-note">
+        <div class="field-note-icon">✍️</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Short &amp; Human Beats Long &amp; AI</span>
+          <p><em>A short comment written in your own natural voice almost always outperforms a long AI-generated one in active subreddits. Save the detailed, structured responses for niche subs where depth is expected and appreciated. When in doubt, write less.</em></p>
+        </div>
+      </div>
+      <div class="field-note">
+        <div class="field-note-icon">🎭</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Blend Into the Sub's Culture</span>
+          <p><em>Every subreddit has its own vocabulary, humour, and meme language. Spend time reading before you post. Drop a relevant meme reference or use the sub's inside language where it fits naturally — it signals that you belong there, and that's half the battle.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S3 -->
+  <div class="guide-section fade-in" id="s3">
+    <span class="section-num">Section 03</span>
+    <h2 class="section-heading">Finding Threads to Engage In</h2>
+    <div class="section-body">
+      <p>Use Google operators to locate active Reddit discussions relevant to your brand or niche:</p>
+      <div class="operator-block">
+        <div class="operator-label">Google Search Operator</div>
+        <div class="operator-code">site:reddit.com "[keyword]" OR "[competitor]" OR "[pain point]"</div>
+        <div class="operator-example">Example → site:reddit.com "unclaimed money" OR "asset recovery" OR "found money"</div>
+      </div>
+      <ul class="guide-list">
+        <li>Use Claude or Grok to help draft responses that sound natural and human.</li>
+        <li>Prompt: "Write a Reddit comment as a real user who found [brand] helpful for [use case]."</li>
+        <li>Review and personalise every AI-generated response before posting.</li>
+      </ul>
+      <div class="field-note">
+        <div class="field-note-icon">🔥</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Target Freshly Posted, Debate-Sparking Threads</span>
+          <p><em>Prioritise threads that were posted recently and have the feel of a conversation that could take off. Early comments on viral-trajectory threads get exponentially more visibility as upvotes compound. A 2-hour-old thread beats a 2-day-old one every time.</em></p>
+        </div>
+      </div>
+      <div class="field-note">
+        <div class="field-note-icon">📈</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Use Google Trends Alerts to Be Early</span>
+          <p><em>Set up Google Trends notifications for relevant queries in your niche. When a topic spikes, there will be fresh Reddit threads within hours. Being among the first 5–10 comments on a trending post is worth more than 50 comments on a stale one.</em></p>
+        </div>
+      </div>
+      <div class="field-note">
+        <div class="field-note-icon">🔗</div>
+        <div class="field-note-body">
+          <span class="field-note-label">Field Note — Bury the Link (Use With Caution)</span>
+          <p><em>Post a comment without any link first. If the thread starts going viral over the next few days, go back and embed the link naturally into a reply or edit. High-risk tactic — use only on threads with clear momentum, and only when the link genuinely adds value to the discussion.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S4 -->
+  <div class="guide-section fade-in" id="s4">
+    <span class="section-num">Section 04</span>
+    <h2 class="section-heading">Result Measurement</h2>
+    <div class="section-body">
+      <p>Track the impact of your Reddit activity using two primary tools. Establish a baseline before activity begins so you can isolate Reddit's contribution.</p>
+      <h3 class="sub-heading">Traffic: Google Analytics</h3>
+      <ul class="guide-list">
+        <li>Set up a UTM parameter for any links posted on Reddit (e.g., utm_source=reddit).</li>
+        <li>Monitor the "Acquisition → All Traffic → Referrals" report for reddit.com traffic.</li>
+        <li>Track: sessions, bounce rate, pages per session, and goal completions from Reddit referral traffic.</li>
+        <li>Review weekly and note which subreddits and post types drive the most qualified traffic.</li>
+      </ul>
+      <h3 class="sub-heading">Citations &amp; Brand Mentions: SEMrush</h3>
+      <ul class="guide-list">
+        <li>Use SEMrush's Brand Monitoring tool to track new mentions of your brand name across Reddit.</li>
+        <li>Set up alerts for brand name variations and key product/service terms.</li>
+        <li>Log the number of organic citations per month and track month-over-month growth.</li>
+        <li>Identify high-authority threads where your brand is mentioned for potential link-building follow-up.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S5 -->
+  <div class="guide-section fade-in" id="s5">
+    <span class="section-num">Section 05</span>
+    <h2 class="section-heading">Tools &amp; Resources</h2>
+    <div class="section-body">
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead><tr><th>Tool</th><th>Purpose</th><th>How to Use</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Google Analytics</strong></td><td>Traffic measurement</td><td>Track Reddit referral sessions via UTM parameters and the Referrals report.</td></tr>
+            <tr><td><strong>SEMrush</strong></td><td>Citation tracking</td><td>Use Brand Monitoring to count and alert on brand mentions across Reddit.</td></tr>
+            <tr><td><strong>Google Operators</strong></td><td>Thread discovery</td><td>Search site:reddit.com with keywords to find relevant discussions.</td></tr>
+            <tr><td><strong>Claude / Grok</strong></td><td>Response drafting</td><td>Generate natural-sounding Reddit comments; always review and personalise before posting.</td></tr>
+            <tr><td><strong>Google Trends</strong></td><td>Early engagement</td><td>Set alerts for relevant queries — be early to threads before they go viral.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-divider"></div>
+
+  <!-- S6 -->
+  <div class="guide-section fade-in" id="s6">
+    <span class="section-num">Section 06</span>
+    <h2 class="section-heading">Phased Rollout Timeline</h2>
+    <div class="section-body">
+      <div class="phase-list">
+        <div class="phase-item">
+          <div><span class="phase-label">Phase 1</span><span class="phase-time">Weeks 1–4</span></div>
+          <div class="phase-content"><h4>Foundation</h4><p>Account creation, subreddit research, karma building through genuine engagement only. Zero brand mentions.</p></div>
+        </div>
+        <div class="phase-item">
+          <div><span class="phase-label">Phase 2</span><span class="phase-time">Weeks 5–8</span></div>
+          <div class="phase-content"><h4>Content &amp; Discovery</h4><p>Begin thread discovery via Google operators. Start posting informational content. No brand mentions yet.</p></div>
+        </div>
+        <div class="phase-item">
+          <div><span class="phase-label">Phase 3</span><span class="phase-time">Weeks 9+</span></div>
+          <div class="phase-content"><h4>Brand Integration</h4><p>Introduce natural brand mentions and simulated customer feedback. Track citations in SEMrush and traffic in GA.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Mustansar Mahmood</div>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li><li><a href="guides.html">Guides</a></li>
+    <li><a href="cv.html">CV</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link">in</a>
+    <a href="https://wa.me/923000853448" target="_blank" class="social-link">W</a>
+    <a href="mailto:itsmustansarmahmood@gmail.com" class="social-link">@</a>
+  </div>
+  <p class="footer-copy">© 2026 Mustansar Mahmood. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
+  const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*80);fo.unobserve(en.target);}});},{threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+</script>
+</body>
+</html>
