@@ -354,6 +354,10 @@
   .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
   .footer-links a:hover { color: var(--accent); }
   .footer-copy { color: var(--muted); font-size: 0.78rem; }
+  .social-links { display: flex; gap: 0.5rem; }
+  .social-link { width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; flex-shrink: 0; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
+  .social-link svg { width: 15px; height: 15px; flex-shrink: 0; }
 
   /* Responsive */
   @media(max-width:600px) {
