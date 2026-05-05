@@ -154,12 +154,12 @@
   .hero-inner {
     position: relative; z-index:2;
     width:100%; max-width:1400px; margin:0 auto;
-    padding: calc(var(--nav-h) + 2.5rem) 5% 3rem;
-    display: grid; grid-template-columns: 1fr 0.85fr;
-    align-items: center; gap: 3rem;
+    padding: calc(10px + 3.5rem) 5% 4rem;
+    display: grid; grid-template-columns: 1.15fr 1fr;
+    align-items: center; gap: 2rem;
     box-sizing: border-box;
   }
-  .hero-content { max-width: 600px; }
+  .hero-content { max-width: 560px; }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 0.5rem;
     background: var(--accent-bg); color: var(--accent);
@@ -215,7 +215,7 @@
   }
   .btn-cv:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(var(--accent-rgb),0.35); }
   .hero-stats-3d {
-    display:flex; flex-direction:column; gap:0.65rem; align-items:flex-start;
+    display:flex; flex-direction:column; gap:0.65rem; align-items:flex-end;
     animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.55s both;
   }
   .hero-card {
