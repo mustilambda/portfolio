@@ -350,15 +350,20 @@
   .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 
   /* FOOTER */
-  footer{
-    background:var(--bg2);border-top:1px solid var(--border);padding:3rem 5%;
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+    footer {
+    position: relative;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; gap: 1.5rem; flex-wrap: wrap;
+    background: rgba(var(--bg-rgb), 0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
   }
-  .footer-logo{font-family:var(--serif);font-size:1.1rem;color:var(--text)}
-  .footer-links{display:flex;gap:1.5rem;list-style:none}
-  .footer-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;transition:color var(--transition)}
-  .footer-links a:hover{color:var(--accent)}
-  .footer-copy{color:var(--muted);font-size:0.8rem}
+  .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { color: var(--muted); font-size: 0.78rem; }
   .social-links{display:flex;gap:0.5rem}
   .social-link{
     width:36px;height:36px;border:1px solid var(--border);border-radius:50%;
@@ -627,13 +632,14 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Mustansar Mahmood</div>
+  <a href="index.html" class="footer-logo">Mustansar Mahmood</a>
   <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="guides.html">Guides</a></li>
-    <li><a href="cv.html">CV</a></li>
+    <li><a href="tools.html">Tools</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="social-links">
