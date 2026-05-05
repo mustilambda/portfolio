@@ -121,9 +121,33 @@
     footer { flex-direction: column; text-align: center; }
     .footer-links { justify-content: center; flex-wrap: wrap; }
   }
+
+  /* CURSOR */
+  body { cursor: none; }
+  #cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width 0.2s, height 0.2s;
+  }
+  #cursor-ring {
+    position: fixed; width: 38px; height: 38px;
+    border: 1.5px solid var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    opacity: 0.45;
+    transition: width 0.25s, height 0.25s, opacity 0.2s;
+  }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
+  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
 </style>
 </head>
 <body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
 <nav>
   <div id="scroll-progress"></div>
@@ -241,6 +265,18 @@
   window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
   const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*100);fo.unobserve(en.target);}});},{threshold:0.08});
   document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+
+// Cursor
+(function(){
+  var cursor = document.getElementById('cursor');
+  var ring = document.getElementById('cursor-ring');
+  if (!cursor || !ring) return;
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  document.addEventListener('mouseover', function(e){ if(e.target.matches('a,button,input,textarea,select')){ document.body.classList.add('cursor-hover'); }else{ document.body.classList.remove('cursor-hover'); } });
+  function loop(){ rx += (mx-rx)*0.1; ry += (my-ry)*0.1; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); }
+  loop();
+})();
 </script>
 </body>
 </html>

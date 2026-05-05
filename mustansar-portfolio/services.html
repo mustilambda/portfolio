@@ -9,8 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --bg: #FAF8F4; --bg2: #F0EDE6; --bg3: #E8E4DB; --text: #1A1814; --muted: #7A776E; --accent: #C8622A; --accent-bg: #F5E8DF; --border: rgba(26,24,20,0.1); --nav-h: 68px; --serif: 'DM Serif Display', serif; --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease; }
-  [data-theme="dark"] { --bg: #141210; --bg2: #1E1C18; --bg3: #262420; --text: #F0EDE6; --muted: #8A8478; --accent: #E07840; --accent-bg: #2A1E16; --border: rgba(240,237,230,0.1); }
+  :root {
+    --bg: #f4ebdd; --bg-rgb: 244,235,221;
+    --bg2: #ede0cc; --bg2-rgb: 237,224,204; --bg3: #e5d3b8;
+    --text: #1a1612; --muted: #6b5e4e;
+    --accent: #c1272d; --accent-rgb: 193,39,45; --accent-bg: #f7dede;
+    --secondary: #8dca93; --secondary-rgb: 141,202,147;
+    --border: rgba(26,22,18,0.12);
+    --nav-h: 68px; --serif: 'DM Serif Display', serif;
+    --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #18130e; --bg-rgb: 24,19,14;
+    --bg2: #231c15; --bg2-rgb: 35,28,21; --bg3: #2e2419;
+    --text: #f4ebdd; --muted: #9a8878;
+    --accent: #e03035; --accent-rgb: 224,48,53; --accent-bg: #2e1112;
+    --secondary: #6db874; --secondary-rgb: 109,184,116;
+    --border: rgba(244,235,221,0.1);
+  }
   html { scroll-behavior: smooth; }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: var(--bg); border-bottom: 1px solid var(--border); transition: background var(--transition); }
@@ -100,9 +116,33 @@
     border-radius: 0 2px 2px 0;
     box-shadow: 0 0 6px rgba(200,98,42,0.5);
   }
+
+  /* CURSOR */
+  body { cursor: none; }
+  #cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width 0.2s, height 0.2s;
+  }
+  #cursor-ring {
+    position: fixed; width: 38px; height: 38px;
+    border: 1.5px solid var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    opacity: 0.45;
+    transition: width 0.25s, height 0.25s, opacity 0.2s;
+  }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
+  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
 </style>
 </head>
 <body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
 
 <nav>
   <div id="scroll-progress"></div>
@@ -262,6 +302,18 @@
   function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
   const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*80);fo.unobserve(en.target);}});},{threshold:0.1});
   document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+
+// Cursor
+(function(){
+  var cursor = document.getElementById('cursor');
+  var ring = document.getElementById('cursor-ring');
+  if (!cursor || !ring) return;
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  document.addEventListener('mouseover', function(e){ if(e.target.matches('a,button,input,textarea,select')){ document.body.classList.add('cursor-hover'); }else{ document.body.classList.remove('cursor-hover'); } });
+  function loop(){ rx += (mx-rx)*0.1; ry += (my-ry)*0.1; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); }
+  loop();
+})();
 </script>
 </body>
 </html>
