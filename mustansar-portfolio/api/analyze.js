@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  const prompt = `You are an SEO strategist. Analyze this query and respond ONLY in valid JSON with no markdown or code fences.
+  const prompt = `You are an SEO strategist. Analyze this query and respond ONLY in valid JSON with no markdown, no code fences, no extra text before or after the JSON.
 
 Query: "${query.trim()}"
 
@@ -37,6 +37,7 @@ Return this exact JSON structure:
           generationConfig: {
             temperature: 0.5,
             maxOutputTokens: 800,
+            responseMimeType: "application/json"
           }
         })
       }
@@ -51,13 +52,23 @@ Return this exact JSON structure:
     const geminiData = await geminiRes.json();
     const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    const cleaned = rawText.replace(/```json|```/g, '').trim();
+    // Aggressively clean the response
+    let cleaned = rawText
+      .replace(/```json/gi, '')
+      .replace(/```/g, '')
+      .trim();
+
+    // Extract JSON if there's text before/after it
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      cleaned = jsonMatch[0];
+    }
 
     let parsed;
     try {
       parsed = JSON.parse(cleaned);
     } catch (e) {
-      console.error('JSON parse failed. Raw:', cleaned);
+      console.error('JSON parse failed. Raw:', rawText);
       return res.status(502).json({ error: 'Failed to parse AI response. Please try again.' });
     }
 
