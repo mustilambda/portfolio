@@ -37,7 +37,10 @@ Return this exact JSON structure:
           generationConfig: {
             temperature: 0.5,
             maxOutputTokens: 800,
-            responseMimeType: "application/json"
+            responseMimeType: "application/json",
+            thinkingConfig: {
+              thinkingBudget: 0
+            }
           }
         })
       }
@@ -50,7 +53,10 @@ Return this exact JSON structure:
     }
 
     const geminiData = await geminiRes.json();
+    console.log('Full Gemini response:', JSON.stringify(geminiData));
+
     const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    console.log('Raw text:', rawText);
 
     // Aggressively clean the response
     let cleaned = rawText
@@ -58,7 +64,7 @@ Return this exact JSON structure:
       .replace(/```/g, '')
       .trim();
 
-    // Extract JSON if there's text before/after it
+    // Extract JSON object if surrounded by extra text
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       cleaned = jsonMatch[0];
