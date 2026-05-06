@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free guides on SEO, content writing, social media strategy and team management by Mustansar Mahmood.">
+<meta name="description" content="Free content writing guides by Mustansar Mahmood — covering SEO articles, AI Overviews, and commercial page writing.">
 <title>Guides — Mustansar Mahmood</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
@@ -33,129 +33,142 @@
   body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
 
   /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(var(--bg-rgb),.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: var(--bg); border-bottom: 1px solid var(--border); transition: background var(--transition); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color var(--transition); position: relative; }
-  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s ease; transform-origin: left; }
-  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color var(--transition); }
   .nav-links a:hover, .nav-links a.active { color: var(--accent); }
   .nav-right { display: flex; align-items: center; gap: 1rem; }
   .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
-  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-talk { background: var(--secondary); color: #fff; padding: .5rem 1.25rem; border-radius: 50px; font-size: .875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),.35); }
-  .btn-talk:hover { transform: translateY(-2px); }
+  .btn-talk { background: var(--secondary); color: #fff; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),0.35); }
   .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
   .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
-  #scroll-progress { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; background: var(--accent); z-index: 101; transition: width .1s linear; border-radius: 0 2px 2px 0; box-shadow: 0 0 6px rgba(var(--accent-rgb),.5); }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
 
-  /* PAGE HERO */
-  .page-hero { padding: calc(var(--nav-h) + 4.5rem) 5% 2.5rem; max-width: 1200px; margin: 0 auto; }
-  .page-tag { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .75rem; display: block; }
-  .page-title { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: -.03em; line-height: 1.1; max-width: 680px; }
+  /* SCROLL PROGRESS */
+  #scroll-progress { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; background: var(--accent); z-index: 101; transition: width 0.1s linear; border-radius: 0 2px 2px 0; box-shadow: 0 0 6px rgba(200,98,42,0.5); }
+
+  /* CURSOR */
+  body { cursor: none; }
+  #cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s; }
+  #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.45; transition: width 0.25s, height 0.25s, opacity 0.2s; }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
+  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
+  #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  /* PAGE WRAP */
+  .page-wrap { position: relative; z-index: 1; padding: calc(var(--nav-h) + 4rem) 5% 6rem; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  .page-tag { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.5rem); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1.25rem; }
   .page-title em { font-style: italic; color: var(--accent); }
-  .page-sub { color: var(--muted); font-size: 1.02rem; max-width: 520px; margin-top: .9rem; line-height: 1.8; }
+  .page-intro { color: var(--muted); font-size: 0.97rem; line-height: 1.85; max-width: 560px; margin-bottom: 3rem; }
 
-  /* GUIDES COUNT */
-  .guides-meta { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
-  .guides-count { font-size: .82rem; color: var(--muted); padding: .3rem .85rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 50px; }
+  /* GUIDE TABS */
+  .guide-tabs { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0; flex-wrap: wrap; }
+  .guide-tab { background: none; border: none; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--muted); cursor: pointer; padding: 0.65rem 1.25rem; border-radius: 8px 8px 0 0; transition: all var(--transition); position: relative; bottom: -1px; border: 1px solid transparent; border-bottom: none; }
+  .guide-tab.active { color: var(--accent); background: var(--bg2); border-color: var(--border); border-bottom-color: var(--bg2); }
+  .guide-tab:hover:not(.active) { color: var(--text); }
 
-  /* GRID */
-  .guides-section { padding: 1rem 5% 6rem; max-width: 1200px; margin: 0 auto; }
-  .guides-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  /* GUIDE PANELS */
+  .guide-panel { display: none; }
+  .guide-panel.active { display: block; }
 
-  /* GUIDE CARD */
-  .guide-card {
-    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
-    overflow: hidden; transition: all .4s cubic-bezier(.22,1,.36,1);
-    display: flex; flex-direction: column;
-    text-decoration: none; color: inherit;
-  }
-  .guide-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 16px 40px rgba(var(--accent-rgb),.1); }
+  /* GUIDE INTRO BANNER */
+  .guide-banner { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 2rem; margin-bottom: 2rem; }
+  .guide-banner h2 { font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 0.5rem; }
+  .guide-banner p { color: var(--muted); font-size: 0.93rem; line-height: 1.75; }
+  .guide-banner .guide-meta { display: flex; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
+  .guide-meta-item { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
 
-  /* THUMB */
-  .guide-thumb {
-    height: 155px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    border-bottom: 1px solid var(--border);
-    transition: all .3s ease; position: relative; overflow: hidden;
-  }
-  .guide-card:hover .guide-thumb { filter: brightness(.97); }
-  .thumb-icon { font-size: 2.8rem; margin-bottom: .35rem; }
-  .thumb-sub { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(26,22,18,.4); }
-  [data-theme="dark"] .thumb-sub { color: rgba(244,235,221,.3); }
+  /* VIDEO LINK */
+  .video-link-bar { display: flex; align-items: center; gap: 0.75rem; background: var(--accent-bg); border: 1px solid rgba(var(--accent-rgb),0.2); border-radius: var(--radius); padding: 0.85rem 1.25rem; margin-bottom: 2rem; text-decoration: none; color: var(--text); transition: all var(--transition); }
+  .video-link-bar:hover { border-color: var(--accent); }
+  .video-play { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.85rem; padding-left: 2px; }
+  .video-link-bar span { font-size: 0.88rem; font-weight: 500; }
+  .video-link-bar strong { color: var(--accent); }
 
-  /* CARD BODY */
-  .guide-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
-  .guide-cat { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .45rem; display: block; }
-  .guide-title { font-family: var(--serif); font-size: 1.05rem; margin-bottom: .45rem; line-height: 1.4; color: var(--text); }
-  .guide-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 1rem; }
-  .guide-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .85rem; border-top: 1px solid var(--border); }
-  .read-time { font-size: .75rem; color: var(--muted); }
-  .read-link { font-size: .8rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: .3rem; }
+  /* STEPS GRID */
+  .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .step-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color var(--transition), transform var(--transition); position: relative; overflow: hidden; }
+  .step-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--transition); }
+  .step-card:hover { border-color: rgba(var(--accent-rgb),0.3); transform: translateY(-2px); }
+  .step-card:hover::before { transform: scaleX(1); }
+  .step-num { font-family: var(--serif); font-size: 2.2rem; color: rgba(var(--accent-rgb),0.15); line-height: 1; margin-bottom: 0.5rem; }
+  .step-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text); }
+  .step-body { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
-  /* COMING SOON CARD */
-  .guide-card.soon { opacity: .6; pointer-events: none; cursor: default; }
-  .guide-card.soon:hover { transform: none; border-color: var(--border); box-shadow: none; }
-  .guide-badge { display: inline-block; background: var(--accent-bg); color: var(--accent); font-size: .68rem; font-weight: 700; padding: .2rem .6rem; border-radius: 50px; text-transform: uppercase; letter-spacing: .06em; }
+  /* BONUS BOX */
+  .bonus-box { background: linear-gradient(135deg, rgba(var(--secondary-rgb),0.12), rgba(var(--secondary-rgb),0.05)); border: 1px solid rgba(var(--secondary-rgb),0.3); border-radius: var(--radius); padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+  .bonus-box h3 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 1rem; color: var(--text); }
+  .bonus-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .bonus-list li { font-size: 0.88rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.6rem; }
+  .bonus-list li::before { content: '✓'; color: var(--secondary); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+
+  /* SECTION BLOCKS (Commercial guide) */
+  .section-block { margin-bottom: 2rem; }
+  .section-header { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.25rem; }
+  .section-letter { width: 38px; height: 38px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.1rem; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 1.3rem; }
+
+  .section-body { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .section-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .section-body ul li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.65rem; line-height: 1.65; }
+  .section-body ul li::before { content: '→'; color: var(--accent); font-weight: 600; flex-shrink: 0; margin-top: 0.05rem; }
+  .section-body p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+  .rule-of-thumb { background: rgba(var(--accent-rgb),0.07); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin-top: 1rem; font-size: 0.875rem; color: var(--text); font-style: italic; }
+
+  /* VOC TABLE */
+  .voc-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; font-size: 0.85rem; }
+  .voc-box strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.5rem; }
+  .voc-box ul { margin-left: 1rem; }
+  .voc-box ul li { list-style: disc; color: var(--muted); margin-bottom: 0.25rem; }
+
+  /* CHECKLIST SECTION */
+  .checklist-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+  .checklist-title { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .checklist-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .progress-bar-wrap { background: var(--bg3); border-radius: 50px; height: 6px; margin-bottom: 0.5rem; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--secondary); border-radius: 50px; width: 0%; transition: width 0.4s ease; }
+  .progress-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .cl-group { margin-bottom: 1.5rem; }
+  .cl-group-title { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+  .cl-sub-title { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin: 0.75rem 0 0.4rem; }
+  .cl-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.45rem 0; cursor: pointer; }
+  .cl-item input[type="checkbox"] { display: none; }
+  .cl-box { width: 18px; height: 18px; min-width: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: all var(--transition); margin-top: 0.1rem; }
+  .cl-item.checked .cl-box { background: var(--secondary); border-color: var(--secondary); }
+  .cl-item.checked .cl-box::after { content: '✓'; color: #fff; font-size: 0.7rem; font-weight: 700; }
+  .cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; }
+  .cl-text { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
+  .cl-reset { margin-top: 1.5rem; background: none; border: 1px solid var(--border); color: var(--muted); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.8rem; cursor: pointer; font-family: var(--sans); transition: all var(--transition); }
+  .cl-reset:hover { border-color: var(--accent); color: var(--accent); }
 
   /* FOOTER */
-      footer {
-    display: flex; align-items: center; justify-content: center;
-    gap: 1.5rem; padding: 1.5rem 5%;
-    border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
+  footer { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 1.5rem 5%; border-top: 1px solid var(--border); flex-wrap: wrap; }
   .footer-copy { color: var(--muted); font-size: 0.8rem; }
   .social-links { display: flex; gap: 0.5rem; align-items: center; }
   .social-link { width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; flex-shrink: 0; transition: all var(--transition); }
   .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
   .social-link svg { display: block; flex-shrink: 0; }
 
-  .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
-  .fade-in.visible { opacity: 1; transform: none; }
-
-  @media(max-width:900px) { .guides-grid { grid-template-columns: 1fr 1fr; } }
-  @media(max-width:600px) {
+  @media (max-width: 760px) { .steps-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
     .nav-links, .nav-right .btn-talk { display: none; }
     .menu-btn { display: block; }
-    .guides-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; text-align: center; }
-    .footer-links { justify-content: center; flex-wrap: wrap; }
+    .guide-tabs { gap: 0.25rem; }
+    .guide-tab { font-size: 0.82rem; padding: 0.55rem 0.9rem; }
   }
-
-  #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-
-  /* CURSOR */
-  body { cursor: none; }
-  #cursor {
-    position: fixed; width: 12px; height: 12px;
-    background: var(--accent); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: width 0.2s, height 0.2s;
-  }
-  #cursor-ring {
-    position: fixed; width: 38px; height: 38px;
-    border: 1.5px solid var(--accent); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%,-50%);
-    opacity: 0.45;
-    transition: width 0.25s, height 0.25s, opacity 0.2s;
-  }
-  .cursor-hover #cursor { width: 22px; height: 22px; }
-  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
-  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
 </style>
 </head>
 <body>
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-
 <canvas id="bg-canvas"></canvas>
-
 
 <nav>
   <div id="scroll-progress"></div>
@@ -171,86 +184,301 @@
   </ul>
   <div class="nav-right">
     <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-    <a href="contact.html" class="btn-talk">Let's Talk</a>
+    <a href="https://wa.me/923000853448" target="_blank" class="btn-talk">Let's Talk</a>
   </div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a><a href="about.html">About</a>
-  <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
-  <a href="guides.html">Guides</a><a href="tools.html">Tools</a><a href="contact.html">Contact</a>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="guides.html">Guides</a><a href="tools.html">Tools</a><a href="contact.html">Contact</a>
 </div>
 
-<!-- PAGE HERO -->
-<div class="page-hero fade-in">
-  <span class="page-tag">Guides</span>
-  <h1 class="page-title">Things I've figured out<br>and <em>written down.</em></h1>
-  <p class="page-sub">Practical guides on SEO, content strategy, social media, and team management. Free, no email required.</p>
-  <div class="guides-meta">
-    <span class="guides-count">1 guide published</span>
+<div class="page-wrap">
+  <span class="page-tag">Free Resources</span>
+  <h1 class="page-title">Guides that actually<br><em>move the needle.</em></h1>
+  <p class="page-intro">No-fluff playbooks I've built from real client work. Use them, share them, steal what's useful — just make your content better.</p>
+
+  <!-- TABS -->
+  <div class="guide-tabs">
+    <button class="guide-tab active" onclick="switchTab('seo')">📈 SEO &amp; AI Overview Articles</button>
+    <button class="guide-tab" onclick="switchTab('commercial')">💼 Commercial Page Writing</button>
   </div>
-</div>
 
-<!-- GUIDES GRID -->
-<div class="guides-section">
-  <div class="guides-grid">
+  <!-- ========= GUIDE 1: SEO & AI OVERVIEWS ========= -->
+  <div class="guide-panel active" id="panel-seo">
+    <div class="guide-banner">
+      <h2>How to Write Articles That Rank Higher in Google and Get Featured in AI Overviews</h2>
+      <p>A 2026 framework built around E-E-A-T, semantic relevance, and user intent — so your content earns both traditional rankings and AI citations.</p>
+      <div class="guide-meta">
+        <span class="guide-meta-item">⏱ 8 Steps</span>
+        <span class="guide-meta-item">📅 2026 Guide</span>
+        <span class="guide-meta-item">🎯 Informational &amp; Editorial Content</span>
+      </div>
+    </div>
 
-    <!-- ① PUBLISHED — Reddit Strategy -->
-    <a href="reddit-strategy.html" class="guide-card fade-in">
-      <div class="guide-thumb" style="background:linear-gradient(135deg,#f7dede 0%,#f0b8b8 100%)">
-        <div class="thumb-icon">📱</div>
-        <div class="thumb-sub">Social Media · 12 min read</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">Align the Outline with User Intent</div>
+        <div class="step-body">Research the exact query and related questions using Google's "People Also Ask," Semrush, or AnswerThePublic. Structure with a clear H1, logical H2/H3s, and sections that directly address what users want. Cover the topic comprehensively so AI doesn't need to pull from multiple sources.</div>
       </div>
-      <div class="guide-body">
-        <span class="guide-cat">Social Media Strategy</span>
-        <h3 class="guide-title">Reddit Growth Strategy: Brand Visibility &amp; Citation Building</h3>
-        <p class="guide-desc">A step-by-step playbook for building genuine Reddit presence — from account warm-up to brand citations — without getting flagged or shadow-banned.</p>
-        <div class="guide-foot">
-          <span class="read-time">⏱ 12 min read · 6 sections</span>
-          <span class="read-link">Read →</span>
-        </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">Deliver the Direct Answer Up Front</div>
+        <div class="step-body">Place the concise, straightforward answer in the first 1–3 sentences or a highlighted summary box. Avoid fluff or long introductions — AI Overviews and users both reward immediate value. Follow with a brief explanation, then go deeper.</div>
       </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">Use Visuals That Communicate in 3 Seconds</div>
+        <div class="step-body">Include concise, engaging infographics, charts, or diagrams that users can understand instantly. Optimise images with descriptive alt text and compress for speed. Multi-modal content (text + visuals) significantly boosts chances of being selected for AI summaries.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-title">Add Unique Angles, Fresh Data &amp; Credible Sources</div>
+        <div class="step-body">Go beyond generic information. Provide original insights, real-world examples, or first-hand experience. Cite the latest data from government sites, .edu domains, and peer-reviewed studies. Incorporate UGC from Reddit or forums for freshness and relevance.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <div class="step-title">Conduct Deep, Thorough Research</div>
+        <div class="step-body">Back every claim with evidence. Reference primary sources, statistics, and expert opinions. Show Experience (real-world cases) and Authority (author bio with credentials). These E-E-A-T signals are what AI systems prioritise when selecting content to surface.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">06</div>
+        <div class="step-title">Write Simply, Concisely &amp; Clearly</div>
+        <div class="step-body">Use short sentences, everyday language, and active voice throughout. Eliminate jargon or explain it immediately. Aim for content that feels conversational yet professional — ideal for both human readers and AI parsing engines.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">07</div>
+        <div class="step-title">Make Content Highly Scannable</div>
+        <div class="step-body">Break up text with bullet points, numbered lists, and comparison tables. Bold key phrases. Keep paragraphs to 2–3 lines max. Use clear transition sentences between sections. Scannable structure signals quality to both users and crawlers.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">08</div>
+        <div class="step-title">Implement Strong Internal Linking</div>
+        <div class="step-body">Link naturally to other relevant articles on your site. This helps users explore more, builds topical authority, and helps Google understand your site's structure — improving both traditional rankings and AI visibility simultaneously.</div>
+      </div>
+    </div>
+
+    <div class="bonus-box">
+      <h3>✦ Bonus Tips for 2026 Success</h3>
+      <ul class="bonus-list">
+        <li>Prioritise <strong>long-tail, question-based queries</strong> — these frequently trigger AI Overviews and are easier to rank for early.</li>
+        <li>Demonstrate real <strong>Experience</strong> — include personal insights, case studies, or expert quotes. Generic content gets ignored by AI.</li>
+        <li>Test your content: Does it answer the question completely, clearly, and credibly <strong>in under 30 seconds?</strong> If not, rewrite.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========= GUIDE 2: COMMERCIAL PAGE ========= -->
+  <div class="guide-panel" id="panel-commercial">
+    <div class="guide-banner">
+      <h2>How to Write Any Commercial Page</h2>
+      <p>Writing great pages is no longer about creativity — it's about research, psychology, and structure. Spend 60–80% of your time researching before you write a single word.</p>
+      <div class="guide-meta">
+        <span class="guide-meta-item">⏱ 5 Phases</span>
+        <span class="guide-meta-item">✅ Includes Checklist</span>
+        <span class="guide-meta-item">🎯 Commercial &amp; Landing Pages</span>
+      </div>
+    </div>
+
+    <a href="https://flonnect.com/video/3817f84b5ae9-4aab-8a6b-066e6d8690b0" target="_blank" class="video-link-bar">
+      <div class="video-play">▶</div>
+      <span><strong>Watch first:</strong> Video walkthrough of the full commercial page framework</span>
     </a>
 
-    <!-- ② COMING SOON placeholder -->
-    <div class="guide-card soon fade-in">
-      <div class="guide-thumb" style="background:linear-gradient(135deg,#e8f5e8 0%,#c8e8c8 100%)">
-        <div class="thumb-icon">🔍</div>
-        <div class="thumb-sub">SEO · Coming soon</div>
+    <!-- A. RESEARCH -->
+    <div class="section-block">
+      <div class="section-header">
+        <div class="section-letter">A</div>
+        <h2 class="section-title">Research Phase <span style="font-family:var(--sans);font-size:0.8rem;color:var(--muted);font-weight:400;">(60–80% of your total time)</span></h2>
       </div>
-      <div class="guide-body">
-        <span class="guide-cat">SEO</span>
-        <h3 class="guide-title">How to Build Topical Authority Without Publishing 500 Articles</h3>
-        <p class="guide-desc">Cluster strategy, pillar structure, and search intent alignment — the smarter approach to building authority at scale.</p>
-        <div class="guide-foot">
-          <span class="read-time">⏱ ~8 min read</span>
-          <span class="guide-badge">Coming soon</span>
+      <div class="section-body">
+        <ul>
+          <li>Open the page and <strong>understand the service/product/brand first</strong> (use Grok or similar). Map brand USPs, product USPs, target audience, features, and page goals before anything else.</li>
+          <li><strong>Audience understanding:</strong> Think about what users want on this page. Consider their pain points, funnel type, and emotional triggers. Categorise into: Loyal customers (know why you're best), New customers (find their tipping point), and Almost-buyers (currently on the fence). Your copy must speak to all three.</li>
+        </ul>
+        <div class="voc-box">
+          <strong>[Advanced] VOC Mining — The Secret Weapon</strong>
+          <ul>
+            <li>Mine Reddit, Amazon reviews, and forums for exact customer language</li>
+            <li>Interview customers if possible: What triggered the search? What almost stopped them buying? What's life like before vs. after?</li>
+            <li>Organise findings into: pain points, goals, objections, outcomes</li>
+          </ul>
         </div>
+        <ul>
+          <li><strong>Competitor analysis:</strong> Search the keyword on SERP. Review the headings of the top 10 competitors. Note industry-specific terms and entities they use. Use keyword clustering (group related terms) instead of repeating one keyword.</li>
+          <li>Find <strong>direct quotes and UGC videos/reviews</strong> — treat them as sticky notes for later.</li>
+          <li><strong>Outline:</strong> Make a rough outline, take help from AI to finalise it. Extract headings manually, merge them, and map the user journey (placement of headings). You can use AI to generate a competitor-based outline as a cross-reference.</li>
+        </ul>
+        <div class="rule-of-thumb">Rule of Thumb: The more manual the work, the better the result.</div>
       </div>
     </div>
 
-    <!-- ③ COMING SOON placeholder -->
-    <div class="guide-card soon fade-in">
-      <div class="guide-thumb" style="background:linear-gradient(135deg,#e8eaf5 0%,#c0c8e8 100%)">
-        <div class="thumb-icon">👥</div>
-        <div class="thumb-sub">Team Management · Coming soon</div>
+    <!-- B. WRITING -->
+    <div class="section-block">
+      <div class="section-header">
+        <div class="section-letter">B</div>
+        <h2 class="section-title">Writing Phase <span style="font-family:var(--sans);font-size:0.8rem;color:var(--muted);font-weight:400;">(30% of your total time)</span></h2>
       </div>
-      <div class="guide-body">
-        <span class="guide-cat">Team Management</span>
-        <h3 class="guide-title">How I Managed 15 Writers Without Things Falling Apart</h3>
-        <p class="guide-desc">The SOP system, QA process, and communication structure that kept a 15-person content team running consistently.</p>
-        <div class="guide-foot">
-          <span class="read-time">⏱ ~10 min read</span>
-          <span class="guide-badge">Coming soon</span>
-        </div>
+      <div class="section-body">
+        <ul>
+          <li>If you can't write the crux of the page in the <strong>headline</strong>, don't start writing yet.</li>
+          <li>While writing, consider: sales/marketing tone, educational/promotional elements, CTA position, emotional points, industry terms, word count, and page design.</li>
+          <li>No jargon. No tough wording. If a line can be removed without impacting quality, remove it.</li>
+          <li><strong>Less content, more visualisation.</strong></li>
+        </ul>
+        <br>
+        <p><strong style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.06em;">Writing Techniques That Convert</strong></p>
+        <br>
+        <ul>
+          <li>Strong and descriptive headlines — 80% of people read only this</li>
+          <li>Benefits over features throughout the entire content</li>
+          <li>Active voice only — no "whether/while" sentence constructions</li>
+          <li>Eliminate AI clichés: "transform," "leverage," "imagine," "picture this," em dashes</li>
+          <li>Write in 1–3 sentence standalone blocks; 120–180 words per section maximum</li>
+          <li>Each section must make sense on its own — no context dependency</li>
+          <li>Use bullets and tables — AI loves structured data</li>
+          <li>Definitely <strong>add reviews as trust factors</strong></li>
+        </ul>
       </div>
     </div>
 
+    <!-- C. CTA -->
+    <div class="section-block">
+      <div class="section-header">
+        <div class="section-letter">C</div>
+        <h2 class="section-title">CTA Rules</h2>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li>No generic CTAs — every CTA must be specific and action-oriented</li>
+          <li>Use multiple CTAs with the same intent (different intent = separate pages)</li>
+          <li>Use different word choice across CTAs even when intent is the same</li>
+          <li>Include phone numbers, WhatsApp links, or direct contact options where possible</li>
+          <li>Use sales, promotions, or limited-time offers to add urgency</li>
+          <li><strong>One CTA immediately after the hero and one after the last section — non-negotiable</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D. LOCATION -->
+    <div class="section-block">
+      <div class="section-header">
+        <div class="section-letter">D</div>
+        <h2 class="section-title">Location Page Rules</h2>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li>H1 must include the location name</li>
+          <li>Embed Google Map (optional but recommended for local trust)</li>
+          <li>Mention local landmarks to reinforce geo-relevance</li>
+          <li>Use NAP — Name, Address, Phone — consistently throughout the page</li>
+          <li>Include location-specific services, not just generic ones</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- E. FAQ -->
+    <div class="section-block">
+      <div class="section-header">
+        <div class="section-letter">E</div>
+        <h2 class="section-title">FAQ Rules</h2>
+      </div>
+      <div class="section-body">
+        <ul>
+          <li>Get FAQs from SERP's "People Also Ask" — the single most credible source</li>
+          <li>FAQ type depends on intent: use MOFU + BOFU FAQs for collection pages; BOFU FAQs only for product and home pages</li>
+          <li>Keep answers under 30 words — no padding</li>
+          <li>Write in a direct tone; always be certain, never ambiguous</li>
+          <li>Bullets are fine inside FAQ answers if needed for clarity</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE CHECKLIST -->
+    <div class="checklist-wrap" id="checklist">
+      <h2 class="checklist-title">✅ Commercial Page Writing Checklist</h2>
+      <p class="checklist-sub">Tick off each item as you complete it. Progress saves in your browser.</p>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <p class="progress-label" id="progressLabel">0 of 0 completed</p>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Pre-Writing — Brand & Product</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Brand &amp; product USPs identified</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Target audience &amp; page goals defined</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Key features listed</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Pre-Writing — Audience Research</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Pain points, funnel stage &amp; emotional triggers mapped</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Audience segmented into loyal / new / almost-buyers</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Pre-Writing — Competitor Analysis</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Reviewed top 10 competitor headings for the target keyword</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Listed industry terms &amp; keyword clusters</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Found direct quotes / UGC sticky notes</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Pre-Writing — Outline</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Created rough outline</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Mapped user journey (heading placement)</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Finalised clean outline with AI assistance</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Writing Phase — Headline & Content</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Headline captures the page essence (strong &amp; descriptive)</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Appropriate sales/marketing tone used throughout</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">No jargon or unnecessary filler lines</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Visualisations added where possible</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Writing Phase — Techniques</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Benefits-focused (not features-focused)</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Active voice; no "whether/while" constructions</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">No AI clichés (transform, leverage, imagine, em dashes)</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">1–3 sentence blocks; 120–180 words per section</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Each section stands alone without prior context</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Bullets/tables used for structure</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Reviews/testimonials included as trust signals</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Location Page (if applicable)</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">H1 includes the location name</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Local landmarks mentioned</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">NAP (Name, Address, Phone) included</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">FAQs</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Pulled from SERP "People Also Ask"</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Matched to intent (MOFU+BOFU for collections, BOFU for products)</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Answers under 30 words, direct tone, no ambiguity</span></label>
+      </div>
+
+      <div class="cl-group">
+        <div class="cl-group-title">Final Check</div>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Headline is compelling; first paragraph hooks immediately</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Benefits answer the "So what?" test</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">All CTAs are action-focused with urgency</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">CTA placed right after hero section</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">CTA placed after the final section</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Mobile-friendly layout confirmed</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Trust signals present throughout</span></label>
+        <label class="cl-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="cl-box"></span><span class="cl-text">Proofread for errors, tone, and consistency</span></label>
+      </div>
+
+      <button class="cl-reset" onclick="resetChecklist()">↺ Reset Checklist</button>
+    </div>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="social-links">
     <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link" title="LinkedIn">
@@ -267,54 +495,102 @@
 </footer>
 
 <script>
+  /* THEME */
   function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
   (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+
+  /* MOBILE MENU */
   function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+  /* SCROLL PROGRESS */
   window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
-  const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*100);fo.unobserve(en.target);}});},{threshold:0.08});
-  document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
 
-/* BG CANVAS */
-(function(){
-  const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
-  let W,H;
-  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize);
-  const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI'];
-  const particles=[];
-  for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
-  let mx=800,my=500;
-  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const aC=isDark()?'224,48,53':'193,39,45',gC=isDark()?'109,184,116':'141,202,147';
-    particles.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
-      if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
-      const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<140){const f=(140-d)/140*.45;p.x+=(dx/d)*f;p.y+=(dy/d)*f;}
-      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
-      if(p.word){ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;ctx.fillStyle=`rgba(${aC},1)`;ctx.fillText(p.word,0,0);}
-      else{ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${gC},1)`;ctx.fill();}
-      ctx.restore();
-    });
-    requestAnimationFrame(draw);
+  /* TABS */
+  function switchTab(id) {
+    document.querySelectorAll('.guide-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.guide-panel').forEach(p => p.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
   }
-  draw();
-})();
 
-// Cursor
-(function(){
-  var cursor = document.getElementById('cursor');
-  var ring = document.getElementById('cursor-ring');
-  if (!cursor || !ring) return;
-  var mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-  document.addEventListener('mouseover', function(e){ if(e.target.matches('a,button,input,textarea,select')){ document.body.classList.add('cursor-hover'); }else{ document.body.classList.remove('cursor-hover'); } });
-  function loop(){ rx += (mx-rx)*0.1; ry += (my-ry)*0.1; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); }
-  loop();
-})();
+  /* CHECKLIST */
+  const CL_KEY = 'musti_cl_state';
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    saveChecklist();
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.cl-item');
+    const done = document.querySelectorAll('.cl-item.checked');
+    const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = done.length + ' of ' + all.length + ' completed' + (pct === 100 ? ' 🎉' : '');
+  }
+
+  function saveChecklist() {
+    const state = Array.from(document.querySelectorAll('.cl-item')).map(el => el.classList.contains('checked'));
+    localStorage.setItem(CL_KEY, JSON.stringify(state));
+  }
+
+  function loadChecklist() {
+    const raw = localStorage.getItem(CL_KEY);
+    if (!raw) { updateProgress(); return; }
+    const state = JSON.parse(raw);
+    document.querySelectorAll('.cl-item').forEach((el, i) => {
+      if (state[i]) el.classList.add('checked');
+    });
+    updateProgress();
+  }
+
+  function resetChecklist() {
+    document.querySelectorAll('.cl-item').forEach(el => el.classList.remove('checked'));
+    localStorage.removeItem(CL_KEY);
+    updateProgress();
+  }
+
+  window.addEventListener('DOMContentLoaded', loadChecklist);
+
+  /* CURSOR */
+  (function(){
+    var cursor=document.getElementById('cursor');var ring=document.getElementById('cursor-ring');
+    if(!cursor||!ring)return;var mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    document.addEventListener('mouseover',function(e){if(e.target.matches('a,button,input,textarea,select,label')){document.body.classList.add('cursor-hover');}else{document.body.classList.remove('cursor-hover');}});
+    function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}
+    loop();
+  })();
+
+  /* BG CANVAS */
+  (function(){
+    const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');let W,H;
+    function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+    resize();window.addEventListener('resize',resize);
+    const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI'];
+    const particles=[];
+    for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
+    let mx=800,my=500;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      const aC=isDark()?'224,48,53':'193,39,45',gC=isDark()?'109,184,116':'141,202,147';
+      particles.forEach(p=>{
+        p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
+        if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
+        const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140){const f=(140-d)/140*.45;p.x+=(dx/d)*f;p.y+=(dy/d)*f;}
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
+        if(p.word){ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;ctx.fillStyle=`rgba(${aC},1)`;ctx.fillText(p.word,0,0);}
+        else{ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${gC},1)`;ctx.fill();}
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 </script>
 </body>
 </html>
