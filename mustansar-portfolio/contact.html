@@ -197,18 +197,7 @@
       </a>
     </div>
 
-    <p style="font-size:0.8rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Find me on</p>
-    <div class="social-row">
-      <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-card">
-        <span>in</span> LinkedIn
-      </a>
-      <a href="#" class="social-card">
-        <span>𝕏</span> Twitter/X
-      </a>
-      <a href="#" class="social-card">
-        <span>▶</span> YouTube
-      </a>
-    </div>
+
   </div>
 
   <div class="contact-form-wrap">
@@ -272,18 +261,52 @@
   function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
   window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
 
-  function submitForm() {
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+  async function submitForm() {
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
     if (!email || !message) { alert('Please fill in your email and message.'); return; }
-    // Opens default email client with pre-filled content
-    const fname = document.getElementById('fname').value;
-    const lname = document.getElementById('lname').value;
+
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
     const reason = document.getElementById('reason').value;
-    const subject = encodeURIComponent(`Portfolio Enquiry: ${reason || 'General'}`);
-    const body = encodeURIComponent(`Name: ${fname} ${lname}\nEmail: ${email}\nReason: ${reason}\n\n${message}`);
-    window.location.href = `mailto:itsmustansarmahmood@gmail.com?subject=${subject}&body=${body}`;
-    document.getElementById('successMsg').style.display = 'block';
+
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const data = {
+      access_key: '059dbb36-4486-441f-a802-47c8b1ba5da1',
+      name: (fname + ' ' + lname).trim(),
+      email: email,
+      subject: 'Portfolio Enquiry: ' + (reason || 'General'),
+      message: 'Reason: ' + (reason || 'Not specified') + '\n\n' + message
+    };
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      if (json.success) {
+        document.getElementById('successMsg').style.display = 'block';
+        document.getElementById('fname').value = '';
+        document.getElementById('lname').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('reason').value = '';
+        document.getElementById('message').value = '';
+        btn.textContent = 'Sent ✓';
+      } else {
+        alert('Something went wrong. Please try WhatsApp or email directly.');
+        btn.textContent = 'Send Message →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      alert('Network error. Please try WhatsApp or email directly.');
+      btn.textContent = 'Send Message →';
+      btn.disabled = false;
+    }
   }
 
 // Cursor
