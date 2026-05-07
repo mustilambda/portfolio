@@ -28,7 +28,7 @@ Return EXACTLY this JSON structure. All values must be strings:
   "layer2": "Two sharp bullet points starting with • that describe the immediate intent. What outcome does the user want from consuming this content? What do they want to walk away with?",
   "layer3": "Two sharp bullet points starting with • that reveal the hidden emotional or aspirational driver. What is the user REALLY trying to solve, achieve, or feel? Go deeper than the surface.",
   "contentAngle": "A bold, specific content angle (2-3 sentences) that satisfies all three intent layers simultaneously. Include a suggested article headline that would stand out on the SERP.",
-  "mustCoverTopics": "MUST-COVER TOPICS\\n\\n• [HIGH PRIORITY] Topic one — why it matters\\n• [HIGH PRIORITY] Topic two — why it matters\\n• [HIGH PRIORITY] Topic three — why it matters\\n• Topic four — brief note\\n• Topic five — brief note\\n• Topic six — brief note\\n• Topic seven — brief note\\n• Topic eight — brief note",
+  "mustCoverTopics": "• [HIGH PRIORITY] Topic one — why it matters\\n• [HIGH PRIORITY] Topic two — why it matters\\n• [HIGH PRIORITY] Topic three — why it matters\\n• Topic four — brief note\\n• Topic five — brief note\\n• Topic six — brief note\\n• Topic seven — brief note\\n• Topic eight — brief note",
   "peopleAlsoAsk": "• Question one that real users ask around this topic?\\n• Question two?\\n• Question three?\\n• Question four?\\n• Question five?\\n• Question six?",
   "contentGaps": "• Gap one — specific angle or subtopic top-ranking pages skip, and why owning it helps you rank\\n• Gap two — same format\\n• Gap three — same format\\n• Gap four — same format",
   "h2Outline": "H2: Compelling heading one\\nH2: Compelling heading two\\nH2: Compelling heading three\\nH2: Compelling heading four\\nH2: Compelling heading five\\nH2: Compelling heading six\\nH2: Compelling heading seven"
@@ -38,7 +38,7 @@ Rules:
 - Every bullet point must be specific to THIS query — nothing generic
 - [HIGH PRIORITY] flags go on topics that appear across 3+ top-ranking pages
 - H2s must be compelling and specific, not generic section labels
-- Content gaps must name what's missing AND why it's an opportunity
+- Content gaps must name what is missing AND why it is an opportunity
 - Return ONLY the JSON. Nothing else.`;
 
   try {
@@ -51,7 +51,7 @@ Rules:
         'X-Title': 'SEO Intent Analyzer'
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.0-flash-exp:free',
+        model: 'google/gemini-2.0-flash-lite-001',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
