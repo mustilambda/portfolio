@@ -277,9 +277,45 @@
   .layer-card.l2::before { background: var(--secondary); }
   .layer-card.l3::before { background: #f59e0b; }
   .layer-card.angle::before { background: #6366f1; }
-  .layer-card.serp::before { background: #06b6d4; }
+  .layer-card.serp-must::before { background: #06b6d4; }
+  .layer-card.serp-paa::before { background: #8b5cf6; }
+  .layer-card.serp-gaps::before { background: #f59e0b; }
+  .layer-card.serp-h2::before { background: #10b981; }
 
-  .layer-tag {
+  .serp-must .layer-tag { background: rgba(6,182,212,0.12); color: #06b6d4; }
+  .serp-paa .layer-tag { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+  .serp-gaps .layer-tag { background: rgba(245,158,11,0.12); color: #d97706; }
+  .serp-h2 .layer-tag { background: rgba(16,185,129,0.12); color: #10b981; }
+
+  .serp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-bottom: 0.9rem;
+  }
+  @media(max-width: 640px) {
+    .serp-grid { grid-template-columns: 1fr; }
+  }
+
+  /* HIGH PRIORITY badge styling */
+  .layer-content .high-priority {
+    display: inline-block;
+    background: rgba(var(--accent-rgb), 0.12);
+    color: var(--accent);
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.1rem 0.45rem; border-radius: 4px;
+    margin-right: 0.3rem; vertical-align: middle;
+  }
+  .layer-content .h2-line {
+    font-weight: 600; color: var(--text);
+    display: block; margin-bottom: 0.35rem;
+  }
+  .layer-content .h2-label {
+    color: var(--muted); font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-right: 0.4rem;
+  }
     display: inline-block; font-size: 0.68rem; font-weight: 700;
     letter-spacing: 0.1em; text-transform: uppercase;
     padding: 0.2rem 0.65rem; border-radius: 50px; margin-bottom: 0.6rem;
@@ -468,9 +504,23 @@
           <div class="layer-content" id="contentAngle"></div>
         </div>
 
-        <div class="layer-card serp">
-          <span class="layer-tag">📊 SERP & Content Brief</span>
-          <div class="layer-content" id="serpAnalysis"></div>
+        <div class="serp-grid">
+          <div class="layer-card serp-must">
+            <span class="layer-tag">📌 Must-Cover Topics</span>
+            <div class="layer-content" id="mustCoverTopics"></div>
+          </div>
+          <div class="layer-card serp-paa">
+            <span class="layer-tag">💬 People Also Ask</span>
+            <div class="layer-content" id="peopleAlsoAsk"></div>
+          </div>
+          <div class="layer-card serp-gaps">
+            <span class="layer-tag">🔍 Content Gaps</span>
+            <div class="layer-content" id="contentGaps"></div>
+          </div>
+          <div class="layer-card serp-h2">
+            <span class="layer-tag">📝 Suggested H2 Outline</span>
+            <div class="layer-content" id="h2Outline"></div>
+          </div>
         </div>
 
         <div class="copy-row">
@@ -608,12 +658,29 @@ async function runAnalysis() {
   }
 }
 
+function formatContent(text) {
+  if (!text) return '';
+  return text
+    .split('\n')
+    .map(line => {
+      line = line.replace(/\[HIGH PRIORITY\]/gi, '<span class="high-priority">High Priority</span>');
+      if (/^H2:/i.test(line)) {
+        return `<span class="h2-line"><span class="h2-label">H2</span>${line.replace(/^H2:/i, '').trim()}</span>`;
+      }
+      return line;
+    })
+    .join('\n');
+}
+
 function renderResults(data) {
   document.getElementById('layer1').textContent = data.layer1 || '';
   document.getElementById('layer2').textContent = data.layer2 || '';
   document.getElementById('layer3').textContent = data.layer3 || '';
   document.getElementById('contentAngle').textContent = data.contentAngle || '';
-  document.getElementById('serpAnalysis').textContent = data.serpAnalysis || '';
+  document.getElementById('mustCoverTopics').innerHTML = formatContent(data.mustCoverTopics || '');
+  document.getElementById('peopleAlsoAsk').textContent = data.peopleAlsoAsk || '';
+  document.getElementById('contentGaps').textContent = data.contentGaps || '';
+  document.getElementById('h2Outline').innerHTML = formatContent(data.h2Outline || '');
   document.getElementById('resultsWrap').classList.add('show');
   document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -625,13 +692,17 @@ function showError(msg) {
 }
 
 function copyResults() {
+  const get = (id) => document.getElementById(id)?.textContent || document.getElementById(id)?.innerText || '';
   const parts = [
     '=== SEO INTENT ANALYSIS ===\n',
-    'LAYER 1 — SEARCH INTENT\n' + document.getElementById('layer1').textContent,
-    '\nLAYER 2 — IMMEDIATE INTENT\n' + document.getElementById('layer2').textContent,
-    '\nLAYER 3 — HIDDEN INTENT\n' + document.getElementById('layer3').textContent,
-    '\nRECOMMENDED CONTENT ANGLE\n' + document.getElementById('contentAngle').textContent,
-    '\nSERP & CONTENT BRIEF\n' + document.getElementById('serpAnalysis').textContent,
+    'LAYER 1 — SEARCH INTENT\n' + get('layer1'),
+    '\nLAYER 2 — IMMEDIATE INTENT\n' + get('layer2'),
+    '\nLAYER 3 — HIDDEN INTENT\n' + get('layer3'),
+    '\nRECOMMENDED CONTENT ANGLE\n' + get('contentAngle'),
+    '\nMUST-COVER TOPICS\n' + get('mustCoverTopics'),
+    '\nPEOPLE ALSO ASK\n' + get('peopleAlsoAsk'),
+    '\nCONTENT GAPS\n' + get('contentGaps'),
+    '\nSUGGESTED H2 OUTLINE\n' + get('h2Outline'),
   ];
   navigator.clipboard.writeText(parts.join('\n')).then(() => {
     const btn = document.querySelector('.btn-copy');

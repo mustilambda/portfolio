@@ -8,59 +8,69 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Query is required' });
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  const prompt = `You are an SEO strategist. Analyze this search query and respond ONLY with a valid JSON object. No markdown, no code fences, no explanation — just the raw JSON.
+  const systemPrompt = `You are a senior SEO content strategist with 10+ years of experience analyzing search intent, SERP patterns, and content architecture. You think like an editor AND a marketer — sharp, specific, no filler.
+
+You MUST respond with a valid JSON object only. No markdown, no code fences, no preamble, no explanation. Just raw JSON.`;
+
+  const userPrompt = `Analyze this search query for a content team and return a detailed JSON object.
 
 Query: "${query.trim()}"
 
-Return exactly this JSON structure with string values only:
+Return EXACTLY this JSON structure. All values must be strings:
+
 {
-  "layer1": "Search Intent: • point one • point two",
-  "layer2": "Immediate Intent: • point one • point two",
-  "layer3": "Hidden Intent: • point one • point two",
-  "contentAngle": "Your recommended content angle and example headline",
-  "serpAnalysis": "MUST-COVER TOPICS:\\n• topic 1\\n• topic 2\\n• topic 3\\n• topic 4\\n\\nPEOPLE ALSO ASK:\\n• question 1\\n• question 2\\n• question 3\\n\\nCONTENT GAPS:\\n• gap 1\\n• gap 2\\n\\nSUGGESTED H2 OUTLINE:\\nH2: heading 1\\nH2: heading 2\\nH2: heading 3\\nH2: heading 4\\nH2: heading 5"
-}`;
+  "layer1": "Two sharp bullet points starting with • that describe the literal search intent. What format does the SERP likely reward? What type of result is the user expecting?",
+  "layer2": "Two sharp bullet points starting with • that describe the immediate intent. What outcome does the user want from consuming this content? What do they want to walk away with?",
+  "layer3": "Two sharp bullet points starting with • that reveal the hidden emotional or aspirational driver. What is the user REALLY trying to solve, achieve, or feel? Go deeper than the surface.",
+  "contentAngle": "A bold, specific content angle (2-3 sentences) that satisfies all three intent layers simultaneously. Include a suggested article headline that would stand out on the SERP.",
+  "mustCoverTopics": "MUST-COVER TOPICS\\n\\n• [HIGH PRIORITY] Topic one — why it matters\\n• [HIGH PRIORITY] Topic two — why it matters\\n• [HIGH PRIORITY] Topic three — why it matters\\n• Topic four — brief note\\n• Topic five — brief note\\n• Topic six — brief note\\n• Topic seven — brief note\\n• Topic eight — brief note",
+  "peopleAlsoAsk": "• Question one that real users ask around this topic?\\n• Question two?\\n• Question three?\\n• Question four?\\n• Question five?\\n• Question six?",
+  "contentGaps": "• Gap one — specific angle or subtopic top-ranking pages skip, and why owning it helps you rank\\n• Gap two — same format\\n• Gap three — same format\\n• Gap four — same format",
+  "h2Outline": "H2: Compelling heading one\\nH2: Compelling heading two\\nH2: Compelling heading three\\nH2: Compelling heading four\\nH2: Compelling heading five\\nH2: Compelling heading six\\nH2: Compelling heading seven"
+}
+
+Rules:
+- Every bullet point must be specific to THIS query — nothing generic
+- [HIGH PRIORITY] flags go on topics that appear across 3+ top-ranking pages
+- H2s must be compelling and specific, not generic section labels
+- Content gaps must name what's missing AND why it's an opportunity
+- Return ONLY the JSON. Nothing else.`;
 
   try {
-    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const apiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://mustansarmahmood.com',
+        'X-Title': 'SEO Intent Analyzer'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'google/gemini-2.0-flash-exp:free',
         messages: [
-          {
-            role: 'system',
-            content: 'You are an SEO strategist. Always respond with valid JSON only. No markdown, no code fences, no extra text.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
         ],
-        temperature: 0.4,
-        max_tokens: 1000,
-        response_format: { type: 'json_object' }
+        temperature: 0.6,
+        max_tokens: 2000
       })
     });
 
-    if (!groqRes.ok) {
-      const errData = await groqRes.json().catch(() => ({}));
-      console.error('Groq API error:', JSON.stringify(errData));
-      return res.status(502).json({ error: `API error ${groqRes.status}: ${errData?.error?.message || 'Unknown'}` });
+    if (!apiRes.ok) {
+      const errData = await apiRes.json().catch(() => ({}));
+      console.error('OpenRouter API error:', JSON.stringify(errData));
+      return res.status(502).json({ error: `API error ${apiRes.status}: ${errData?.error?.message || 'Unknown'}` });
     }
 
-    const groqData = await groqRes.json();
-    const rawText = groqData?.choices?.[0]?.message?.content || '';
+    const apiData = await apiRes.json();
+    const rawText = apiData?.choices?.[0]?.message?.content || '';
 
-    // Clean and extract JSON
+    // Strip markdown fences if model adds them
     let cleaned = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (jsonMatch) cleaned = jsonMatch[0];
@@ -73,10 +83,9 @@ Return exactly this JSON structure with string values only:
       return res.status(502).json({ error: 'Failed to parse AI response. Please try again.' });
     }
 
-    // Handle both string and array responses
     const toString = (val) => {
       if (!val) return '';
-      if (Array.isArray(val)) return val.join('\n• ');
+      if (Array.isArray(val)) return val.join('\n');
       return String(val);
     };
 
@@ -85,7 +94,10 @@ Return exactly this JSON structure with string values only:
       layer2: toString(parsed.layer2),
       layer3: toString(parsed.layer3),
       contentAngle: toString(parsed.contentAngle),
-      serpAnalysis: toString(parsed.serpAnalysis),
+      mustCoverTopics: toString(parsed.mustCoverTopics),
+      peopleAlsoAsk: toString(parsed.peopleAlsoAsk),
+      contentGaps: toString(parsed.contentGaps),
+      h2Outline: toString(parsed.h2Outline),
     });
 
   } catch (err) {
