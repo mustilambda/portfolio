@@ -9,7 +9,6 @@
 <link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -79,12 +78,6 @@
   .cursor-hover #cursor { width: 22px; height: 22px; }
   .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
 
-  /* SITE-WIDE BG CANVAS */
-  #bg-canvas {
-    position: fixed; inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none; z-index: 0;
-  }
   nav, section, .marquee-wrap, footer, .mobile-menu {
     position: relative; z-index: 1;
   }
@@ -143,7 +136,6 @@
     display: flex; align-items: center;
     overflow: hidden;
   }
-  #hero-canvas { position: absolute; inset:0; width:100%; height:100%; z-index:0; }
   .hero-overlay {
     position: absolute; inset:0;
     background: linear-gradient(105deg,
@@ -396,7 +388,6 @@
   }
 
   @media(max-width:767px){
-    #hero-canvas, #bg-canvas { display: none; }
     /* keep floatCard on GPU compositor */
     .hero-card { will-change: transform; }
     /* disable heavy CSS transitions on mobile */
@@ -423,7 +414,6 @@
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-<canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -457,7 +447,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-content">
@@ -733,223 +722,6 @@ if(!isMobile){
   });
 }
 
-/* ════════════════════════════════════════════
-   SITE-WIDE BG CANVAS — desktop only
-════════════════════════════════════════════ */
-if(!isMobile){
-(function(){
-  const cv=document.getElementById('bg-canvas');
-  const ctx=cv.getContext('2d');
-  let W,H;
-  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
-  resize(); window.addEventListener('resize',resize);
-
-  const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI','TEAM','GROW'];
-  const particles=[];
-  for(let i=0;i<65;i++){
-    const isW=Math.random()>0.42;
-    particles.push({
-      x:Math.random()*1600,y:Math.random()*1000,
-      vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25,
-      alpha:Math.random()*0.1+0.035,
-      size:isW?(Math.random()*7+8):(Math.random()*3+2),
-      word:isW?words[Math.floor(Math.random()*words.length)]:null,
-      rot:Math.random()*Math.PI*2,rotV:(Math.random()-0.5)*0.003
-    });
-  }
-
-  let mx=800,my=500;
-  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-
-  function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const aCol=isDark()?'224,48,53':'193,39,45';
-    const gCol=isDark()?'109,184,116':'141,202,147';
-    particles.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
-      if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;
-      if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
-      const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<150){const f=(150-dist)/150*0.5;p.x+=(dx/dist)*f;p.y+=(dy/dist)*f;}
-      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
-      if(p.word){
-        ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;
-        ctx.fillStyle=`rgba(${aCol},1)`;ctx.fillText(p.word,0,0);
-      } else {
-        ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);
-        ctx.fillStyle=`rgba(${gCol},1)`;ctx.fill();
-      }
-      ctx.restore();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-}
-
-/* ════════════════════════════════════════════
-   HERO THREE.JS — desktop only
-   Niche objects: pencil, open book, @ symbol,
-   trending graph, paper plane, hashtag, magnifier
-════════════════════════════════════════════ */
-if(!isMobile){
-(function(){
-  const cv=document.getElementById('hero-canvas');
-  if(!cv) return;
-  const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setClearColor(0x000000,0);
-
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(55,1,0.1,100);
-  camera.position.set(0,0,7);
-
-  function resize(){
-    const hero=document.querySelector('.hero');if(!hero)return;
-    const w=hero.clientWidth,h=hero.clientHeight;
-    renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
-  }
-  resize(); window.addEventListener('resize',resize);
-
-  const AL=0xc1272d,AD=0xe03035,GL=0x8dca93,GD=0x6db874;
-  function ac(){return document.documentElement.getAttribute('data-theme')==='dark'?AD:AL;}
-  function gc(){return document.documentElement.getAttribute('data-theme')==='dark'?GD:GL;}
-
-  const wm=(c,o=0.22)=>new THREE.MeshBasicMaterial({color:c,wireframe:true,transparent:true,opacity:o});
-  const sm=(c,o=0.08)=>new THREE.MeshPhongMaterial({color:c,transparent:true,opacity:o,wireframe:false});
-  const lm=(c,o=0.45)=>new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o});
-
-  const shapes=[];
-
-  /* PENCIL */
-  (()=>{
-    const g=new THREE.Group();
-    g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.07,1.1,6),wm(ac(),0.28)),{name:'a'}));
-    const tip=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.22,6),wm(gc(),0.32));tip.position.y=-0.66;g.add(tip);
-    const era=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.07,0.14,6),wm(gc(),0.3));era.position.y=0.62;g.add(era);
-    g.position.set(3.7,0.6,-1.0);g.rotation.z=0.45;
-    g.userData={rx:0.004,ry:0.007,fo:0.3,a:[g.children[0]],gr:[tip,era]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* OPEN BOOK */
-  (()=>{
-    const g=new THREE.Group();
-    const geo=new THREE.BoxGeometry(0.7,0.9,0.04);
-    const L=new THREE.Mesh(geo,wm(ac(),0.2));L.rotation.y=0.35;L.position.x=-0.34;
-    const R=new THREE.Mesh(geo,wm(ac(),0.2));R.rotation.y=-0.35;R.position.x=0.34;
-    g.add(L,R);
-    const sp=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,-0.45,0),new THREE.Vector3(0,0.45,0)]),lm(gc(),0.4));
-    g.add(sp);
-    g.position.set(-3.5,0.9,-1.6);
-    g.userData={rx:0.003,ry:-0.005,fo:1.2,a:[L,R],gr:[]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* @ SYMBOL */
-  (()=>{
-    const g=new THREE.Group();
-    const ring=new THREE.Mesh(new THREE.TorusGeometry(0.45,0.06,10,36),wm(ac(),0.26));
-    const inner=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.045,8,24),wm(gc(),0.32));
-    const tail=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.28,6),wm(gc(),0.28));
-    tail.rotation.z=-0.9;tail.position.set(0.43,-0.18,0);
-    g.add(ring,inner,tail);
-    g.position.set(2.9,-1.7,-0.7);
-    g.userData={rx:0.005,ry:0.006,fo:2.1,a:[ring],gr:[inner,tail]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* TRENDING GRAPH */
-  (()=>{
-    const g=new THREE.Group();
-    const pts=[new THREE.Vector3(-0.6,-0.3,0),new THREE.Vector3(-0.3,-0.05,0),new THREE.Vector3(0,0.1,0),new THREE.Vector3(0.25,0.02,0),new THREE.Vector3(0.6,0.38,0)];
-    g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),lm(ac(),0.5)));
-    [0.18,0.30,0.40,0.32,0.55].forEach((h,i)=>{
-      const bar=new THREE.Mesh(new THREE.BoxGeometry(0.1,h,0.05),wm(gc(),0.24));
-      bar.position.set(-0.6+i*0.3,-0.45+h/2,-0.05);g.add(bar);
-    });
-    const peak=new THREE.Mesh(new THREE.SphereGeometry(0.065,8,8),wm(ac(),0.55));peak.position.copy(pts[4]);g.add(peak);
-    g.position.set(-2.3,-1.5,-1.4);
-    g.userData={rx:0.002,ry:0.006,fo:3.0,a:[],gr:[]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* PAPER PLANE */
-  (()=>{
-    const g=new THREE.Group();
-    const v=new Float32Array([0,.5,0,-.5,-.3,.1,.5,-.3,.1, 0,.5,0,.5,-.3,.1,0,-.1,-.2, 0,.5,0,-.5,-.3,.1,0,-.1,-.2]);
-    const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(v,3));geo.computeVertexNormals();
-    g.add(new THREE.Mesh(geo,sm(ac(),0.09)));
-    g.add(new THREE.Mesh(geo,wm(ac(),0.34)));
-    g.position.set(1.2,2.3,-2.3);
-    g.userData={rx:0.006,ry:-0.005,fo:0.9,a:[...g.children],gr:[]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* HASHTAG */
-  (()=>{
-    const g=new THREE.Group();
-    const bar=new THREE.CylinderGeometry(0.03,0.03,0.72,6);
-    const h1=new THREE.Mesh(bar,wm(gc(),0.3));h1.rotation.z=Math.PI/2;h1.position.y=0.15;
-    const h2=new THREE.Mesh(bar,wm(gc(),0.3));h2.rotation.z=Math.PI/2;h2.position.y=-0.15;
-    const v1=new THREE.Mesh(bar,wm(ac(),0.28));v1.position.x=-0.19;
-    const v2=new THREE.Mesh(bar,wm(ac(),0.28));v2.position.x=0.19;
-    g.add(h1,h2,v1,v2);
-    g.position.set(-3.9,-0.6,-2.0);
-    g.userData={rx:0.004,ry:0.008,fo:1.7,a:[v1,v2],gr:[h1,h2]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* MAGNIFIER */
-  (()=>{
-    const g=new THREE.Group();
-    const lens=new THREE.Mesh(new THREE.TorusGeometry(0.32,0.055,8,34),wm(ac(),0.28));
-    const handle=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.4,6),wm(gc(),0.3));
-    handle.rotation.z=-0.7;handle.position.set(0.30,-0.32,0);
-    g.add(lens,handle);
-    g.position.set(3.1,-0.5,-2.6);
-    g.userData={rx:0.005,ry:-0.004,fo:2.6,a:[lens],gr:[handle]};
-    scene.add(g);shapes.push(g);
-  })();
-
-  /* PARTICLES */
-  const PC=180,pp=new Float32Array(PC*3),ps=[];
-  for(let i=0;i<PC;i++){pp[i*3]=(Math.random()-.5)*16;pp[i*3+1]=(Math.random()-.5)*10;pp[i*3+2]=(Math.random()-.5)*8;ps.push({x:(Math.random()-.5)*0.002,y:(Math.random()-.5)*0.002});}
-  const pGeo=new THREE.BufferGeometry();pGeo.setAttribute('position',new THREE.BufferAttribute(pp,3));
-  const pMat=new THREE.PointsMaterial({color:ac(),size:0.05,transparent:true,opacity:0.38,sizeAttenuation:true});
-  scene.add(new THREE.Points(pGeo,pMat));
-
-  /* LIGHTS */
-  scene.add(new THREE.AmbientLight(0xffffff,0.7));
-  const dl=new THREE.DirectionalLight(ac(),1.0);dl.position.set(4,6,4);scene.add(dl);
-
-  /* MOUSE */
-  let mx=0,my=0;
-  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=(e.clientY/window.innerHeight-.5)*2;});
-
-  let t=0;
-  function animate(){
-    requestAnimationFrame(animate);t+=0.01;
-    const pos=pGeo.attributes.position.array;
-    for(let i=0;i<PC;i++){pos[i*3]+=ps[i].x;pos[i*3+1]+=ps[i].y;if(Math.abs(pos[i*3])>8)ps[i].x*=-1;if(Math.abs(pos[i*3+1])>5)ps[i].y*=-1;}
-    pGeo.attributes.position.needsUpdate=true;
-    shapes.forEach(s=>{s.rotation.x+=s.userData.rx;s.rotation.y+=s.userData.ry;s.position.y+=Math.sin(t+s.userData.fo)*0.003;});
-    camera.position.x+=(mx*0.7-camera.position.x)*0.04;
-    camera.position.y+=(-my*0.45-camera.position.y)*0.04;
-    camera.lookAt(0,0,0);
-    const a=ac(),gr=gc();
-    pMat.color.setHex(a);dl.color.setHex(a);
-    shapes.forEach(s=>{
-      (s.userData.a||[]).forEach(m=>{if(m&&m.material)m.material.color.setHex(a);});
-      (s.userData.gr||[]).forEach(m=>{if(m&&m.material)m.material.color.setHex(gr);});
-    });
-    renderer.render(scene,camera);
-  }
-  animate();
-})();
-} // end isMobile check for Three.js
 </script>
 </body>
 </html>
