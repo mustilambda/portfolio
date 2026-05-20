@@ -137,7 +137,7 @@
   /* HERO */
   .hero {
     position: relative;
-    min-height: calc(100vh - var(--nav-h));
+    height: calc(100vh - var(--nav-h));
     margin-top: var(--nav-h);
     display: flex; align-items: center;
     overflow: hidden;
@@ -154,7 +154,7 @@
   .hero-inner {
     position: relative; z-index:2;
     width:100%; max-width:1400px; margin:0 auto;
-    padding: 2rem 5% 2rem;
+    padding: 0 5%;
     display: grid; grid-template-columns: 1.15fr 1fr;
     align-items: center; gap: 2rem;
     box-sizing: border-box;
@@ -215,14 +215,14 @@
   }
   .btn-cv:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(var(--accent-rgb),0.35); }
   .hero-stats-3d {
-    display:flex; flex-direction:column; gap:0.65rem; align-items:flex-end;
+    display:flex; flex-direction:column; gap:0.4rem; align-items:flex-end;
     animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.55s both;
   }
   .hero-card {
     background:rgba(var(--bg2-rgb),0.72);
     backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border:1px solid var(--border); border-radius:var(--radius);
-    padding:0.7rem 1rem; min-width:172px; max-width:205px;
+    padding:0.5rem 1rem; min-width:172px; max-width:205px;
     transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     cursor:default; animation:floatCard linear infinite;
   }
@@ -464,7 +464,7 @@
       <p class="hero-sub">Content Marketing Manager &amp; Senior SEO Writer based in Lahore. I've led 15-writer teams, generated $40k in email sales, and helped brands grow traffic by 2x — sometimes more.</p>
       <div class="hero-ctas">
         <span class="mag"><a href="portfolio.html" class="btn-primary">See My Work</a></span>
-        <span class="mag"><a href="contact.html" class="btn-secondary">Work With Me</a></span>
+        <span class="mag"><a href="https://calendly.com/itsmustansarmahmood/30min" target="_blank" class="btn-secondary">📅 Book a Call</a></span>
         <span class="mag"><a href="Mustansar_Mahmood_CV.pdf" download class="btn-cv">⬇ Download CV</a></span>
       </div>
     </div>
@@ -614,6 +614,7 @@
   <p class="fade-in">Whether you're hiring, outsourcing content, or want to talk strategy — I'm easy to reach and quick to reply.</p>
   <div class="cta-btns fade-in">
     <span class="mag"><a href="https://wa.me/923000853448" target="_blank" class="btn-primary">💬 WhatsApp Me</a></span>
+    <span class="mag"><a href="https://calendly.com/itsmustansarmahmood/30min" target="_blank" class="btn-ghost">📅 Book a Call</a></span>
     <span class="mag"><a href="contact.html" class="btn-ghost">Or Use Contact Page</a></span>
   </div>
 </section>
