@@ -137,10 +137,15 @@
   /* HERO */
   .hero {
     position: relative;
-    height: calc(100vh - var(--nav-h));
-    margin-top: var(--nav-h);
+    /* height: calc(100vh - var(--nav-h)); */
+    /* margin-top: var(--nav-h); */
     display: flex; align-items: center;
     overflow: hidden;
+  
+  }
+  section.hero {
+  padding: 0 !important; 
+    padding-block: 100px 50px !important;
   }
   .hero-overlay {
     position: absolute; inset:0;
@@ -155,11 +160,11 @@
     position: relative; z-index:2;
     width:100%; max-width:1400px; margin:0 auto;
     padding: 0 5%;
-    display: grid; grid-template-columns: 1.15fr 1fr;
-    align-items: center; gap: 2rem;
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    align-items: start; gap: 2rem;
     box-sizing: border-box;
   }
-  .hero-content { max-width: 560px; }
+  /* .hero-content { max-width: 560px; } */
   .hero-tag {
     display: inline-flex; align-items: center; gap: 0.5rem;
     background: var(--accent-bg); color: var(--accent);
@@ -214,15 +219,17 @@
     background: rgba(var(--accent-rgb), 0.07);
   }
   .btn-cv:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(var(--accent-rgb),0.35); }
-  .hero-stats-3d {
+  .hero-section-wrapper {width: fit-content; margin-left: auto;}
+  .hero-stats-3d { width: 100%;
     display:flex; flex-direction:column; gap:0.4rem; align-items:flex-end;
     animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.55s both;
   }
   .hero-card {
+    width: 100%;
     background:rgba(var(--bg2-rgb),0.72);
     backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border:1px solid var(--border); border-radius:var(--radius);
-    padding:0.5rem 1rem; min-width:172px; max-width:205px;
+    padding:0.5rem 1rem;
     transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     cursor:default; animation:floatCard linear infinite;
   }
@@ -364,11 +371,11 @@
   .social-link svg { display: block; flex-shrink: 0; }
 
   @media (max-width: 1200px) {
-	.hero-inner {padding : 15px 5% 4rem;}
+	.hero-inner {padding : 15px 5% 0;}
   }
   /* RESPONSIVE */
   @media(max-width:900px){
-    .hero-inner{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 2.5rem);padding-bottom:3rem}
+    .hero-inner{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 2.5rem);}
     .hero-stats-3d{flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start}
     .hero-card{min-width:140px;max-width:160px}
     .services-grid{grid-template-columns:1fr 1fr}
@@ -380,7 +387,7 @@
     .nav-links{display:none}
     .nav-right .btn-talk{display:none}
     .menu-btn{display:block}
-    .hero-inner{padding:calc(var(--nav-h) + 2rem) 5% 3rem;grid-template-columns:1fr}
+    .hero-inner{padding:calc(var(--nav-h) + 2rem) 5% 0;grid-template-columns:1fr}
     .hero h1{font-size:clamp(2rem,8vw,2.8rem)}
     .hero-sub{font-size:0.95rem}
     .hero-stats-3d{flex-direction:row;flex-wrap:wrap;gap:0.5rem}
@@ -401,7 +408,7 @@
     .service-card, .portfolio-card { transform: none !important; will-change: auto; }
   }
   @media (max-width: 576px) {
-	.hero-inner {padding : 0 5% 4rem;} 
+	.hero-inner {padding : 0 5% 0;} 
   }
   .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.22,1,0.36,1)}
   .fade-in.visible{opacity:1;transform:none}
@@ -459,7 +466,9 @@
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-tag"><span class="dot"></span> Open to Work &amp; Freelance</div>
-      <h1>Hi, I'm<br><em>Mustansar</em> —<br>I make content<br>that ranks.</h1>
+
+      <h1>Hi, I'm <em>Mustansar</em> <br> I make content that ranks.</h1>
+
       <div class="typewriter-wrap"><span class="typewriter" id="typewriter"></span></div>
       <p class="hero-sub">Content Marketing Manager &amp; Senior SEO Writer based in Lahore. I've led 15-writer teams, generated $40k in email sales, and helped brands grow traffic by 2x — sometimes more.</p>
       <div class="hero-ctas">
@@ -468,15 +477,17 @@
         <span class="mag"><a href="Mustansar_Mahmood_CV.pdf" download class="btn-cv">⬇ Download CV</a></span>
       </div>
     </div>
-    <div class="hero-stats-3d">
-      <div class="hero-card"><div class="hero-card-label">Team Size Led</div><div class="hero-card-val">15</div><div class="hero-card-note">writers, hired &amp; trained</div></div>
-      <div class="hero-card"><div class="hero-card-label">Traffic Growth</div><div class="hero-card-val">2x</div><div class="hero-card-note">organic, across clients</div></div>
-      <div class="hero-card"><div class="hero-card-label">Content Published</div><div class="hero-card-val">300+</div><div class="hero-card-note">articles, blogs, landing pages</div></div>
-      <div class="hero-card"><div class="hero-card-label">Email Sales</div><div class="hero-card-val">$40k+</div><div class="hero-card-note">via Klaviyo campaigns</div></div>
-      <div class="hero-card"><div class="hero-card-label">Pages Ranked</div><div class="hero-card-val">30+</div><div class="hero-card-note">on Google's first page</div></div>
+    <div class="hero-section-wrapper">
+      <div class="hero-stats-3d">
+        <div class="hero-card"><div class="hero-card-label">Team Size Led</div><div class="hero-card-val">15</div><div class="hero-card-note">writers, hired &amp; trained</div></div>
+        <div class="hero-card"><div class="hero-card-label">Traffic Growth</div><div class="hero-card-val">2x</div><div class="hero-card-note">organic, across clients</div></div>
+        <div class="hero-card"><div class="hero-card-label">Content Published</div><div class="hero-card-val">300+</div><div class="hero-card-note">articles, blogs, landing pages</div></div>
+        <div class="hero-card"><div class="hero-card-label">Email Sales</div><div class="hero-card-val">$40k+</div><div class="hero-card-note">via Klaviyo campaigns</div></div>
+        <div class="hero-card"><div class="hero-card-label">Pages Ranked</div><div class="hero-card-val">30+</div><div class="hero-card-note">on Google's first page</div></div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll-hint">Scroll</div>
+  <!-- <div class="hero-scroll-hint">Scroll</div> -->
 </section>
 
 <!-- MARQUEE -->
