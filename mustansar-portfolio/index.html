@@ -192,25 +192,24 @@
     animation: blink 0.75s step-end infinite;
   }
   @keyframes blink { 0%,100%{border-color:var(--accent)} 50%{border-color:transparent} }
-  .hero-ctas { display:flex; gap:0.6rem; flex-wrap:nowrap; align-items:center; margin-left:0; padding-left:0; animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.45s both; }
-  .hero-ctas .mag:first-child { margin-left:0; }
+  .hero-ctas { display:flex; gap:0.75rem; flex-wrap:wrap; animation: riseUp 1s cubic-bezier(0.22,1,0.36,1) 0.45s both; }
   .btn-primary {
-    background: var(--secondary); color:#fff; padding:0.7rem 1.3rem;
-    border-radius:50px; font-size:0.88rem; font-weight:600;
+    background: var(--secondary); color:#fff; padding:0.75rem 1.6rem;
+    border-radius:50px; font-size:0.92rem; font-weight:600;
     text-decoration:none; display:inline-block; transition: all var(--transition);
     box-shadow: 0 4px 16px rgba(var(--secondary-rgb),0.35);
   }
   .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(var(--secondary-rgb),0.5); }
   .btn-secondary {
-    border:1.5px solid var(--border); color:var(--text); padding:0.7rem 1.3rem;
-    border-radius:50px; font-size:0.88rem; font-weight:500;
+    border:1.5px solid var(--border); color:var(--text); padding:0.75rem 1.6rem;
+    border-radius:50px; font-size:0.92rem; font-weight:500;
     text-decoration:none; transition:all var(--transition); display:inline-block;
     background: rgba(var(--bg-rgb),0.6); backdrop-filter:blur(8px);
   }
   .btn-secondary:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
   .btn-cv {
-    border: 1.5px solid var(--accent); color: var(--accent); padding: 0.7rem 1.2rem;
-    border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+    border: 1.5px solid var(--accent); color: var(--accent); padding: 0.75rem 1.4rem;
+    border-radius: 50px; font-size: 0.9rem; font-weight: 600;
     text-decoration: none; transition: all var(--transition); display: inline-block;
     background: rgba(var(--accent-rgb), 0.07);
   }
@@ -237,7 +236,14 @@
   .hero-card-label{font-size:0.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.18rem}
   .hero-card-val{font-family:var(--serif);font-size:1.3rem;color:var(--text);line-height:1.1}
   .hero-card-note{font-size:0.65rem;color:var(--muted);margin-top:0.08rem}
-
+  .hero-scroll-hint {
+    position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%);
+    z-index:2; display:flex; flex-direction:column; align-items:center; gap:0.35rem;
+    color:var(--muted); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    animation:bounceDown 2s ease infinite;
+  }
+  .hero-scroll-hint::after{content:'';display:block;width:1px;height:30px;background:linear-gradient(to bottom,var(--muted),transparent)}
+  @keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
 
   /* MARQUEE */
   .marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;background:var(--bg2)}
@@ -470,7 +476,8 @@
       <div class="hero-card"><div class="hero-card-label">Pages Ranked</div><div class="hero-card-val">30+</div><div class="hero-card-note">on Google's first page</div></div>
     </div>
   </div>
-
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
