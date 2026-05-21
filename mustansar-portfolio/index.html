@@ -137,10 +137,10 @@
   /* HERO */
   .hero {
     position: relative;
-    min-height: calc(100vh - var(--nav-h));
+    height: calc(100vh - var(--nav-h));
     margin-top: var(--nav-h);
-    display: flex; align-items: center;
-    overflow: visible;
+    display: flex; align-items: flex-start;
+    overflow: hidden;
   }
   .hero-overlay {
     position: absolute; inset:0;
@@ -154,10 +154,11 @@
   .hero-inner {
     position: relative; z-index:2;
     width:100%; max-width:1400px; margin:0 auto;
-    padding: 3rem 5% 3rem;
+    padding: 4rem 5% 2rem;
     display: grid; grid-template-columns: 1.15fr 1fr;
     align-items: center; gap: 2rem;
     box-sizing: border-box;
+    height: 100%;
   }
   .hero-content { max-width: 560px; }
   .hero-tag {
@@ -358,11 +359,11 @@
   .social-link svg { display: block; flex-shrink: 0; }
 
   @media (max-width: 1200px) {
-	.hero-inner {padding: 3rem 5%;}
+	.hero-inner {padding: 4rem 5% 2rem;}
   }
   /* RESPONSIVE */
   @media(max-width:900px){
-    .hero-inner{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 2.5rem);padding-bottom:3rem}
+    .hero-inner{grid-template-columns:1fr;padding:3rem 5% 2rem;align-content:center}
     .hero-stats-3d{flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start}
     .hero-card{min-width:140px;max-width:160px}
     .services-grid{grid-template-columns:1fr 1fr}
@@ -374,7 +375,7 @@
     .nav-links{display:none}
     .nav-right .btn-talk{display:none}
     .menu-btn{display:block}
-    .hero-inner{padding:calc(var(--nav-h) + 2rem) 5% 3rem;grid-template-columns:1fr}
+    .hero-inner{padding:2.5rem 5% 2rem;grid-template-columns:1fr}
     .hero h1{font-size:clamp(2rem,8vw,2.8rem)}
     .hero-sub{font-size:0.95rem}
     .hero-ctas{flex-wrap:wrap}
@@ -396,7 +397,7 @@
     .service-card, .portfolio-card { transform: none !important; will-change: auto; }
   }
   @media (max-width: 576px) {
-	.hero-inner {padding: calc(var(--nav-h) + 1rem) 5% 3rem;} 
+	.hero-inner {padding: 2rem 5% 2rem;} 
   }
   .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.22,1,0.36,1)}
   .fade-in.visible{opacity:1;transform:none}
