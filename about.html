@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About Mustansar Mahmood — Content Marketing Manager, SEO Writer, and Team Lead based in Lahore, Pakistan.">
+<title>About — Mustansar Mahmood</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f4ebdd; --bg-rgb: 244,235,221; --bg2: #ede0cc; --bg2-rgb: 237,224,204; --bg3: #e5d3b8;
+    --text: #1a1612; --muted: #6b5e4e; --accent: #c1272d; --accent-rgb: 193,39,45;
+    --accent-bg: #f7dede; --secondary: #8dca93; --secondary-rgb: 141,202,147;
+    --border: rgba(26,22,18,0.12);
+    --nav-h: 68px; --serif: 'DM Serif Display', serif;
+    --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #18130e; --bg-rgb: 24,19,14; --bg2: #231c15; --bg2-rgb: 35,28,21; --bg3: #2e2419;
+    --text: #f4ebdd; --muted: #9a8878; --accent: #e03035; --accent-rgb: 224,48,53;
+    --accent-bg: #2e1112; --secondary: #6db874; --secondary-rgb: 109,184,116;
+    --border: rgba(244,235,221,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(var(--bg-rgb), 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background var(--transition); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color var(--transition); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-talk { background: var(--secondary); color: #fff; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),0.35); }
+  .btn-talk:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(var(--secondary-rgb),0.5); }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(var(--bg-rgb), 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+
+  /* PAGE HERO */
+  .page-hero { padding: calc(var(--nav-h) + 5rem) 5% 4rem; max-width: 800px; }
+  .page-tag { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1.1; }
+  .page-title em { font-style: italic; color: var(--accent); }
+
+  /* ABOUT LAYOUT */
+  .about-grid { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; gap: 5rem; padding: 0 5% 5rem; align-items: start; }
+  .about-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+  .about-photo {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+    aspect-ratio: 3/4; margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .about-meta { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+  .meta-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .meta-row:last-child { border-bottom: none; }
+  .meta-key { color: var(--muted); }
+  .meta-val { font-weight: 500; color: var(--text); }
+
+  /* CONTENT */
+  .about-content h2 { font-family: var(--serif); font-size: 1.75rem; margin: 2.5rem 0 1rem; color: var(--text); line-height: 1.3; }
+  .about-content h2:first-child { margin-top: 0; }
+  .about-content p { color: var(--muted); font-size: 0.97rem; line-height: 1.9; margin-bottom: 1.1rem; }
+  .about-content strong { color: var(--text); font-weight: 600; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 1.5rem; border-left: 2px solid var(--border); }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before { content: ''; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: absolute; left: -1.85rem; top: 0.35rem; }
+  .timeline-date { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.35rem; }
+  .timeline-title { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.35rem; }
+  .timeline-co { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .timeline-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+
+  /* SKILLS */
+  .skills-section { background: var(--bg2); padding: 4rem 5%; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .skill-group { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .skill-group h4 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; }
+  .skill-tag { display: inline-block; background: var(--bg2); color: var(--muted); font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 50px; margin: 0.25rem 0.2rem 0 0; font-weight: 500; border: 1px solid var(--border); }
+
+  /* SECTION TAG */
+  .section-tag { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+  .section-title { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.75rem; }
+
+  /* FOOTER */
+  footer {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; padding: 1.5rem 5%;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  .social-links { display: flex; gap: 0.5rem; align-items: center; }
+  .social-link { width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; flex-shrink: 0; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
+  .social-link svg { display: block; flex-shrink: 0; }
+
+  .btn-primary { background: var(--accent); color: #fff; padding: 0.8rem 1.75rem; border-radius: 50px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: opacity var(--transition); display: inline-block; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { border: 1.5px solid var(--border); color: var(--text); padding: 0.8rem 1.75rem; border-radius: 50px; font-size: 0.95rem; font-weight: 500; text-decoration: none; transition: all var(--transition); display: inline-block; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-sidebar { position: static; }
+    .about-photo { aspect-ratio: 16/9; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    .skills-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; }
+  }
+
+  /* SCROLL PROGRESS BAR */
+  #scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 101;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 6px rgba(200,98,42,0.5);
+  }
+
+  #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  /* CURSOR */
+  body { cursor: none; }
+  #cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width 0.2s, height 0.2s;
+  }
+  #cursor-ring {
+    position: fixed; width: 38px; height: 38px;
+    border: 1.5px solid var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    opacity: 0.45;
+    transition: width 0.25s, height 0.25s, opacity 0.2s;
+  }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
+  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<canvas id="bg-canvas"></canvas>
+
+
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html">Guides</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="guides.html">Guides</a>
+  <a href="tools.html">Tools</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-hero">
+  <span class="page-tag">About Me</span>
+  <h1 class="page-title">Writer. Strategist.<br><em>Team builder.</em></h1>
+</div>
+
+<div class="about-grid">
+  <div class="about-sidebar">
+    <div class="about-photo">
+      <img src="mustansar-photo.jpg" alt="Mustansar Mahmood" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;border-radius:var(--radius);" />
+    </div>
+    <div class="about-meta">
+      <div class="meta-row"><span class="meta-key">Location</span><span class="meta-val">Lahore, Pakistan</span></div>
+      <div class="meta-row"><span class="meta-key">Role</span><span class="meta-val">Content Marketing Manager</span></div>
+      <div class="meta-row"><span class="meta-key">Experience</span><span class="meta-val">4+ Years</span></div>
+      <div class="meta-row"><span class="meta-key">Education</span><span class="meta-val">Pharm-D</span></div>
+      <div class="meta-row"><span class="meta-key">Available for</span><span class="meta-val">Hire & Freelance</span></div>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <h2>The short version</h2>
+    <p>If you Google Mustansar Mahmood, I'm the top result. That's not a coincidence — it's what happens when someone actually understands SEO from the inside out.</p>
+    <p>I started writing in 2022, covering everything from cryptocurrency to camera gear for international clients. Over time, I moved into leading teams, managing clients, and building content systems that scale. These days I sit somewhere between writer, editor, team lead, and strategist — depending on what the project needs.</p>
+    <p>I've written <strong>300+ pieces</strong> across SaaS, travel, lifestyle, packaging, e-commerce, and academic niches. I've led a <strong>15-writer team</strong>, helped brands grow their organic traffic by <strong>2x</strong>, and generated over <strong>$40,000 in email sales</strong> for a single client using Klaviyo campaigns.</p>
+
+    <h2>The bit people don't expect</h2>
+    <p>My degree is in Pharmacy. Five years of it. That means I'm wired for research, precision, and not publishing something unless the facts are actually correct. That habit carries into everything I write — and everything I edit.</p>
+    <p>It also means I'm comfortable reading dense material and turning it into something a normal person actually wants to read. Which, it turns out, is exactly what good content writing is.</p>
+
+    <h2>How I work</h2>
+    <p>I don't disappear after sending a draft. I work closely with whoever I'm working for — whether that's a single client, a content manager, or a full editorial team. I build SOPs so work stays consistent. I flag problems early. I reply quickly.</p>
+    <p>I also use AI tools (Claude, Grok, Gemini) as part of my writing process — not to replace thinking, but to move faster without cutting corners. Every final piece still goes through my own editorial eye before it goes anywhere.</p>
+
+    <h2>Career timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item fade-in">
+        <div class="timeline-date">Apr 2025 – Jan 2026</div>
+        <div class="timeline-title">Content Team Lead</div>
+        <div class="timeline-co">ManagingSeo · Lahore</div>
+        <div class="timeline-desc">Led 15 writers across 10+ SaaS and content projects. Built 15 SOPs, managed 7 client accounts, and drove 2x organic traffic growth.</div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-date">Jan 2025 – Mar 2025</div>
+        <div class="timeline-title">SEO Content Writer & Lead</div>
+        <div class="timeline-co">SoftXcess · Contract</div>
+        <div class="timeline-desc">Led a team of 5 across 7 websites in SaaS and services niches. Used Ahrefs, SEMrush, and GSC for on-page SEO wins.</div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-date">May 2024 – Dec 2024</div>
+        <div class="timeline-title">Senior SEO Content Writer</div>
+        <div class="timeline-co">StardomNow</div>
+        <div class="timeline-desc">Wrote 120 articles and landing pages. Ranked 30 blogs on Google's first page across packaging, Hajj & Umrah, and travel niches.</div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-date">Apr 2023 – Apr 2024</div>
+        <div class="timeline-title">Senior SEO Writer</div>
+        <div class="timeline-co">UKR (Ukraine-based Agency)</div>
+        <div class="timeline-desc">Wrote 40 high-quality blogs achieving 3x site traffic. Trained and proofread work from 7 writers.</div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-date">Feb 2022 – Sep 2023</div>
+        <div class="timeline-title">Freelance Content Writer</div>
+        <div class="timeline-co">Multiple International Clients</div>
+        <div class="timeline-desc">45 SEO blogs across filmmaking, YouTube, and crypto. 15+ SaaS how-to guides. 30+ affiliate reviews. Created infographic-supported articles using Canva.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="contact.html" class="btn-primary">Work With Me</a>
+      <a href="portfolio.html" class="btn-secondary">See My Work →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="skills-section">
+  <div style="max-width:900px;margin:0 auto">
+    <span class="section-tag">Skills & Tools</span>
+    <h2 class="section-title">What's in the toolkit.</h2>
+    <div class="skills-grid">
+      <div class="skill-group fade-in">
+        <h4>Content & Writing</h4>
+        <span class="skill-tag">SEO Content Writing</span>
+        <span class="skill-tag">Semantic SEO</span>
+        <span class="skill-tag">Copywriting</span>
+        <span class="skill-tag">Topical Authority</span>
+        <span class="skill-tag">Email Marketing Copy</span>
+        <span class="skill-tag">Landing Pages</span>
+        <span class="skill-tag">Editing & Proofreading</span>
+      </div>
+      <div class="skill-group fade-in">
+        <h4>Strategy & Management</h4>
+        <span class="skill-tag">Content Strategy</span>
+        <span class="skill-tag">Team Leadership</span>
+        <span class="skill-tag">SOP Creation</span>
+        <span class="skill-tag">Keyword Research</span>
+        <span class="skill-tag">CRO</span>
+        <span class="skill-tag">Client Success</span>
+        <span class="skill-tag">Content Planning</span>
+      </div>
+      <div class="skill-group fade-in">
+        <h4>Tools</h4>
+        <span class="skill-tag">Ahrefs</span>
+        <span class="skill-tag">SEMrush</span>
+        <span class="skill-tag">Surfer SEO</span>
+        <span class="skill-tag">Google Search Console</span>
+        <span class="skill-tag">Klaviyo</span>
+        <span class="skill-tag">ClickUp</span>
+        <span class="skill-tag">Claude / Grok / Gemini</span>
+        <span class="skill-tag">Canva</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link" title="LinkedIn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://wa.me/923000853448" target="_blank" class="social-link" title="WhatsApp">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="mailto:itsmustansarmahmood@gmail.com" class="social-link" title="Email">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2026 Mustansar Mahmood. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleTheme() { const h=document.documentElement,d=h.getAttribute('data-theme')==='dark'; h.setAttribute('data-theme',d?'light':'dark'); document.querySelector('.theme-btn').textContent=d?'🌙':'☀️'; localStorage.setItem('theme',d?'light':'dark'); }
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
+  const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*100);fo.unobserve(en.target);}});},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+
+/* BG CANVAS */
+(function(){
+  const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI'];
+  const particles=[];
+  for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
+  let mx=800,my=500;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const aC=isDark()?'224,48,53':'193,39,45',gC=isDark()?'109,184,116':'141,202,147';
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
+      if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
+      const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140){const f=(140-d)/140*.45;p.x+=(dx/d)*f;p.y+=(dy/d)*f;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
+      if(p.word){ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;ctx.fillStyle=`rgba(${aC},1)`;ctx.fillText(p.word,0,0);}
+      else{ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${gC},1)`;ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Cursor
+(function(){
+  var cursor = document.getElementById('cursor');
+  var ring = document.getElementById('cursor-ring');
+  if (!cursor || !ring) return;
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  document.addEventListener('mouseover', function(e){ if(e.target.matches('a,button,input,textarea,select')){ document.body.classList.add('cursor-hover'); }else{ document.body.classList.remove('cursor-hover'); } });
+  function loop(){ rx += (mx-rx)*0.1; ry += (my-ry)*0.1; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); }
+  loop();
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The research-first framework for writing high-converting commercial pages — VOC mining, competitor analysis, CTA rules, and writing techniques that convert. By Mustansar Mahmood.">
+<title>How to Write Any Commercial Page — Mustansar Mahmood</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f4ebdd; --bg-rgb: 244,235,221;
+    --bg2: #ede0cc; --bg2-rgb: 237,224,204; --bg3: #e5d3b8;
+    --text: #1a1612; --muted: #6b5e4e;
+    --accent: #c1272d; --accent-rgb: 193,39,45; --accent-bg: #f7dede;
+    --secondary: #8dca93; --secondary-rgb: 141,202,147;
+    --border: rgba(26,22,18,0.12);
+    --nav-h: 68px; --serif: 'DM Serif Display', serif;
+    --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #18130e; --bg-rgb: 24,19,14;
+    --bg2: #231c15; --bg2-rgb: 35,28,21; --bg3: #2e2419;
+    --text: #f4ebdd; --muted: #9a8878;
+    --accent: #e03035; --accent-rgb: 224,48,53; --accent-bg: #2e1112;
+    --secondary: #6db874; --secondary-rgb: 109,184,116;
+    --border: rgba(244,235,221,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(var(--bg-rgb),.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s ease; transform-origin: left; }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-talk { background: var(--secondary); color: #fff; padding: .5rem 1.25rem; border-radius: 50px; font-size: .875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),.35); }
+  .btn-talk:hover { transform: translateY(-2px); }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+  #scroll-progress { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; background: var(--accent); z-index: 101; transition: width .1s linear; border-radius: 0 2px 2px 0; box-shadow: 0 0 6px rgba(var(--accent-rgb),.5); }
+  #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  body { cursor: none; }
+  #cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s; }
+  #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.45; transition: width 0.25s, height 0.25s, opacity 0.2s; }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: 0.25; }
+  @media(max-width:600px) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
+  .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  .guide-wrapper { max-width: 760px; margin: 0 auto; padding: calc(var(--nav-h) + 4rem) 5% 6rem; position: relative; z-index: 1; }
+  .back-link { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; margin-bottom: 2.5rem; transition: color var(--transition); }
+  .back-link:hover { color: var(--accent); }
+  .guide-cat-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .75rem; display: block; }
+  .guide-main-title { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.2rem); letter-spacing: -.03em; line-height: 1.12; margin-bottom: 1rem; }
+  .guide-main-title em { font-style: italic; color: var(--accent); }
+  .guide-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.5rem; }
+  .guide-meta-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  .meta-pill { font-size: .75rem; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); border-radius: 50px; padding: .28rem .8rem; }
+  .answer-box { background: var(--bg2); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 2rem 0; }
+  .answer-box p { font-size: .95rem; color: var(--text); line-height: 1.75; }
+  .answer-box strong { color: var(--accent); }
+
+  /* SECTION */
+  .guide-section { margin: 2.5rem 0; }
+  .section-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .5rem; display: block; }
+  .section-heading { font-family: var(--serif); font-size: 1.55rem; margin-bottom: .85rem; color: var(--text); }
+  .section-body { font-size: .95rem; color: var(--muted); line-height: 1.85; }
+  .section-body + .section-body { margin-top: .75rem; }
+
+  /* PHASE CARD */
+  .phase-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1.25rem 0; }
+  .phase-card h4 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: .75rem; color: var(--text); display: flex; align-items: center; gap: .5rem; }
+  .phase-card p { font-size: .9rem; color: var(--muted); line-height: 1.8; }
+
+  /* BULLET LIST */
+  .guide-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin: 1rem 0; }
+  .guide-list li { font-size: .92rem; color: var(--muted); padding-left: 1.3rem; position: relative; line-height: 1.72; }
+  .guide-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .guide-list li strong { color: var(--text); }
+
+  /* VOC TABLE */
+  .voc-box { background: linear-gradient(135deg,var(--accent-bg) 0%,var(--bg2) 100%); border: 1px solid rgba(var(--accent-rgb),.2); border-radius: var(--radius); padding: 1.5rem; margin: 1.25rem 0; }
+  .voc-box .voc-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .75rem; display: block; }
+  .voc-box p { font-size: .88rem; color: var(--muted); line-height: 1.75; }
+  .voc-box ol { padding-left: 1.2rem; margin-top: .5rem; }
+  .voc-box ol li { font-size: .88rem; color: var(--muted); line-height: 1.75; margin-bottom: .3rem; }
+
+  /* AUDIENCE GRID */
+  .audience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1.25rem 0; }
+  .audience-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .audience-card .ac-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .4rem; display: block; }
+  .audience-card p { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+  @media(max-width:600px) { .audience-grid { grid-template-columns: 1fr; } }
+
+  /* RULES GRID */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+  .rule-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .rule-card h5 { font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: .4rem; }
+  .rule-card p { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+  @media(max-width:600px) { .rules-grid { grid-template-columns: 1fr; } }
+
+  /* CHECKLIST */
+  .checklist-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; margin: 2.5rem 0; }
+  .checklist-box h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--text); }
+  .checklist-section { margin-bottom: 1.25rem; }
+  .checklist-section h4 { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .6rem; }
+  .checklist-items { display: flex; flex-direction: column; gap: .4rem; }
+  .checklist-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .88rem; color: var(--muted); line-height: 1.65; }
+  .checklist-item::before { content: '☐'; flex-shrink: 0; color: var(--accent); font-size: 1rem; margin-top: -.05rem; }
+
+  .guide-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .highlight { background: var(--accent-bg); color: var(--accent); padding: .1rem .4rem; border-radius: 4px; font-weight: 600; font-size: .9em; }
+  .guide-cta { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; margin-top: 3.5rem; }
+  .guide-cta p { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+  .cta-btn { display: inline-block; background: var(--accent); color: #fff; padding: .65rem 1.75rem; border-radius: 50px; font-size: .9rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--accent-rgb),.3); }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(var(--accent-rgb),.35); }
+  footer { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 1.5rem 5%; border-top: 1px solid var(--border); flex-wrap: wrap; position: relative; z-index: 1; }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  .social-links { display: flex; gap: 0.5rem; align-items: center; }
+  .social-link { width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; flex-shrink: 0; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
+  .social-link svg { display: block; flex-shrink: 0; }
+  @media(max-width:600px) {
+    .nav-links, .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="guides.html" class="active">Guides</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a>
+  <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+  <a href="guides.html">Guides</a><a href="tools.html">Tools</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="guide-wrapper">
+
+  <a href="guides.html" class="back-link fade-in">← Back to Guides</a>
+
+  <div class="guide-header fade-in">
+    <span class="guide-cat-tag">Copywriting</span>
+    <h1 class="guide-main-title">How to Write <em>Any</em> Commercial Page</h1>
+    <p class="guide-intro">Writing great commercial pages isn't about creativity anymore. It's about research, psychology, and structure. Spend 60–80% of your time researching before you write a single word.</p>
+    <div class="guide-meta-row">
+      <span class="meta-pill">⏱ 10 min read</span>
+      <span class="meta-pill">📋 5 sections</span>
+      <span class="meta-pill">✅ Checklist included</span>
+    </div>
+  </div>
+
+  <div class="answer-box fade-in">
+    <p><strong>The rule of thumb:</strong> The more manual the work, the better the result. There are no shortcuts here — only a proven process that separates pages that convert from pages that just exist.</p>
+  </div>
+
+  <hr class="guide-divider">
+
+  <!-- PHASE A -->
+  <div class="guide-section fade-in">
+    <span class="section-label">Phase A</span>
+    <h2 class="section-heading">Research — 60 to 80% of Your Time</h2>
+    <p class="section-body">Before writing a word, you need to understand the product, the brand, and the people buying it. Open the page and study the service or product first. Know the brand USPs, product USPs, target audience, key features, and the specific goal of the page.</p>
+
+    <div style="margin-top:1.5rem;">
+      <h3 style="font-family:var(--serif);font-size:1.15rem;margin-bottom:.85rem;color:var(--text);">Know Your Audience in 3 Layers</h3>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="ac-label">Loyal Customers</span>
+          <p>Already know your product is the best. Reinforce why they made the right choice.</p>
+        </div>
+        <div class="audience-card">
+          <span class="ac-label">New Customers</span>
+          <p>Hit their tipping point — the specific moment or frustration that triggered their search.</p>
+        </div>
+        <div class="audience-card">
+          <span class="ac-label">Almost-Buyers</span>
+          <p>On the fence. Address their objections directly and remove friction to commit.</p>
+        </div>
+      </div>
+      <p style="font-size:.88rem;color:var(--muted);margin-top:.75rem;">Your copy should speak to all three unless the brief specifies otherwise.</p>
+    </div>
+
+    <div class="voc-box" style="margin-top:1.5rem;">
+      <span class="voc-title">⚡ Advanced: VOC Mining (The Secret Weapon)</span>
+      <p>Mine Reddit, Amazon reviews, and forums for the exact language your customers use — not the language marketers think they use. Interview customers if possible and ask:</p>
+      <ol>
+        <li>What triggered you to search for this?</li>
+        <li>What almost stopped you from buying?</li>
+        <li>What does life look like before vs. after using this?</li>
+      </ol>
+      <p style="margin-top:.6rem;">Organise findings into four buckets: pain points, goals, objections, and desired outcomes. This language goes directly into your copy.</p>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <h3 style="font-family:var(--serif);font-size:1.15rem;margin-bottom:.75rem;color:var(--text);">Competitor Analysis</h3>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.8;">Search the target keyword on Google. Review the headings of the top 10 results and note the industry-specific terms and entities competitors use. Use keyword clustering — grouping related terms — instead of repeating one keyword. Find direct quotes or sticky phrases. Keep an eye on competitor page design for CRO ideas.</p>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <h3 style="font-family:var(--serif);font-size:1.15rem;margin-bottom:.75rem;color:var(--text);">Building the Outline</h3>
+      <ul class="guide-list">
+        <li>Create a rough outline manually, then use AI to refine it</li>
+        <li>Extract headings from your research and merge them into a final structure</li>
+        <li>Map the <strong>user journey</strong> — think about where each heading sits in the page flow</li>
+        <li>You can use AI to generate an outline via competitor analysis prompting, but always verify it manually</li>
+        <li>(Optional) Use tools like v0 or Claude to generate a visual page design with your branding and CRO guidelines</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="guide-divider">
+
+  <!-- PHASE B -->
+  <div class="guide-section fade-in">
+    <span class="section-label">Phase B</span>
+    <h2 class="section-heading">Writing — 30% of Your Time</h2>
+    <p class="section-body">If you can't write the crux of the page in the headline, don't write. The headline either carries the whole page or kills it.</p>
+
+    <div style="margin-top:1.25rem;">
+      <h3 style="font-family:var(--serif);font-size:1.15rem;margin-bottom:.75rem;color:var(--text);">Writing Principles</h3>
+      <ul class="guide-list">
+        <li><strong>Benefits over features</strong> — always answer "so what?" after any feature claim</li>
+        <li><strong>Active voice</strong> — avoid passive constructions that dilute impact</li>
+        <li>No "whether" or "while" sentence structures — they weaken copy</li>
+        <li>No AI clichés: eliminate "transform," "leverage," "imagine," "picture this," and em dashes</li>
+        <li>No jargon — if it needs explaining, it needs removing</li>
+        <li>If a line can be removed without affecting quality, remove it</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:1.25rem;">
+      <h3 style="font-family:var(--serif);font-size:1.15rem;margin-bottom:.75rem;color:var(--text);">Make Content "Liftable"</h3>
+      <ul class="guide-list">
+        <li>Write in <strong>1–3 sentence standalone blocks</strong> — each section should make sense on its own</li>
+        <li>Aim for <span class="highlight">120–180 words per section</span> as optimal length</li>
+        <li>Use bullets and tables — AI and humans both love structured data</li>
+        <li>Less content, more visualisation wherever possible</li>
+        <li>Include reviews and testimonials as trust anchors — non-negotiable</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="guide-divider">
+
+  <!-- PHASE C + D + E -->
+  <div class="guide-section fade-in">
+    <span class="section-label">Phases C · D · E</span>
+    <h2 class="section-heading">CTA Rules, Location Pages &amp; FAQs</h2>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <h5>✦ CTA Rules</h5>
+        <p>No generic CTAs. Use multiple CTAs with the same intent — different wording each time. Add urgency and promotions where possible. One CTA immediately after the hero section, one after the last section — non-negotiable. Include phone numbers if the service is call-driven.</p>
+      </div>
+      <div class="rule-card">
+        <h5>✦ Location Pages</h5>
+        <p>H1 must include the location name. Embed a Google Map where possible. Mention local landmarks to signal relevance. Use NAP (Name, Address, Phone) consistently. Tailor the service list to local context.</p>
+      </div>
+      <div class="rule-card">
+        <h5>✦ FAQ Rules</h5>
+        <p>Pull FAQs from the SERP "People Also Ask" box — most credible source. Match FAQ type to page intent: MOFU + BOFU for collection pages, BOFU only for product and home pages.</p>
+      </div>
+      <div class="rule-card">
+        <h5>✦ FAQ Writing</h5>
+        <p>Keep answers under 30 words. Write and answer in a direct tone — no ambiguity. You can use bullets inside answers. Never hedge or qualify — be certain and specific.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="guide-divider">
+
+  <!-- CHECKLIST -->
+  <div class="checklist-box fade-in">
+    <h3>✅ Commercial Page Writing Checklist</h3>
+
+    <div class="checklist-section">
+      <h4>Pre-Writing Research</h4>
+      <div class="checklist-items">
+        <span class="checklist-item">Brand &amp; product USPs identified</span>
+        <span class="checklist-item">Target audience &amp; page goals defined</span>
+        <span class="checklist-item">Key features listed</span>
+        <span class="checklist-item">Pain points, funnel stage &amp; emotional triggers mapped</span>
+        <span class="checklist-item">Reviewed top 10 competitor headings for target keyword</span>
+        <span class="checklist-item">Listed industry terms &amp; keyword clusters</span>
+        <span class="checklist-item">Created rough outline &amp; mapped user journey</span>
+        <span class="checklist-item">Finalised clean outline</span>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h4>Writing Phase</h4>
+      <div class="checklist-items">
+        <span class="checklist-item">Headline captures page essence — strong &amp; descriptive</span>
+        <span class="checklist-item">Appropriate sales/marketing tone throughout</span>
+        <span class="checklist-item">No jargon or unnecessary lines</span>
+        <span class="checklist-item">Visualisations added where possible</span>
+        <span class="checklist-item">Benefits-focused (not features)</span>
+        <span class="checklist-item">Active voice, no "whether/while" sentences</span>
+        <span class="checklist-item">No AI clichés (transform, leverage, imagine, em dashes)</span>
+        <span class="checklist-item">1–3 sentence blocks, 120–180 words per section</span>
+        <span class="checklist-item">Each section stands alone</span>
+        <span class="checklist-item">Bullets/tables used for structure</span>
+        <span class="checklist-item">Reviews/testimonials included</span>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h4>Location Page (if applicable)</h4>
+      <div class="checklist-items">
+        <span class="checklist-item">H1 includes location name</span>
+        <span class="checklist-item">Local landmarks mentioned</span>
+        <span class="checklist-item">NAP (Name, Address, Phone) included</span>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h4>FAQs</h4>
+      <div class="checklist-items">
+        <span class="checklist-item">Pulled from SERP "People Also Ask"</span>
+        <span class="checklist-item">Matched to intent (MOFU+BOFU for collections, BOFU for products)</span>
+        <span class="checklist-item">Answers under 30 words, direct tone, no ambiguity</span>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <h4>Final Check</h4>
+      <div class="checklist-items">
+        <span class="checklist-item">Headline compelling, first paragraph hooks immediately</span>
+        <span class="checklist-item">Benefits answer "So what?" for every claim</span>
+        <span class="checklist-item">All CTAs are action-focused with urgency</span>
+        <span class="checklist-item">Mobile-friendly layout confirmed</span>
+        <span class="checklist-item">Trust signals present throughout</span>
+        <span class="checklist-item">Proofread and final polish done</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-cta fade-in">
+    <p>Need a commercial page written the right way? Let's build something that actually converts.</p>
+    <a href="contact.html" class="cta-btn">Get in Touch →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link" title="LinkedIn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://wa.me/923000853448" target="_blank" class="social-link" title="WhatsApp">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="mailto:itsmustansarmahmood@gmail.com" class="social-link" title="Email">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2026 Mustansar Mahmood. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+  (function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+  function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+  window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
+  const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*100);fo.unobserve(en.target);}});},{threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+  (function(){
+    const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+    let W,H;
+    function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+    resize();window.addEventListener('resize',resize);
+    const words=['COPY','CRO','VOC','CTA','SELL','LEAD','USP','PAGE','CONV','MOFU','BOFU','FAQ','HERO','UGC','HOOK','TRUST'];
+    const particles=[];
+    for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
+    let mx=800,my=500;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      const aC=isDark()?'224,48,53':'193,39,45',gC=isDark()?'109,184,116':'141,202,147';
+      particles.forEach(p=>{
+        p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
+        if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
+        const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140){const f=(140-d)/140*.45;p.x+=(dx/d)*f;p.y+=(dy/d)*f;}
+        ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
+        if(p.word){ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;ctx.fillStyle=`rgba(${aC},1)`;ctx.fillText(p.word,0,0);}
+        else{ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${gC},1)`;ctx.fill();}
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  (function(){
+    var cursor=document.getElementById('cursor');
+    var ring=document.getElementById('cursor-ring');
+    if(!cursor||!ring)return;
+    var mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    document.addEventListener('mouseover',function(e){if(e.target.matches('a,button,input,textarea,select')){document.body.classList.add('cursor-hover');}else{document.body.classList.remove('cursor-hover');}});
+    function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);}
+    loop();
+  })();
+</script>
+</body>
+</html>

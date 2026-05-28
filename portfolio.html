@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio of Mustansar Mahmood — real writing samples across SaaS, travel, email copy, social media strategy, and non-technical content.">
+<title>Portfolio — Mustansar Mahmood</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f4ebdd; --bg-rgb: 244,235,221;
+    --bg2: #ede0cc; --bg2-rgb: 237,224,204;
+    --bg3: #e5d3b8;
+    --text: #1a1612; --muted: #6b5e4e;
+    --accent: #c1272d; --accent-rgb: 193,39,45; --accent-bg: #f7dede;
+    --secondary: #8dca93; --secondary-rgb: 141,202,147;
+    --border: rgba(26,22,18,0.12);
+    --nav-h: 68px; --serif: 'DM Serif Display', serif;
+    --sans: 'Plus Jakarta Sans', sans-serif; --radius: 12px; --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #18130e; --bg-rgb: 24,19,14;
+    --bg2: #231c15; --bg2-rgb: 35,28,21; --bg3: #2e2419;
+    --text: #f4ebdd; --muted: #9a8878;
+    --accent: #e03035; --accent-rgb: 224,48,53; --accent-bg: #2e1112;
+    --secondary: #6db874; --secondary-rgb: 109,184,116;
+    --border: rgba(244,235,221,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; transition: background var(--transition), color var(--transition); cursor: none; }
+
+  /* CURSOR */
+  #cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s; }
+  #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: .45; transition: width .25s, height .25s; }
+  .cursor-hover #cursor { width: 22px; height: 22px; }
+  .cursor-hover #cursor-ring { width: 54px; height: 54px; opacity: .25; }
+
+  /* BG CANVAS */
+  #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(var(--bg-rgb),.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s ease; transform-origin: left; }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: none; font-size: 1rem; color: var(--muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-talk { background: var(--secondary); color: #fff; padding: .5rem 1.25rem; border-radius: 50px; font-size: .875rem; font-weight: 600; text-decoration: none; transition: all var(--transition); box-shadow: 0 4px 14px rgba(var(--secondary-rgb),.35); }
+  .btn-talk:hover { transform: translateY(-2px); }
+  .menu-btn { display: none; background: none; border: none; cursor: none; color: var(--text); font-size: 1.4rem; }
+  .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem 5%; z-index: 99; flex-direction: column; gap: 1.25rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
+
+  #scroll-progress { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; background: var(--accent); z-index: 101; transition: width .1s linear; border-radius: 0 2px 2px 0; box-shadow: 0 0 6px rgba(var(--accent-rgb),.5); }
+
+  /* PAGE HERO */
+  .page-hero { position: relative; z-index: 1; padding: calc(var(--nav-h) + 4rem) 5% 2.5rem; }
+  .page-tag { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .75rem; display: block; }
+  .page-title { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: -.03em; line-height: 1.1; max-width: 680px; }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-sub { color: var(--muted); font-size: 1.02rem; max-width: 520px; margin-top: .9rem; line-height: 1.8; }
+
+  /* FILTER TABS */
+  .filter-wrap { position: relative; z-index: 1; padding: 0 5% 2rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .filter-btn { background: none; border: 1px solid var(--border); border-radius: 50px; padding: .42rem 1.05rem; font-size: .83rem; font-weight: 500; color: var(--muted); cursor: none; transition: all var(--transition); font-family: var(--sans); }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* PORTFOLIO GRID */
+  .portfolio-section { position: relative; z-index: 1; padding: 0 5% 5rem; }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  /* CARD */
+  .portfolio-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; transition: all .4s cubic-bezier(.22,1,.36,1);
+    display: flex; flex-direction: column;
+    transform-style: preserve-3d; will-change: transform;
+  }
+  .portfolio-card:hover { border-color: var(--accent); box-shadow: 0 16px 40px rgba(var(--accent-rgb),.12); }
+  .portfolio-card.hidden { display: none; }
+  .portfolio-card.featured { grid-column: span 2; }
+
+  /* THUMB */
+  .card-thumb {
+    height: 160px; background: var(--bg2);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border); padding: 1rem;
+    transition: background .3s ease; text-align: center; position: relative;
+    overflow: hidden;
+  }
+  .portfolio-card.featured .card-thumb { height: 200px; }
+  .portfolio-card:hover .card-thumb { background: var(--accent-bg); }
+  .thumb-icon { font-size: 2.2rem; margin-bottom: .4rem; }
+  .thumb-type-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+
+  /* CARD BODY */
+  .card-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .card-niche { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .4rem; display: block; }
+  .card-title { font-family: var(--serif); font-size: 1rem; margin-bottom: .45rem; line-height: 1.4; }
+  .card-desc { font-size: .84rem; color: var(--muted); line-height: 1.65; margin-bottom: .85rem; flex: 1; }
+  .card-meta { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .85rem; }
+  .meta-pill { font-size: .7rem; background: var(--bg2); color: var(--muted); padding: .22rem .6rem; border-radius: 50px; border: 1px solid var(--border); }
+
+  /* CARD ACTIONS */
+  .card-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: auto; }
+  .btn-view {
+    display: inline-flex; align-items: center; gap: .3rem;
+    background: var(--accent); color: #fff;
+    padding: .45rem 1rem; border-radius: 50px;
+    font-size: .78rem; font-weight: 600; text-decoration: none;
+    transition: all var(--transition);
+    box-shadow: 0 3px 10px rgba(var(--accent-rgb),.25);
+  }
+  .btn-view:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(var(--accent-rgb),.38); }
+
+  /* FOOTER */
+  footer {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; padding: 1.5rem 5%;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  .social-links { display: flex; gap: 0.5rem; align-items: center; }
+  .social-link { width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; flex-shrink: 0; transition: all var(--transition); }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.12); }
+  .social-link svg { display: block; flex-shrink: 0; }
+
+  .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media(max-width:900px) {
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-card.featured { grid-column: span 2; }
+  }
+  @media(max-width:600px) {
+    .nav-links, .nav-right .btn-talk { display: none; }
+    .menu-btn { display: block; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-card.featured { grid-column: span 1; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; }
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="guides.html">Guides</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <a href="contact.html" class="btn-talk">Let's Talk</a>
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a><a href="guides.html">Guides</a>
+  <a href="tools.html">Tools</a><a href="contact.html">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="page-tag">Portfolio</span>
+  <h1 class="page-title">Work that <em>did something.</em></h1>
+  <p class="page-sub">Real writing samples from 4+ years — SaaS guides, email campaigns, travel articles, social media strategy, and non-technical content. Download any piece below.</p>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-wrap">
+  <button class="filter-btn active" data-filter="all">All Work</button>
+  <button class="filter-btn" data-filter="saas">SaaS</button>
+  <button class="filter-btn" data-filter="email">Email Copy</button>
+  <button class="filter-btn" data-filter="travel">Travel</button>
+  <button class="filter-btn" data-filter="social">Social Media</button>
+  <button class="filter-btn" data-filter="nontechnical">Non-Technical</button>
+</div>
+
+<!-- GRID -->
+<div class="portfolio-section">
+  <div class="portfolio-grid">
+
+    <!-- 1. SaaS — FEATURED -->
+    <div class="portfolio-card featured fade-in" data-niche="saas">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#e8d5f5 0%,#c4a0e8 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">💻</div>
+        <div class="thumb-type-label">SaaS · PDF Protection Guide</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">SaaS</span>
+        <h3 class="card-title">How to Protect a PDF from Editing/Copying Without a Password</h3>
+        <p class="card-desc">A complete SaaS how-to guide covering 4 working methods to protect PDFs without passwords — written for a non-technical audience with clear step-by-step structure, proper keyword placement, and strong search intent matching. Built to rank and convert.</p>
+        <div class="card-meta">
+          <span class="meta-pill">SaaS Content</span>
+          <span class="meta-pill">How-to Guide</span>
+          <span class="meta-pill">Search Intent</span>
+          <span class="meta-pill">CRO Writing</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-saas-pdf-article.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Email Copy -->
+    <div class="portfolio-card fade-in" data-niche="email">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#d5e8f5 0%,#90bfe0 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">📧</div>
+        <div class="thumb-type-label">Email Copy · MyGreenScape</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Email Copywriting</span>
+        <h3 class="card-title">Black Friday Email Campaign — MyGreenScape</h3>
+        <p class="card-desc">High-converting Black Friday email for a plant e-commerce brand. Personalised hook, urgency-driven subject line, featured product picks with emotional copy, and a single strong CTA — built on Klaviyo principles.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Klaviyo</span>
+          <span class="meta-pill">E-commerce</span>
+          <span class="meta-pill">Email Copy</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-email-sample.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Travel -->
+    <div class="portfolio-card fade-in" data-niche="travel">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#d5f0e8 0%,#8ecfb0 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">✈️</div>
+        <div class="thumb-type-label">Travel · Safety Guide</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Travel</span>
+        <h3 class="card-title">Is Puebla Mexico Safe for Travelers? — Safety & Crime Guide</h3>
+        <p class="card-desc">A travel safety article targeting high-intent search queries, covering crime data, neighbourhood breakdowns, and practical traveller tips. Structured for both Google and real readers planning a Puebla trip.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Travel Writing</span>
+          <span class="meta-pill">Safety Niche</span>
+          <span class="meta-pill">Long-form SEO</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-puebla-travel-article.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Social Media Calendar -->
+    <div class="portfolio-card fade-in" data-niche="social">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#f5f0d5 0%,#e0cc80 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">📅</div>
+        <div class="thumb-type-label">Social Strategy · PJ Bold</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Social Media Strategy</span>
+        <h3 class="card-title">6-Month Social Media Calendar — PJ Bold</h3>
+        <p class="card-desc">A fully structured social media content calendar for PJ Bold covering 24 posts across 6 months. Includes a dashboard with progress tracking, post-type breakdowns (Recipe, Brand, Discount), and a content library — built for a real brand's publishing workflow.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Content Calendar</span>
+          <span class="meta-pill">Social Strategy</span>
+          <span class="meta-pill">24 Posts</span>
+          <span class="meta-pill">6 Months</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-social-calendar.xlsx" class="btn-view">↗ View Calendar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Non-Technical — Philodendron -->
+    <div class="portfolio-card fade-in" data-niche="nontechnical">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#d5f5e0 0%,#8ed4a0 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">🌿</div>
+        <div class="thumb-type-label">Non-Technical · Plant Care</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Non-Technical</span>
+        <h3 class="card-title">Philodendron Pink Princess Care Guide</h3>
+        <p class="card-desc">A comprehensive plant care guide blending genuine research with engaging storytelling. Covers light, watering, pruning, propagation, and pest control — written to rank on Google while keeping real plant lovers hooked to the end.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Evergreen Content</span>
+          <span class="meta-pill">Plant Niche</span>
+          <span class="meta-pill">Long-form</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-philodendron-article.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Non-Technical — Chocolate Bark -->
+    <div class="portfolio-card fade-in" data-niche="nontechnical">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#f5e8d5 0%,#c8a878 100%)">
+        <div class="thumb-icon" style="font-size:3rem;opacity:0.85">🍫</div>
+        <div class="thumb-type-label">Non-Technical · Food & Recipe</div>
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Non-Technical</span>
+        <h3 class="card-title">Homemade Chocolate Bark Variations — Peppermint, Nutty & Exotic Flavors</h3>
+        <p class="card-desc">A food content article targeting multiple chocolate bark recipe keywords. Warm, conversational tone paired with tight SEO structure — showing range across niche verticals beyond B2B and SaaS.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Food Content</span>
+          <span class="meta-pill">Recipe Niche</span>
+          <span class="meta-pill">Keyword Clusters</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio-chocolate-bark-article.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="social-links">
+    <a href="https://linkedin.com/in/mustansarmahmood" target="_blank" class="social-link" title="LinkedIn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://wa.me/923000853448" target="_blank" class="social-link" title="WhatsApp">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="mailto:itsmustansarmahmood@gmail.com" class="social-link" title="Email">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2026 Mustansar Mahmood. All rights reserved.</p>
+</footer>
+
+<script>
+/* THEME */
+function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+(function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;const bar=document.getElementById('scroll-progress');if(bar)bar.style.width=(d>0?(t/d)*100:0)+'%';});
+
+/* FILTER */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.portfolio-card').forEach(card=>{
+      if(f==='all'||card.dataset.niche===f){card.classList.remove('hidden');}
+      else{card.classList.add('hidden');}
+    });
+  });
+});
+
+/* FADE IN */
+const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*90);fo.unobserve(en.target);}});},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
+
+/* 3D CARD TILT */
+document.querySelectorAll('.portfolio-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(700px) rotateY(${x*9}deg) rotateX(${-y*9}deg) translateZ(6px)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transition='transform .5s cubic-bezier(.22,1,.36,1)';
+    card.style.transform='perspective(700px) rotateY(0) rotateX(0) translateZ(0)';
+    setTimeout(()=>card.style.transition='',500);
+  });
+});
+
+/* CURSOR */
+const dot=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let cx=-200,cy=-200,rx=-200,ry=-200;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});
+(function loop(){if(dot){dot.style.left=cx+'px';dot.style.top=cy+'px';}rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.portfolio-card,.social-link,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+});
+
+/* BG CANVAS */
+(function(){
+  const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+  let W,H;
+  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI'];
+  const particles=[];
+  for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
+  let mx=800,my=500;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const aC=isDark()?'224,48,53':'193,39,45',gC=isDark()?'109,184,116':'141,202,147';
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;
+      if(p.x<-80)p.x=W+80;if(p.x>W+80)p.x=-80;if(p.y<-80)p.y=H+80;if(p.y>H+80)p.y=-80;
+      const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140){const f=(140-d)/140*.45;p.x+=(dx/d)*f;p.y+=(dy/d)*f;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.alpha;
+      if(p.word){ctx.font=`600 ${p.size}px 'Plus Jakarta Sans',sans-serif`;ctx.fillStyle=`rgba(${aC},1)`;ctx.fillText(p.word,0,0);}
+      else{ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${gC},1)`;ctx.fill();}
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
