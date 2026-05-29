@@ -356,7 +356,7 @@
           <span class="meta-pill">Conversion Writing</span>
         </div>
         <div class="card-actions">
-          <a href="portfolio-ux-audit-guide.pdf" target="_blank" class="btn-view">↗ View Sample</a>
+          <a href="portfolio-ux-audit-guide.docx" target="_blank" class="btn-view">↗ View Sample</a>
         </div>
       </div>
     </div>
@@ -403,7 +403,7 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 });
 
 /* FADE IN */
-const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*90);fo.unobserve(en.target);}});},{threshold:0,rootMargin:'0px 0px -10px 0px'});
+const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*90);fo.unobserve(en.target);}});},{threshold:.08});
 document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
 
 /* 3D CARD TILT */
