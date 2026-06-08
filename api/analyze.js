@@ -51,7 +51,7 @@ Rules:
         'X-Title': 'SEO Intent Analyzer'
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.0-flash-lite-001',
+        model: 'openai/gpt-4o-mini',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
@@ -71,7 +71,8 @@ Rules:
     const rawText = apiData?.choices?.[0]?.message?.content || '';
 
     // Strip markdown fences if model adds them
-    let cleaned = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+    let cleaned = rawText.replace(/```json/gi, '').replace(/
+```/g, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (jsonMatch) cleaned = jsonMatch[0];
 
