@@ -364,6 +364,30 @@
   </div>
 </div>
 
+<!-- SIDE PROJECTS PROMO -->
+<div style="position:relative;z-index:1;padding:0 5% 4rem">
+  <div style="
+    background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);
+    border:1px solid var(--border);border-radius:16px;
+    padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;
+    gap:1.5rem;flex-wrap:wrap;
+  " class="fade-in">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--secondary);margin-bottom:.4rem">✦ Beyond Writing</div>
+      <h3 style="font-family:var(--serif);font-size:1.4rem;letter-spacing:-.02em;margin-bottom:.4rem">I also build things from scratch.</h3>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.7;max-width:460px">Curious what I code when I'm not writing? I build web apps that solve real problems — from prayer trackers to productivity tools.</p>
+    </div>
+    <a href="side-projects.html" style="
+      display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;
+      background:var(--secondary);color:#fff;
+      padding:.55rem 1.4rem;border-radius:50px;
+      font-size:.85rem;font-weight:600;text-decoration:none;
+      box-shadow:0 4px 14px rgba(var(--secondary-rgb),.4);
+      transition:all .3s ease;flex-shrink:0;
+    " onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 22px rgba(var(--secondary-rgb),.5)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 4px 14px rgba(var(--secondary-rgb),.4)'">🛠 Explore Side Projects</a>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="social-links">
@@ -403,7 +427,7 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 });
 
 /* FADE IN */
-const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*90);fo.unobserve(en.target);}});},{threshold:.08});
+const fo=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*90);fo.unobserve(en.target);}});},{threshold:0,rootMargin:'0px 0px -10px 0px'});
 document.querySelectorAll('.fade-in').forEach(el=>fo.observe(el));
 
 /* 3D CARD TILT */
