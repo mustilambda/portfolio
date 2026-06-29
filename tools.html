@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free SEO & privacy tools by Mustansar Mahmood — SEO Intent Analyzer and Session Logout Chrome extension. No login, no fluff.">
-<title>Free SEO & AI Tools — Mustansar Mahmood</title>
+<meta name="description" content="Projects by Mustansar Mahmood — web apps (SalahPath, TaskMind) and free SEO tools (SEO Intent Analyzer, Session Logout). Built from scratch, free to use.">
+<title>Projects — Mustansar Mahmood</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -157,18 +157,14 @@
     height: 180px; display: flex; align-items: center; justify-content: center;
     flex-direction: column; gap: 0.5rem; position: relative; overflow: hidden;
   }
-  .tool-card:nth-child(1) .tool-card-thumb {
-    background: linear-gradient(135deg, #fde8e8 0%, #f5c6c7 100%);
-  }
-  .tool-card:nth-child(2) .tool-card-thumb {
-    background: linear-gradient(135deg, #d8f0db 0%, #b3ddb8 100%);
-  }
-  [data-theme="dark"] .tool-card:nth-child(1) .tool-card-thumb {
-    background: linear-gradient(135deg, #3a1516 0%, #2e1112 100%);
-  }
-  [data-theme="dark"] .tool-card:nth-child(2) .tool-card-thumb {
-    background: linear-gradient(135deg, #1a2e1b 0%, #152315 100%);
-  }
+  .thumb-salah   { background: linear-gradient(135deg, #d3ece1 0%, #b4ddca 100%); }
+  .thumb-task    { background: linear-gradient(135deg, #fbe4d6 0%, #f3c8aa 100%); }
+  .thumb-seo     { background: linear-gradient(135deg, #fde8e8 0%, #f5c6c7 100%); }
+  .thumb-session { background: linear-gradient(135deg, #d8f0db 0%, #b3ddb8 100%); }
+  [data-theme="dark"] .thumb-salah   { background: linear-gradient(135deg, #10322a 0%, #0d231d 100%); }
+  [data-theme="dark"] .thumb-task    { background: linear-gradient(135deg, #3a2012 0%, #2e160d 100%); }
+  [data-theme="dark"] .thumb-seo     { background: linear-gradient(135deg, #3a1516 0%, #2e1112 100%); }
+  [data-theme="dark"] .thumb-session { background: linear-gradient(135deg, #1a2e1b 0%, #152315 100%); }
   .tool-thumb-icon { font-size: 3.5rem; display: block; }
   .tool-thumb-label {
     font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
@@ -211,14 +207,14 @@
     text-decoration: none;
   }
   .btn-open-tool:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(var(--accent-rgb),0.45); }
-  .tool-card:nth-child(2) .btn-open-tool {
+  .tool-card.green .btn-open-tool {
     background: var(--secondary);
     box-shadow: 0 4px 14px rgba(var(--secondary-rgb),0.35);
   }
-  .tool-card:nth-child(2) .btn-open-tool:hover {
+  .tool-card.green .btn-open-tool:hover {
     box-shadow: 0 8px 22px rgba(var(--secondary-rgb),0.5);
   }
-  .tool-card:nth-child(2) .tool-badge { color: var(--secondary); }
+  .tool-card.green .tool-badge { color: var(--secondary); }
 
   /* FOOTER */
   footer {
@@ -266,7 +262,7 @@
     <li><a href="services.html">Services</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="guides.html">Guides</a></li>
-    <li><a href="tools.html" class="active">Tools</a></li>
+    <li><a href="tools.html" class="active">Projects</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -281,24 +277,64 @@
   <a href="services.html">Services</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="guides.html">Guides</a>
-  <a href="tools.html">Tools</a>
+  <a href="tools.html">Projects</a>
   <a href="contact.html">Contact</a>
 </div>
 
 <main>
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-tag"><span class="dot"></span> Free to Use</div>
-    <h1>Tools that think<br>like a <em>strategist.</em></h1>
-    <p>Practical SEO & AI tools built from frameworks I use daily. Free for everyone — no login, no fluff.</p>
+    <div class="page-tag"><span class="dot"></span> Built by Me</div>
+    <h1>Things I've<br><em>built &amp; shipped.</em></h1>
+    <p>Web apps and free tools I've designed and coded from scratch — from prayer trackers to SEO utilities. Free to use, no login.</p>
   </div>
 
-  <!-- TOOLS GRID -->
+  <!-- PROJECTS GRID -->
   <div class="tools-grid">
+
+    <!-- App 1: SalahPath -->
+    <a href="https://salahpath.vercel.app/" target="_blank" rel="noopener" class="tool-card green fade-in">
+      <div class="tool-card-thumb thumb-salah">
+        <span class="tool-thumb-icon">🕌</span>
+        <span class="tool-thumb-label">Web App · Muslim Lifestyle</span>
+      </div>
+      <div class="tool-card-body">
+        <span class="tool-badge">Live Web App</span>
+        <h2>SalahPath</h2>
+        <p>A free Android app that helps Muslims keep up consistent daily prayer — auto-calculates prayer times via GPS, tracks streaks, sends smart reminders, and rewards devotion with achievement badges. No account needed.</p>
+        <div class="tool-features">
+          <span class="tool-feature">GPS Prayer Times</span>
+          <span class="tool-feature">Streak Tracking</span>
+          <span class="tool-feature">Notifications</span>
+          <span class="tool-feature">Android</span>
+        </div>
+        <span class="btn-open-tool">Visit Live Site ↗</span>
+      </div>
+    </a>
+
+    <!-- App 2: TaskMind -->
+    <a href="https://taskmind-five.vercel.app/" target="_blank" rel="noopener" class="tool-card fade-in">
+      <div class="tool-card-thumb thumb-task">
+        <span class="tool-thumb-icon">🧠</span>
+        <span class="tool-thumb-label">Web App · AI Productivity</span>
+      </div>
+      <div class="tool-card-body">
+        <span class="tool-badge">Live Web App</span>
+        <h2>TaskMind</h2>
+        <p>An AI task organizer that sorts whatever you type by category, priority and due date — then writes a witty, motivating status of your day. Type "Call Sam [tomorrow 5pm high]" and it schedules the reminder. No account; your data stays on your device.</p>
+        <div class="tool-features">
+          <span class="tool-feature">React + Vite</span>
+          <span class="tool-feature">Groq AI</span>
+          <span class="tool-feature">Smart Scheduling</span>
+          <span class="tool-feature">Local-First</span>
+        </div>
+        <span class="btn-open-tool">Visit Live Site ↗</span>
+      </div>
+    </a>
 
     <!-- Tool 1: SEO Intent Analyzer -->
     <a href="seo-intent-analyzer.html" class="tool-card fade-in">
-      <div class="tool-card-thumb">
+      <div class="tool-card-thumb thumb-seo">
         <span class="tool-thumb-icon">🎯</span>
         <span class="tool-thumb-label">SEO · Intent Analysis</span>
       </div>
@@ -317,8 +353,8 @@
     </a>
 
     <!-- Tool 2: Session Logout -->
-    <a href="session-logout.html" class="tool-card fade-in">
-      <div class="tool-card-thumb">
+    <a href="session-logout.html" class="tool-card green fade-in">
+      <div class="tool-card-thumb thumb-session">
         <span class="tool-thumb-icon">🔒</span>
         <span class="tool-thumb-label">Chrome · Privacy</span>
       </div>
