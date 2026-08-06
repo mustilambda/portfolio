@@ -424,7 +424,7 @@ document.querySelectorAll('.portfolio-card').forEach(card=>{
 const dot=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let cx=-200,cy=-200,rx=-200,ry=-200;
 document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});
-(function loop(){if(dot){dot.style.left=cx+'px';dot.style.top=cy+'px';}rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}requestAnimationFrame(loop);})();
+(function loop(){if(dot){dot.style.transform=`translate3d(${cx}px,${cy}px,0) translate(-50%,-50%)`;}rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;if(ring){ring.style.transform=`translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;}requestAnimationFrame(loop);})();
 document.querySelectorAll('a,button,.portfolio-card,.social-link,.filter-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
@@ -438,7 +438,7 @@ document.querySelectorAll('a,button,.portfolio-card,.social-link,.filter-btn').f
   resize();window.addEventListener('resize',resize);
   const words=['SEO','#1','RANK','WRITE','BLOG','COPY','LEAD','EDIT','SERP','CTR','KPI','CRO','DRAFT','LINK','H1','ROI'];
   const particles=[];
-  for(let i=0;i<55;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
+  for(let i=0;i<32;i++){const isW=Math.random()>.42;particles.push({x:Math.random()*1600,y:Math.random()*1000,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,alpha:Math.random()*.09+.03,size:isW?(Math.random()*6+8):(Math.random()*3+2),word:isW?words[Math.floor(Math.random()*words.length)]:null,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*.003});}
   let mx=800,my=500;
   window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
   function isDark(){return document.documentElement.getAttribute('data-theme')==='dark';}
