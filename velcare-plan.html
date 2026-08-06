@@ -32,6 +32,8 @@
     .phone-row{display:grid;grid-template-columns:1fr auto;gap:.7rem}
     .phone-input{width:100%;min-width:0;border:1.5px solid var(--border);border-radius:12px;background:white;color:var(--text);font:500 1rem var(--sans);padding:1rem 1.05rem;outline:none;transition:border-color .2s,box-shadow .2s}
     .phone-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(193,39,45,.1)}
+    .phone-help{margin-top:.55rem;color:var(--muted);font-size:.78rem}
+    .phone-help strong{color:var(--text)}
     .access-btn{border:0;border-radius:12px;background:var(--accent);color:white;padding:1rem 1.35rem;font:700 .92rem var(--sans);cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s}
     .access-btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
     .access-btn:disabled{opacity:.7;cursor:wait;transform:none}
@@ -84,9 +86,10 @@
         <form class="access-form" id="accessForm" novalidate>
           <label for="phone">WhatsApp number</label>
           <div class="phone-row">
-            <input class="phone-input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. +92 300 1234567" aria-describedby="formError" required>
+            <input class="phone-input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+92 300 1234567" aria-describedby="phoneHelp formError" required>
             <button class="access-btn" id="accessButton" type="submit">View the plan →</button>
           </div>
+          <p class="phone-help" id="phoneHelp">Include your country code. Example: <strong>+92 300 1234567</strong></p>
           <input class="hidden-field" id="companyWebsite" name="company_website" type="text" tabindex="-1" autocomplete="off">
           <p class="form-error" id="formError" role="alert"></p>
           <p class="privacy">Your number is only used for communication about this partnership.</p>
@@ -229,8 +232,8 @@
       error.textContent = '';
       const number = phone.value.trim();
       const digits = number.replace(/\D/g, '');
-      if (digits.length < 7 || digits.length > 15) {
-        error.textContent = 'Please enter a valid WhatsApp number.';
+      if (!number.startsWith('+') || digits.length < 7 || digits.length > 15) {
+        error.textContent = 'Please include the country code, for example +92 300 1234567.';
         phone.focus();
         return;
       }
