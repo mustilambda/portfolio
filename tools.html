@@ -112,24 +112,24 @@
   .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 500; }
 
   /* MAIN */
-  main { max-width: 1100px; margin: 0 auto; padding: calc(var(--nav-h) + 4rem) 5% 6rem; }
+  main { padding-bottom: 6rem; }
 
   /* PAGE HEADER */
-  .page-header { text-align: center; margin-bottom: 4rem; animation: riseUp 0.9s cubic-bezier(0.22,1,0.36,1) both; }
-  .page-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--accent-bg); color: var(--accent);
-    padding: 0.35rem 0.9rem; border-radius: 50px;
-    font-size: 0.78rem; font-weight: 600; margin-bottom: 1.1rem;
-    letter-spacing: 0.04em; text-transform: uppercase;
+  .page-header {
+    padding: calc(var(--nav-h) + 5rem) 5% 4rem;
+    animation: riseUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
   }
-  .page-tag .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  .page-tag {
+    display: block; color: var(--accent);
+    font-size: 0.78rem; font-weight: 600; margin-bottom: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
   .page-header h1 {
-    font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.5rem);
-    line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.85rem;
+    font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1; letter-spacing: -0.03em; max-width: 700px;
   }
   .page-header h1 em { font-style: italic; color: var(--accent); }
-  .page-header p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.8; }
+  .page-header p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin-top: 1rem; line-height: 1.8; }
 
   @keyframes riseUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
   @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.8); } }
@@ -137,6 +137,7 @@
   /* TOOLS GRID */
   .tools-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem;
+    max-width: 1100px; margin: 0 auto; padding: 0 5%;
   }
 
   /* TOOL CARD */
@@ -283,7 +284,7 @@
 <main>
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-tag"><span class="dot"></span> Built by Me</div>
+    <span class="page-tag">Tools</span>
     <h1>Things I've<br><em>built &amp; shipped.</em></h1>
     <p>Web apps and free tools I've designed and coded from scratch — from prayer trackers to SEO utilities. Free to use, no login.</p>
   </div>
