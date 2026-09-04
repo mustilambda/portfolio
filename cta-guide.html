@@ -208,6 +208,7 @@
     #cursor, #cursor-ring { display: none; }
   }
 </style>
+<link rel="stylesheet" href="site-navigation.css">
 </head>
 <body>
 <div id="cursor"></div>
@@ -220,7 +221,7 @@
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
+    <li class="nav-dropdown"><a href="portfolio.html">Portfolio <span class="nav-chevron">▼</span></a><ul class="nav-submenu"><li><a href="portfolio.html">Samples</a></li><li><a href="tools.html">Tools</a></li></ul></li>
     <li><a href="guides.html" class="active">Guides</a></li>
     <li><a href="growth-expert.html">Growth Expert</a></li>
   </ul>
@@ -233,7 +234,7 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="about.html">About</a>
-  <a href="services.html">Services</a><a href="portfolio.html">Portfolio</a>
+  <a href="services.html">Services</a><details class="mobile-portfolio"><summary>Portfolio</summary><div class="mobile-submenu"><a href="portfolio.html">Samples</a><a href="tools.html">Tools</a></div></details>
   <a href="guides.html">Guides</a><a href="growth-expert.html">Growth Expert</a>
 </div>
 
