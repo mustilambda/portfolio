@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Portfolio of Mustansar Mahmood — real writing samples across SaaS, travel, email copy, social media strategy, and non-technical content.">
+<meta name="description" content="Portfolio of Mustansar Mahmood — writing samples across healthcare, SaaS, travel, email copy, social media strategy, and non-technical content.">
 <title>Portfolio — Mustansar Mahmood</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="192x192" href="favicon-192x192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -102,6 +101,9 @@
   }
   .portfolio-card.featured .card-thumb { height: 200px; }
   .portfolio-card:hover .card-thumb { background: var(--accent-bg); }
+  .card-thumb.card-image { padding: 0; background: var(--bg2); }
+  .card-thumb.card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .portfolio-card:hover .card-thumb.card-image img { transform: scale(1.035); }
   .thumb-icon { font-size: 2.2rem; margin-bottom: .4rem; }
   .thumb-type-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 
@@ -191,12 +193,13 @@
 <div class="page-hero">
   <span class="page-tag">Portfolio</span>
   <h1 class="page-title">Work that <em>did something.</em></h1>
-  <p class="page-sub">Real writing samples from 4+ years — SaaS guides, email campaigns, travel articles, social media strategy, and non-technical content. Download any piece below.</p>
+  <p class="page-sub">Real writing samples from 4+ years — healthcare articles, SaaS guides, email campaigns, travel content, social media strategy, and more. Download any piece below.</p>
 </div>
 
 <!-- FILTERS -->
 <div class="filter-wrap">
   <button class="filter-btn active" data-filter="all">All Work</button>
+  <button class="filter-btn" data-filter="healthcare">Healthcare</button>
   <button class="filter-btn" data-filter="saas">SaaS</button>
   <button class="filter-btn" data-filter="email">Email Copy</button>
   <button class="filter-btn" data-filter="travel">Travel</button>
@@ -208,6 +211,27 @@
 <!-- GRID -->
 <div class="portfolio-section">
   <div class="portfolio-grid">
+
+    <!-- Healthcare Writing Collection — FEATURED -->
+    <div class="portfolio-card featured fade-in" data-niche="healthcare">
+      <div class="card-thumb card-image">
+        <img src="portfolio/healthcare/sleep-deprivation.png" alt="Medical illustration for the healthcare writing collection">
+      </div>
+      <div class="card-body">
+        <span class="card-niche">Healthcare Writing · 10 Samples</span>
+        <h3 class="card-title">Healthcare Patient Education Collection</h3>
+        <p class="card-desc">Ten polished health articles covering sleep, diagnostics, pregnancy, oncology, neurology, eye care, gastroenterology, mental health, and cardiovascular emergencies. Each Word sample pairs clear patient-friendly writing with a custom medical graphic and authoritative references.</p>
+        <div class="card-meta">
+          <span class="meta-pill">Health Content</span>
+          <span class="meta-pill">Patient Education</span>
+          <span class="meta-pill">10 Articles</span>
+          <span class="meta-pill">Word Samples</span>
+        </div>
+        <div class="card-actions">
+          <a href="portfolio/healthcare-writing.html" class="btn-view">↗ Explore Collection</a>
+        </div>
+      </div>
+    </div>
 
     <!-- 1. SaaS — FEATURED -->
     <div class="portfolio-card featured fade-in" data-niche="saas">

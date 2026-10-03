@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Healthcare writing portfolio by Mustansar Mahmood — ten patient-friendly Word samples with custom medical graphics and authoritative references.">
+<title>Healthcare Writing — Mustansar Mahmood</title>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#f4ebdd; --bg-rgb:244,235,221; --bg2:#ede0cc; --text:#1a1612; --muted:#6b5e4e;
+    --accent:#c1272d; --accent-rgb:193,39,45; --secondary:#8dca93; --secondary-rgb:141,202,147;
+    --border:rgba(26,22,18,.12); --nav-h:68px; --serif:'DM Serif Display',serif;
+    --sans:'Plus Jakarta Sans',sans-serif; --radius:16px; --transition:.3s ease;
+  }
+  [data-theme="dark"] {
+    --bg:#18130e; --bg-rgb:24,19,14; --bg2:#231c15; --text:#f4ebdd; --muted:#a28f7d;
+    --accent:#e03035; --accent-rgb:224,48,53; --secondary:#6db874; --secondary-rgb:109,184,116;
+    --border:rgba(244,235,221,.1);
+  }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.7; transition:background var(--transition),color var(--transition); }
+  nav { position:fixed; inset:0 0 auto; z-index:100; height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; padding:0 5%; background:rgba(var(--bg-rgb),.9); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:var(--serif); font-size:1.2rem; color:var(--text); text-decoration:none; letter-spacing:-.02em; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; font-weight:500; transition:color var(--transition); }
+  .nav-links a:hover,.nav-links a.active { color:var(--accent); }
+  .nav-right { display:flex; align-items:center; gap:1rem; }
+  .theme-btn { background:none; border:1px solid var(--border); border-radius:50%; width:36px; height:36px; color:var(--muted); cursor:pointer; }
+  .btn-talk { background:var(--secondary); color:#fff; padding:.5rem 1.25rem; border-radius:50px; font-size:.875rem; font-weight:600; text-decoration:none; box-shadow:0 4px 14px rgba(var(--secondary-rgb),.35); }
+  .menu-btn { display:none; background:none; border:0; color:var(--text); font-size:1.4rem; cursor:pointer; }
+  .mobile-menu { display:none; position:fixed; top:var(--nav-h); inset-inline:0; z-index:99; background:var(--bg); border-bottom:1px solid var(--border); padding:1.5rem 5%; flex-direction:column; gap:1.1rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { color:var(--text); text-decoration:none; font-weight:500; }
+  #scroll-progress { position:absolute; bottom:0; left:0; height:3px; width:0; background:var(--accent); }
+  main { position:relative; z-index:1; }
+  .hero { padding:calc(var(--nav-h) + 4.5rem) 5% 3.5rem; max-width:1200px; margin:auto; }
+  .back-link { display:inline-flex; align-items:center; gap:.4rem; color:var(--muted); text-decoration:none; font-size:.84rem; font-weight:600; margin-bottom:1.5rem; }
+  .back-link:hover { color:var(--accent); }
+  .eyebrow { color:var(--accent); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; display:block; margin-bottom:.75rem; }
+  h1 { font-family:var(--serif); font-size:clamp(2.7rem,6vw,5rem); line-height:1.02; letter-spacing:-.04em; max-width:900px; }
+  h1 em { color:var(--accent); font-weight:400; }
+  .hero-copy { color:var(--muted); max-width:680px; font-size:1.03rem; margin-top:1.1rem; }
+  .collection-stats { display:flex; flex-wrap:wrap; gap:.65rem; margin-top:1.5rem; }
+  .stat { border:1px solid var(--border); background:var(--bg2); border-radius:50px; padding:.45rem .85rem; font-size:.76rem; font-weight:600; color:var(--muted); }
+  .samples { max-width:1200px; margin:auto; padding:0 5% 5rem; }
+  .section-head { display:flex; justify-content:space-between; align-items:end; gap:1rem; margin-bottom:1.5rem; }
+  .section-head h2 { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:-.025em; }
+  .section-head p { color:var(--muted); font-size:.83rem; }
+  .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
+  .sample-card { overflow:hidden; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg); display:grid; grid-template-columns:42% 58%; min-height:305px; transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease; }
+  .sample-card:hover { transform:translateY(-5px); border-color:var(--accent); box-shadow:0 18px 42px rgba(var(--accent-rgb),.12); }
+  .sample-image { min-height:100%; overflow:hidden; background:var(--bg2); }
+  .sample-image img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .sample-card:hover img { transform:scale(1.04); }
+  .sample-body { padding:1.25rem; display:flex; flex-direction:column; }
+  .number { color:var(--accent); font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; font-weight:700; }
+  .sample-title { font-family:var(--serif); font-size:1.3rem; line-height:1.25; margin:.35rem 0 .55rem; }
+  .sample-desc { color:var(--muted); font-size:.82rem; line-height:1.65; margin-bottom:.8rem; flex:1; }
+  .tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.85rem; }
+  .tag { font-size:.66rem; padding:.2rem .55rem; border:1px solid var(--border); background:var(--bg2); color:var(--muted); border-radius:50px; }
+  .download { display:inline-flex; align-items:center; justify-content:center; gap:.35rem; align-self:flex-start; background:var(--accent); color:#fff; border-radius:50px; padding:.48rem .9rem; font-size:.75rem; font-weight:700; text-decoration:none; transition:transform .25s ease,box-shadow .25s ease; }
+  .download:hover { transform:translateY(-2px); box-shadow:0 7px 18px rgba(var(--accent-rgb),.3); }
+  .note { margin-top:1.5rem; padding:1rem 1.2rem; border-left:3px solid var(--secondary); background:var(--bg2); color:var(--muted); font-size:.8rem; border-radius:0 10px 10px 0; }
+  footer { display:flex; align-items:center; justify-content:center; padding:1.5rem 5%; border-top:1px solid var(--border); color:var(--muted); font-size:.8rem; }
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+  @media(max-width:980px) { .grid { grid-template-columns:1fr; } }
+  @media(max-width:680px) {
+    .nav-links,.nav-right .btn-talk { display:none; } .menu-btn { display:block; }
+    .hero { padding-top:calc(var(--nav-h) + 3rem); } .section-head { align-items:start; flex-direction:column; }
+    .sample-card { grid-template-columns:1fr; } .sample-image { height:230px; } .sample-body { padding:1.2rem; }
+  }
+</style>
+<link rel="stylesheet" href="../site-navigation.css">
+</head>
+<body>
+<nav>
+  <div id="scroll-progress"></div>
+  <a href="../index.html" class="nav-logo">Mustansar Mahmood</a>
+  <ul class="nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li class="nav-dropdown active"><a href="../portfolio.html" class="active">Portfolio <span class="nav-chevron">▼</span></a><ul class="nav-submenu"><li><a href="../portfolio.html" class="active">Samples</a></li><li><a href="../tools.html">Tools</a></li></ul></li>
+    <li><a href="../guides.html">Guides</a></li>
+    <li><a href="../growth-expert.html">Growth Expert</a></li>
+  </ul>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle color theme">🌙</button><a href="../contact.html" class="btn-talk">Let's Talk</a></div>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Open navigation">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../about.html">About</a><a href="../services.html">Services</a><a href="../portfolio.html">Portfolio</a><a href="../tools.html">Tools</a><a href="../guides.html">Guides</a><a href="../growth-expert.html">Growth Expert</a>
+</div>
+
+<main>
+  <section class="hero">
+    <a class="back-link" href="../portfolio.html">← Back to all portfolio work</a>
+    <span class="eyebrow">Healthcare Writing Portfolio</span>
+    <h1>Clear health content for <em>real people.</em></h1>
+    <p class="hero-copy">A ten-piece collection of patient-friendly healthcare articles. Each sample combines an accessible structure, careful language, a custom medical illustration, and a reference list built from authoritative health sources.</p>
+    <div class="collection-stats"><span class="stat">10 Word samples</span><span class="stat">10 original graphics</span><span class="stat">9 healthcare subject areas</span><span class="stat">Downloadable .docx files</span></div>
+  </section>
+
+  <section class="samples">
+    <div class="section-head"><h2>Explore the collection</h2><p>Select any article to download the complete Word sample.</p></div>
+    <div class="grid">
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/sleep-deprivation.png" alt="Illustration showing the effects of sleep deprivation" loading="lazy"></div><div class="sample-body"><span class="number">01 · Sleep &amp; Public Health</span><h3 class="sample-title">Sleep Deprivation and Its Effects on the Body</h3><p class="sample-desc">A practical guide to short- and long-term effects, healthier sleep habits, and signs that warrant professional help.</p><div class="tags"><span class="tag">Patient education</span><span class="tag">Wellness</span></div><a class="download" href="healthcare/01-sleep-deprivation.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/urine-color.png" alt="Clinical urine color guide illustration" loading="lazy"></div><div class="sample-body"><span class="number">02 · Urology &amp; Symptom Guide</span><h3 class="sample-title">Urine Color Guide: What Changes May Mean</h3><p class="sample-desc">A careful explanation of hydration, food and medication effects, common color changes, and medical red flags.</p><div class="tags"><span class="tag">Symptom guide</span><span class="tag">Health literacy</span></div><a class="download" href="healthcare/02-urine-color-guide.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/ast-test.png" alt="AST blood test and liver health illustration" loading="lazy"></div><div class="sample-body"><span class="number">03 · Diagnostics &amp; Liver Health</span><h3 class="sample-title">AST Blood Test: Purpose, Results, and Next Steps</h3><p class="sample-desc">An approachable diagnostic explainer covering why AST is ordered, what results can suggest, and why context matters.</p><div class="tags"><span class="tag">Lab test</span><span class="tag">Explainer</span></div><a class="download" href="healthcare/03-ast-blood-test.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/cervix-dilation.png" alt="Cervical dilation during labor illustration" loading="lazy"></div><div class="sample-body"><span class="number">04 · Pregnancy &amp; Maternal Health</span><h3 class="sample-title">Cervical Dilation During Labor</h3><p class="sample-desc">A reassuring stage-by-stage overview of dilation, active labor, what progress can look like, and when to contact the care team.</p><div class="tags"><span class="tag">Pregnancy</span><span class="tag">Patient guide</span></div><a class="download" href="healthcare/04-cervical-dilation.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/endometrial-cancer.png" alt="Endometrial cancer awareness illustration" loading="lazy"></div><div class="sample-body"><span class="number">05 · Oncology &amp; Women's Health</span><h3 class="sample-title">Endometrial Cancer: Symptoms, Risks, and Treatment</h3><p class="sample-desc">A sensitive overview of warning signs, risk factors, diagnostic steps, treatment options, and the value of early evaluation.</p><div class="tags"><span class="tag">Oncology</span><span class="tag">Awareness</span></div><a class="download" href="healthcare/05-endometrial-cancer.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/cluster-headache.png" alt="Cluster headache symptoms illustration" loading="lazy"></div><div class="sample-body"><span class="number">06 · Neurology</span><h3 class="sample-title">Cluster Headache: Signs, Treatment, and Red Flags</h3><p class="sample-desc">A plain-language guide distinguishing cluster headache from migraine and explaining acute care, prevention, and emergencies.</p><div class="tags"><span class="tag">Neurology</span><span class="tag">Symptom education</span></div><a class="download" href="healthcare/06-cluster-headache.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/lasik.png" alt="LASIK eye surgery illustration" loading="lazy"></div><div class="sample-body"><span class="number">07 · Ophthalmology</span><h3 class="sample-title">LASIK Eye Surgery: Procedure, Candidates, and Risks</h3><p class="sample-desc">A balanced procedure guide covering evaluation, what happens during LASIK, recovery, expected benefits, and limitations.</p><div class="tags"><span class="tag">Procedure guide</span><span class="tag">Eye care</span></div><a class="download" href="healthcare/07-lasik-surgery.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/sibo.png" alt="Small intestinal bacterial overgrowth illustration" loading="lazy"></div><div class="sample-body"><span class="number">08 · Gastroenterology</span><h3 class="sample-title">SIBO: Symptoms, Diagnosis, and Treatment</h3><p class="sample-desc">A reader-focused explanation of small intestinal bacterial overgrowth, diagnostic limitations, treatment, and recurrence.</p><div class="tags"><span class="tag">Digestive health</span><span class="tag">Condition guide</span></div><a class="download" href="healthcare/08-sibo.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/tms.png" alt="Transcranial magnetic stimulation treatment illustration" loading="lazy"></div><div class="sample-body"><span class="number">09 · Mental Health &amp; Neurology</span><h3 class="sample-title">Transcranial Magnetic Stimulation</h3><p class="sample-desc">A calm, accessible introduction to rTMS, including common uses, what treatment feels like, side effects, and safety.</p><div class="tags"><span class="tag">Mental health</span><span class="tag">Treatment guide</span></div><a class="download" href="healthcare/09-transcranial-magnetic-stimulation.docx" download>↓ Download Word sample</a></div></article>
+      <article class="sample-card fade-in"><div class="sample-image"><img src="healthcare/hypertensive-crisis.png" alt="Severely high blood pressure emergency illustration" loading="lazy"></div><div class="sample-body"><span class="number">10 · Cardiovascular &amp; Emergency</span><h3 class="sample-title">Severely High Blood Pressure: When It Is an Emergency</h3><p class="sample-desc">A safety-first response guide for readings at or above 180/120, including repeat measurement, warning symptoms, and urgent action.</p><div class="tags"><span class="tag">Emergency guidance</span><span class="tag">Heart health</span></div><a class="download" href="healthcare/10-hypertensive-crisis.docx" download>↓ Download Word sample</a></div></article>
+    </div>
+    <p class="note">These portfolio samples are educational writing, not individualized medical advice. Their reference lists are included in the downloadable documents.</p>
+  </section>
+</main>
+
+<footer>© 2026 Mustansar Mahmood. All rights reserved.</footer>
+<script>
+function toggleTheme(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.querySelector('.theme-btn').textContent=d?'🌙':'☀️';localStorage.setItem('theme',d?'light':'dark');}
+(function(){const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);const b=document.querySelector('.theme-btn');if(b)b.textContent=s==='dark'?'☀️':'🌙';})();
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{const t=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('scroll-progress').style.width=(d>0?(t/d)*100:0)+'%';});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
