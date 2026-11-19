@@ -192,6 +192,64 @@
   }
   .btn-print:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
+  /* CV SELECTOR */
+  .cv-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    animation: riseUp 0.85s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+  }
+  .cv-role-card {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.3rem;
+    cursor: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+  }
+  .cv-role-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(var(--accent-rgb),0.12); }
+  .cv-role-card.active { border-color: var(--accent); background: var(--accent-bg); box-shadow: 0 6px 24px rgba(var(--accent-rgb),0.15); }
+  .cv-role-card.active::after {
+    content: '✓'; position: absolute; top: 0.75rem; right: 0.9rem;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-size: 0.65rem; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .cv-role-tag {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.09em; color: var(--accent);
+  }
+  .cv-role-title {
+    font-family: var(--serif); font-size: 1.1rem; line-height: 1.25; color: var(--text);
+  }
+  .cv-role-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .cv-role-actions {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem;
+  }
+  .cv-btn-view {
+    background: var(--accent); color: #fff;
+    padding: 0.45rem 1rem; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 600;
+    border: none; cursor: none; transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 0.3rem;
+  }
+  .cv-btn-view:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(var(--accent-rgb),0.35); }
+  .cv-role-card.active .cv-btn-view { background: var(--text); }
+  .cv-btn-dl {
+    border: 1.5px solid var(--border); color: var(--muted);
+    padding: 0.45rem 0.9rem; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 600;
+    text-decoration: none; transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 0.3rem;
+  }
+  .cv-btn-dl:hover { border-color: var(--accent); color: var(--accent); }
+
   /* CV VIEWER */
   .cv-viewer-wrap {
     background: var(--bg2);
@@ -303,7 +361,11 @@
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
+    .cv-selector { grid-template-columns: 1fr; }
     .cv-highlights { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .cv-selector { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
     .nav-links { display: none; }
@@ -353,7 +415,7 @@
   <a href="guides.html">Guides</a>
   <a href="cv.html">CV</a>
   <a href="growth-expert.html">Growth Expert</a>
-  <a href="Mustansar_Mahmood_CV.pdf" download class="btn-download" style="margin-top:0.5rem;justify-content:center">⬇ Download CV</a>
+  <a href="cv-content-lead.pdf" download class="btn-download" style="margin-top:0.5rem;justify-content:center">⬇ Download CV</a>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -368,16 +430,46 @@
     </div>
     <div class="cv-actions">
       <span class="mag">
-        <a href="Mustansar_Mahmood_CV.pdf" download class="btn-download">
-          ⬇ Download CV
-        </a>
-      </span>
-      <span class="mag">
         <button class="btn-print" onclick="printCV()">
-          🖨 Print
+          🖨 Print Active CV
         </button>
       </span>
     </div>
+  </div>
+
+  <!-- CV Role Selector -->
+  <div class="cv-selector">
+
+    <div class="cv-role-card active" data-pdf="cv-content-lead.pdf" onclick="selectCV(this)">
+      <span class="cv-role-tag">Management &amp; Leadership</span>
+      <div class="cv-role-title">Content Manager &amp; SEO Lead</div>
+      <p class="cv-role-desc">Best for content management, team lead, and editorial director roles. Highlights team-building, SOPs, and client delivery.</p>
+      <div class="cv-role-actions">
+        <button class="cv-btn-view" onclick="event.stopPropagation();selectCV(this.closest('.cv-role-card'))">👁 View CV</button>
+        <a href="cv-content-lead.pdf" download class="cv-btn-dl" onclick="event.stopPropagation()">⬇ Download</a>
+      </div>
+    </div>
+
+    <div class="cv-role-card" data-pdf="cv-content-writer.pdf" onclick="selectCV(this)">
+      <span class="cv-role-tag">Writing &amp; Editorial</span>
+      <div class="cv-role-title">Senior SEO &amp; Content Writer</div>
+      <p class="cv-role-desc">Best for writing-focused, editorial, and SEO content roles. Highlights 300+ articles, healthcare &amp; SaaS expertise, and rankings.</p>
+      <div class="cv-role-actions">
+        <button class="cv-btn-view" onclick="event.stopPropagation();selectCV(this.closest('.cv-role-card'))">👁 View CV</button>
+        <a href="cv-content-writer.pdf" download class="cv-btn-dl" onclick="event.stopPropagation()">⬇ Download</a>
+      </div>
+    </div>
+
+    <div class="cv-role-card" data-pdf="cv-strategist.pdf" onclick="selectCV(this)">
+      <span class="cv-role-tag">Strategy &amp; Growth</span>
+      <div class="cv-role-title">Content-Led Growth Strategist</div>
+      <p class="cv-role-desc">Best for strategy, growth, and SEO/AEO/GEO roles. Highlights 1M+ organic visits, 900+ leads, and cross-channel content systems.</p>
+      <div class="cv-role-actions">
+        <button class="cv-btn-view" onclick="event.stopPropagation();selectCV(this.closest('.cv-role-card'))">👁 View CV</button>
+        <a href="cv-strategist.pdf" download class="cv-btn-dl" onclick="event.stopPropagation()">⬇ Download</a>
+      </div>
+    </div>
+
   </div>
 
   <!-- PDF Viewer -->
@@ -386,24 +478,24 @@
       <div class="cv-toolbar-info">
         <div class="cv-toolbar-dot"></div>
         <span class="cv-toolbar-label">CV &nbsp;·&nbsp;</span>
-        <span class="cv-toolbar-name">Mustansar Mahmood</span>
+        <span class="cv-toolbar-name" id="cv-active-label">Content Manager &amp; SEO Lead</span>
       </div>
       <div class="cv-toolbar-actions">
-        <a href="Mustansar_Mahmood_CV.pdf" download class="cv-tb-btn">⬇ Download</a>
+        <a href="cv-content-lead.pdf" download class="cv-tb-btn" id="cv-dl-btn">⬇ Download</a>
         <button onclick="printCV()" class="cv-tb-btn">🖨 Print</button>
-        <a href="Mustansar_Mahmood_CV.pdf" target="_blank" class="cv-tb-btn">↗ Open</a>
+        <a href="cv-content-lead.pdf" target="_blank" class="cv-tb-btn" id="cv-open-btn">↗ Open</a>
       </div>
     </div>
     <iframe
       class="cv-embed"
-      src="Mustansar_Mahmood_CV.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
+      id="cv-embed-frame"
+      src="cv-content-lead.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
       title="Mustansar Mahmood — CV"
       type="application/pdf"
     ></iframe>
-    <!-- Fallback for browsers that block inline PDF -->
     <div class="cv-fallback" id="cv-fallback">
       <p>Your browser doesn't support inline PDF viewing.</p>
-      <a href="Mustansar_Mahmood_CV.pdf" download class="btn-download">⬇ Download CV Instead</a>
+      <a href="cv-content-lead.pdf" download class="btn-download" id="cv-fallback-dl">⬇ Download CV Instead</a>
     </div>
   </div>
 
@@ -470,13 +562,33 @@ function toggleTheme(){
 /* MOBILE MENU */
 function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 
+/* CV SELECTOR */
+function selectCV(card){
+  document.querySelectorAll('.cv-role-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+  const pdf=card.getAttribute('data-pdf');
+  const label=card.querySelector('.cv-role-title').textContent;
+  const frame=document.getElementById('cv-embed-frame');
+  if(frame) frame.src=pdf+'#toolbar=0&navpanes=0&scrollbar=1&view=FitH';
+  const dlBtn=document.getElementById('cv-dl-btn');
+  if(dlBtn){dlBtn.href=pdf;}
+  const openBtn=document.getElementById('cv-open-btn');
+  if(openBtn){openBtn.href=pdf;}
+  const activeLabel=document.getElementById('cv-active-label');
+  if(activeLabel) activeLabel.textContent=label;
+  const fallbackDl=document.getElementById('cv-fallback-dl');
+  if(fallbackDl) fallbackDl.href=pdf;
+}
+
 /* PRINT */
 function printCV(){
-  const frame=document.querySelector('.cv-embed');
+  const frame=document.getElementById('cv-embed-frame');
   if(frame){
     try{ frame.contentWindow.print(); return; } catch(e){}
   }
-  window.open('Mustansar_Mahmood_CV.pdf','_blank');
+  const active=document.querySelector('.cv-role-card.active');
+  const pdf=active?active.getAttribute('data-pdf'):'cv-content-lead.pdf';
+  window.open(pdf,'_blank');
 }
 
 /* SCROLL PROGRESS */
@@ -496,7 +608,7 @@ document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});
   if(ring){ring.style.transform=`translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;}
   requestAnimationFrame(loop);
 })();
-document.querySelectorAll('a,button,.cv-highlight-card,.social-link').forEach(el=>{
+document.querySelectorAll('a,button,.cv-highlight-card,.cv-role-card,.social-link').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
 });
